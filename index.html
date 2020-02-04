@@ -1,0 +1,1209 @@
+<!doctype html>
+<!--
+  -->
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta content="text/html; charset=UTF-8; X-Content-Type-Options=osniff" http-equiv="Content-Type" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Probablistic Safety Constraints</title>
+		<meta name="author" content="Vikas Dhiman">
+
+		<link rel="stylesheet" type="text/css" href="reveal.js/css/reveal.css">
+		<link rel="stylesheet" type="text/css" href="./reveal.js/css/theme/white.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" type="text/css" href="reveal.js/lib/css/zenburn.css">
+		<link rel="stylesheet" type="text/css" href="index.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+  <div style="display:none" >
+  \(
+\newcommand{\TODO}[1]{{\color{red}TODO: {#1}}}
+
+\renewcommand{\vec}[1]{\mathbf{#1}}
+\newcommand{\state}{\vec{x}}
+\def\statet{\state_t}
+\def\statetp{\state_{t-1}}
+\def\statehist{\state_{1:t-1}}
+\def\statetn{\state_{t+1}}
+\def\obs{\meas}
+\def\obst{\obs_t}
+\def\act{a}
+\def\actt{\act_t}
+\def\acttp{\act_{t-1}}
+\def\acttn{\act_{t+1}}
+\def\Obs{\mathcal{O}}
+\def\ObsEnc{\Phi_o}
+\def\ObsProb{P_o}
+\def\ObsFunc{C}
+\def\ObsFuncFull{\ObsFunc(\statet, \actt) \rightarrow \obst}
+\def\ObsFuncInv{\ObsFunc^{-1}}
+\def\ObsFuncInvFull{\ObsFuncInv(\obst, \statetp, \actt) \rightarrow \statet}
+\def\StateSp{\mathcal{X}}
+\def\Action{\mathcal{A}}
+\def\TransP{P_{T}}
+\def\Trans{T}
+\def\TransFull{\Trans(\statet, \actt) \rightarrow \statetn}
+\def\TransObs{T_c}
+\def\Rew{R}
+\def\rew{r}
+\def\rewards{\vec{r}_{1:t}}
+\def\rewt{\rew_t}
+\def\rewtp{\rew_{t-1}}
+\def\rewtn{\rew_{t+1}}
+\def\RewFull{\Rew(\statet, \actt) \rightarrow \rewtn}
+\def\TransObsFull{\TransObs(\statet, \obst, \actt, \rewt; \theta_T) \rightarrow \statetn}
+\def\Value{V}
+\def\pit{\pi_t}
+\def\piDef{\pi(\acttn|\statet, \obst, \actt, \rewt; \theta_\pi) \rightarrow \pit(\acttn ; \theta_\pi)}
+\def\Valuet{\Value_t}
+\def\ValueDef{\Value(\statet, \obst, \actt, \rewt; \theta_\Value) \rightarrow \Valuet(\theta_\Value)}
+\def\R{\mathbb{R}}
+\def\E{\mathbb{E}}
+\newcommand{\Goal}{\mathcal{G}}
+\newcommand{\goalRV}{G}
+\newcommand{\meas}{z}
+\newcommand{\measurements}{\vec{\meas}_{1:t}}
+\newcommand{\meast}[1][t]{\meas_{#1}}
+\newcommand{\param}{\theta}
+\newcommand{\policy}{\pi}
+\newcommand{\graph}{G}
+\newcommand{\vtces}{V}
+\newcommand{\edges}{E}
+\newcommand{\st}{\state}
+\newcommand{\stn}{\st_{t+1}}
+\newcommand{\stt}{\st_t}
+\newcommand{\stk}{\st_k}
+\newcommand{\stj}{\st_j}
+\newcommand{\sti}{\st_i}
+\newcommand{\St}{\mathcal{S}}
+\newcommand{\Act}{\mathcal{A}}
+\newcommand{\acti}{\act_i}
+\newcommand{\lpt}{\delta}
+\newcommand{\trans}{P_T}
+\newcommand{\Q}{\qValue}
+
+\newcommand{\fwcost}{Q}
+\newcommand{\fw}{\fwcost}
+\newcommand{\qValue}{Q}
+\newcommand{\prew}{\Upsilon}
+\newcommand{\epiT}{T}
+\newcommand{\vma}{\alpha_\Value}
+\newcommand{\qma}{\alpha_\qValue}
+\newcommand{\prewma}{\alpha_\prew}
+\newcommand{\fwma}{\alpha_\fwcost}
+\newcommand{\maxValueBeam}{\vec{\state}_{\Value:\text{max}(m)}}
+\newcommand{\nil}{\emptyset}
+\newcommand{\discount}{\gamma}
+\newcommand{\minedgecost}{\fwcost_0}
+\newcommand{\goal}{g}
+\newcommand{\pos}{x}
+%\newcommand{\fwargs}[5]{\fw_{#4}^{#5}\left({#3}\middle|{#1}, {#2}\right)}
+\newcommand{\fwargs}[5]{\fw_{#4}^{#5}\left({#1}, {#2}, {#3}\right)}
+\newcommand{\Rgoal}{R_{\text{goal}}}
+
+\newcommand{\Loo}{Latency-1:\textgreater1}
+
+\newcommand{\Loss}{\mathcal{L}}
+\newcommand{\LossText}[1]{\Loss_{\text{#1}}}
+\newcommand{\LossDDPG}{\LossText{ddpg}}
+\newcommand{\LossStep}{\LossText{step}}
+\newcommand{\LossLo}{\LossText{lo}}
+\newcommand{\LossUp}{\LossText{up}}
+\newcommand{\LossTrieq}{\LossText{trieq}}
+
+\newcommand{\tgt}{\text{tgt}}
+\newcommand{\Qstar}{\Q_{*}}
+\newcommand{\Qtgt}{\Q_{\text{tgt}}}
+\newcommand{\ytgt}{y_t}
+
+
+% Symbols
+\newcommand{\ctrl}{\vec{u}}
+\newcommand{\Ctrl}{\mathcal{U}}
+\newcommand{\Data}{\mathcal{D}}
+\newcommand{\stdt}{\dot{\state}}
+\newcommand{\StDt}{\dot{\StateSp}}
+\newcommand{\dynSt}{f}
+\newcommand{\dynCt}{g}
+\newcommand{\bDynSt}{\bar{\dynSt}}
+\newcommand{\bDynCt}{\bar{\dynCt}}
+\newcommand{\dynAff}{F}
+\newcommand{\bDynAff}{\bar{\dynAff}}
+\newcommand{\ctrlaff}{\underline{\mathbf{\ctrl}}}
+\newcommand{\smallbmat}[1]{\left[\begin{smallmatrix}#1\end{smallmatrix}\right]}
+\newcommand{\Knl}{K}
+\newcommand{\knl}{\kappa}
+\newcommand{\bKx}{k_\state}
+\newcommand{\bKF}{k_\dynAff}
+\newcommand{\bKFu}{k_{\dynAff\ctrl}}
+\newcommand{\bKFx}{k_{\dynAff\state}}
+\newcommand{\bKFux}{k_{\dynAff\ctrl\state}}
+\newcommand{\covf}{\text{cov}}
+\newcommand{\dt}{\delta t}
+\newcommand{\dSt}{\stdt}
+\newcommand{\N}{\mathcal{N}}
+\newcommand{\StDat}{\mathbf{X}}
+\newcommand{\StDtDat}{\dot{\mathbf{X}}}
+\newcommand{\CtDat}{\underline{\boldsymbol{\mathcal{U}}}_{1:k}}
+\newcommand{\mat}[1]{{#1}}
+\newcommand{\Y}{\mat{Y}}
+\newcommand{\bY}{\bar{\Y}}
+\newcommand{\W}{\mat{W}}
+\newcommand{\V}{\mat{V}}
+\newcommand{\mH}{\mat{H}}
+\newcommand{\KH}{\Knl^\mH}
+\newcommand{\kH}{\knl^\mH}
+\newcommand{\GP}{\mathcal{GP}}
+\newcommand{\kDA}{\knl^\dynAff}
+\newcommand{\KDA}{\Knl^\dynAff}
+%\newcommand{\M}{\mathcal{M}}
+\newcommand{\kh}{\knl^{\dynAff\ctrlaff}}
+\newcommand{\KDat}{\mathfrak{K}}
+\newcommand{\kDat}{\bm{\knl}}
+\newcommand{\KhDat}{\KDat^{\dynAff\ctrlaff}}
+\newcommand{\khDADat}{\kDat^{\dynAff\ctrlaff\dynAff}}
+\newcommand{\khDA}{\knl^{\dynAff\ctrlaff\dynAff}}
+\newcommand{\dynAffDat}{\mathbf{\dynAff}}
+\newcommand{\grad}{\nabla}
+\newcommand{\Lie}{\mathcal{L}}
+\newcommand{\tdf}{\tilde{f}}
+\newcommand{\tdg}{\tilde{g}}
+\newcommand{\barf}{\bar{f}}
+\newcommand{\barg}{\bar{g}}
+\newcommand{\erf}{\textit{erf}}
+\newcommand{\etal}{et~al.}
+
+\newcommand{\CBC}{\mbox{CBC}}
+\newcommand{\CBCtwo}{\CBC^{(2)}}
+\newcommand{\Prob}{\mathbb{P}}
+\newcommand{\tdbff}{\bff^*_k}
+
+\newcommand{\mDynAffs}{\bfM_k}
+\newcommand{\bfBs}{\bfB_k}
+
+
+\DeclareMathOperator{\vect}{\textit{vec}}
+\DeclareMathOperator{\diag}{\mathbf{diag}}
+\DeclareMathOperator{\cov}{cov}
+\DeclareMathOperator{\Cov}{\mathbf{Cov}}
+\DeclareMathOperator{\Var}{Var}
+
+% Calligraphic fonts
+\newcommand{\calA}{{\cal A}}
+\newcommand{\calB}{{\cal B}}
+\newcommand{\calC}{{\cal C}}
+\newcommand{\calD}{{\cal D}}
+\newcommand{\calE}{{\cal E}}
+\newcommand{\calF}{{\cal F}}
+\newcommand{\calG}{{\cal G}}
+\newcommand{\calH}{{\cal H}}
+\newcommand{\calI}{{\cal I}}
+\newcommand{\calJ}{{\cal J}}
+\newcommand{\calK}{{\cal K}}
+\newcommand{\calL}{{\cal L}}
+\newcommand{\calM}{{\cal M}}
+\newcommand{\calN}{{\cal N}}
+\newcommand{\calO}{{\cal O}}
+\newcommand{\calP}{{\cal P}}
+\newcommand{\calQ}{{\cal Q}}
+\newcommand{\calR}{{\cal R}}
+\newcommand{\calS}{{\cal S}}
+\newcommand{\calT}{{\cal T}}
+\newcommand{\calU}{{\cal U}}
+\newcommand{\calV}{{\cal V}}
+\newcommand{\calW}{{\cal W}}
+\newcommand{\calX}{{\cal X}}
+\newcommand{\calY}{{\cal Y}}
+\newcommand{\calZ}{{\cal Z}}
+
+% Sets:
+\newcommand{\setA}{\textsf{A}}
+\newcommand{\setB}{\textsf{B}}
+\newcommand{\setC}{\textsf{C}}
+\newcommand{\setD}{\textsf{D}}
+\newcommand{\setE}{\textsf{E}}
+\newcommand{\setF}{\textsf{F}}
+\newcommand{\setG}{\textsf{G}}
+\newcommand{\setH}{\textsf{H}}
+\newcommand{\setI}{\textsf{I}}
+\newcommand{\setJ}{\textsf{J}}
+\newcommand{\setK}{\textsf{K}}
+\newcommand{\setL}{\textsf{L}}
+\newcommand{\setM}{\textsf{M}}
+\newcommand{\setN}{\textsf{N}}
+\newcommand{\setO}{\textsf{O}}
+\newcommand{\setP}{\textsf{P}}
+\newcommand{\setQ}{\textsf{Q}}
+\newcommand{\setR}{\textsf{R}}
+\newcommand{\setS}{\textsf{S}}
+\newcommand{\setT}{\textsf{T}}
+\newcommand{\setU}{\textsf{U}}
+\newcommand{\setV}{\textsf{V}}
+\newcommand{\setW}{\textsf{W}}
+\newcommand{\setX}{\textsf{X}}
+\newcommand{\setY}{\textsf{Y}}
+\newcommand{\setZ}{\textsf{Z}}
+
+% Vectors
+\newcommand{\bfa}{\mathbf{a}}
+\newcommand{\bfb}{\mathbf{b}}
+\newcommand{\bfc}{\mathbf{c}}
+\newcommand{\bfd}{\mathbf{d}}
+\newcommand{\bfe}{\mathbf{e}}
+\newcommand{\bff}{\mathbf{f}}
+\newcommand{\bfg}{\mathbf{g}}
+\newcommand{\bfh}{\mathbf{h}}
+\newcommand{\bfi}{\mathbf{i}}
+\newcommand{\bfj}{\mathbf{j}}
+\newcommand{\bfk}{\mathbf{k}}
+\newcommand{\bfl}{\mathbf{l}}
+\newcommand{\bfm}{\mathbf{m}}
+\newcommand{\bfn}{\mathbf{n}}
+\newcommand{\bfo}{\mathbf{o}}
+\newcommand{\bfp}{\mathbf{p}}
+\newcommand{\bfq}{\mathbf{q}}
+\newcommand{\bfr}{\mathbf{r}}
+\newcommand{\bfs}{\mathbf{s}}
+\newcommand{\bft}{\mathbf{t}}
+\newcommand{\bfu}{\mathbf{u}}
+\newcommand{\bfv}{\mathbf{v}}
+\newcommand{\bfw}{\mathbf{w}}
+\newcommand{\bfx}{\mathbf{x}}
+\newcommand{\bfy}{\mathbf{y}}
+\newcommand{\bfz}{\mathbf{z}}
+
+
+\newcommand{\bfalpha}{\boldsymbol{\alpha}}
+\newcommand{\bfbeta}{\boldsymbol{\beta}}
+\newcommand{\bfgamma}{\boldsymbol{\gamma}}
+\newcommand{\bfdelta}{\boldsymbol{\delta}}
+\newcommand{\bfepsilon}{\boldsymbol{\epsilon}}
+\newcommand{\bfzeta}{\boldsymbol{\zeta}}
+\newcommand{\bfeta}{\boldsymbol{\eta}}
+\newcommand{\bftheta}{\boldsymbol{\theta}}
+\newcommand{\bfiota}{\boldsymbol{\iota}}
+\newcommand{\bfkappa}{\boldsymbol{\kappa}}
+\newcommand{\bflambda}{\boldsymbol{\lambda}}
+\newcommand{\bfmu}{\boldsymbol{\mu}}
+\newcommand{\bfnu}{\boldsymbol{\nu}}
+\newcommand{\bfomicron}{\boldsymbol{\omicron}}
+\newcommand{\bfpi}{\boldsymbol{\pi}}
+\newcommand{\bfrho}{\boldsymbol{\rho}}
+\newcommand{\bfsigma}{\boldsymbol{\sigma}}
+\newcommand{\bftau}{\boldsymbol{\tau}}
+\newcommand{\bfupsilon}{\boldsymbol{\upsilon}}
+\newcommand{\bfphi}{\boldsymbol{\phi}}
+\newcommand{\bfchi}{\boldsymbol{\chi}}
+\newcommand{\bfpsi}{\boldsymbol{\psi}}
+\newcommand{\bfomega}{\boldsymbol{\omega}}
+\newcommand{\bfxi}{\boldsymbol{\xi}}
+\newcommand{\bfell}{\boldsymbol{\ell}}
+
+% Matrices
+\newcommand{\bfA}{\mathbf{A}}
+\newcommand{\bfB}{\mathbf{B}}
+\newcommand{\bfC}{\mathbf{C}}
+\newcommand{\bfD}{\mathbf{D}}
+\newcommand{\bfE}{\mathbf{E}}
+\newcommand{\bfF}{\mathbf{F}}
+\newcommand{\bfG}{\mathbf{G}}
+\newcommand{\bfH}{\mathbf{H}}
+\newcommand{\bfI}{\mathbf{I}}
+\newcommand{\bfJ}{\mathbf{J}}
+\newcommand{\bfK}{\mathbf{K}}
+\newcommand{\bfL}{\mathbf{L}}
+\newcommand{\bfM}{\mathbf{M}}
+\newcommand{\bfN}{\mathbf{N}}
+\newcommand{\bfO}{\mathbf{O}}
+\newcommand{\bfP}{\mathbf{P}}
+\newcommand{\bfQ}{\mathbf{Q}}
+\newcommand{\bfR}{\mathbf{R}}
+\newcommand{\bfS}{\mathbf{S}}
+\newcommand{\bfT}{\mathbf{T}}
+\newcommand{\bfU}{\mathbf{U}}
+\newcommand{\bfV}{\mathbf{V}}
+\newcommand{\bfW}{\mathbf{W}}
+\newcommand{\bfX}{\mathbf{X}}
+\newcommand{\bfY}{\mathbf{Y}}
+\newcommand{\bfZ}{\mathbf{Z}}
+
+
+\newcommand{\bfGamma}{\boldsymbol{\Gamma}}
+\newcommand{\bfDelta}{\boldsymbol{\Delta}}
+\newcommand{\bfTheta}{\boldsymbol{\Theta}}
+\newcommand{\bfLambda}{\boldsymbol{\Lambda}}
+\newcommand{\bfPi}{\boldsymbol{\Pi}}
+\newcommand{\bfSigma}{\boldsymbol{\Sigma}}
+\newcommand{\bfUpsilon}{\boldsymbol{\Upsilon}}
+\newcommand{\bfPhi}{\boldsymbol{\Phi}}
+\newcommand{\bfPsi}{\boldsymbol{\Psi}}
+\newcommand{\bfOmega}{\boldsymbol{\Omega}}
+
+
+% Blackboard Bold:
+\newcommand{\bbA}{\mathbb{A}}
+\newcommand{\bbB}{\mathbb{B}}
+\newcommand{\bbC}{\mathbb{C}}
+\newcommand{\bbD}{\mathbb{D}}
+\newcommand{\bbE}{\mathbb{E}}
+\newcommand{\bbF}{\mathbb{F}}
+\newcommand{\bbG}{\mathbb{G}}
+\newcommand{\bbH}{\mathbb{H}}
+\newcommand{\bbI}{\mathbb{I}}
+\newcommand{\bbJ}{\mathbb{J}}
+\newcommand{\bbK}{\mathbb{K}}
+\newcommand{\bbL}{\mathbb{L}}
+\newcommand{\bbM}{\mathbb{M}}
+\newcommand{\bbN}{\mathbb{N}}
+\newcommand{\bbO}{\mathbb{O}}
+\newcommand{\bbP}{\mathbb{P}}
+\newcommand{\bbQ}{\mathbb{Q}}
+\newcommand{\bbR}{\mathbb{R}}
+\newcommand{\bbS}{\mathbb{S}}
+\newcommand{\bbT}{\mathbb{T}}
+\newcommand{\bbU}{\mathbb{U}}
+\newcommand{\bbV}{\mathbb{V}}
+\newcommand{\bbW}{\mathbb{W}}
+\newcommand{\bbX}{\mathbb{X}}
+\newcommand{\bbY}{\mathbb{Y}}
+\newcommand{\bbZ}{\mathbb{Z}}
+
+
+\newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
+%\newtheorem{theorem}{Theorem}
+%\theoremstyle{remark}
+%\newtheorem{lemma}{Lemma}
+%\newtheorem{remark}{Remark}
+%\theoremstyle{definition}
+\newtheorem{defn}{Definition}
+%\theoremstyle{definition}
+\newtheorem{exmp}{Example}
+\newtheorem{conj}{Conjecture}
+%\newtheorem{corollary}{Corollary}
+\newtheorem{Proposition}{Proposition}
+\newtheorem{ansatz}{Assumption}
+
+\newtheorem{problem}{Problem}
+
+
+\newcommand{\oprocendsymbol}{\hbox{$\bullet$}}
+\newcommand{\oprocend}{\relax\ifmmode\else\unskip\hfill\fi\oprocendsymbol}
+\def\eqoprocend{\tag*{$\bullet$}}
+
+\newcommand{\blue}[1]{\color{blue}{#1}}
+
+%% math functions
+\newcommand{\modulo}{\text{mod}}
+
+%% symbols
+\newcommand{\real}{\mathbb{R}}
+\newcommand{\integers}{\mathbb{N}}
+\newcommand{\complex}{\mathbb{C}}
+\DeclareMathOperator*{\argmax}{arg\,max}
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\softmax}{softmax}
+\DeclareMathOperator*{\Tr}{Tr}
+\DeclareMathOperator*{\RE}{Re}
+\DeclareMathOperator*{\IM}{Im}
+\DeclareMathOperator{\tr}{\mathbf{tr}}
+\newcommand{\floor}[1]{\lfloor #1 \rfloor}
+\newcommand{\ceil}[1]{\lceil #1 \rceil}
+\newcommand{\scaleMathLine}[2][1]{\resizebox{#1\linewidth}{!}{$\displaystyle{#2}$}}
+
+  \)
+  </div>
+        <div class="reveal">
+			<div class="slides" >
+
+<!-- Start of header -->
+<div style="position:absolute;left:0;top:0;width:100%">
+    <div style="clear: both;width:100%;display:flex; justify-content: space-between;"
+            id="footer-chapter-progress"
+            inactivestyle="background: #b6b6b6;opacity:1"
+            activestyle="background: rgba(0, 0, 0, 0);opacity:1"
+    >
+        <style>
+            #footer-chapter-progress>.chapter-progress {
+                font-size: 12px;
+                padding: 1px;
+                width: 33%;
+                opacity: 0;
+                border-left: 1px solid white;
+                border-right: 1px solid white;
+            }
+            #footer-chapter-progress>.chapter-progress>span {
+                margin:auto;
+            }
+        </style>
+        <span class="chapter-progress" ><span>Estimation</span></span>
+        <span class="chapter-progress" ><span>Propagation</span></span>
+        <span class="chapter-progress" ><span>Continous time</span></span>
+        <span class="chapter-progress" ><span>Higher relative degree</span></span>
+    </div>
+</div>
+<!-- End of head -->
+
+<!-- Start of slides -->
+<section id="title-slide">
+  <h2>Probablistic Safety Constraints</h2>
+  <h3>
+      for Learned High Relative Degree System Dynamics
+  </h3>
+  <div>
+      <img style="vertical-align:middle" height="80px" src="./media/mjkhojas-photo.jpg"/>
+      Mohammad Javad Khojasteh\(^*\)
+      <div style="display:inline-block;width:20px"></div>
+      <img style="vertical-align:middle" height="80px" src="./media/vdhiman.jpg"/>
+      <b>Vikas Dhiman</b>\(^*\)
+  </div><div>
+      <img style="vertical-align:middle" height="80px" src="./media/massimo.jpg"/>
+      Massimo Franceschetti
+      <div style="display:inline-block;width:60px"></div>
+      <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
+      Nikolay Atanasov
+      <footnote>\(^*\) These authors contributed equally.</footnote>
+  </div>
+  <aside class="notes" data-markdown>
+      Hi everyone,
+
+      I am Vikas Dhiman, I finished my PhD last year from University of
+      Michigan. Now I am a postdoc co-advised under Nikolay Atanasov and Henrik
+      Christensen.
+
+      I am going to talk about my work on Probabilistic safety constraints for
+      higher order relative degree systems.
+
+      This work was done under the supervision of Nikolay Atanasov and in
+      collaboration with Mohammad and Massimo Franceschetti.
+  </aside>
+</section>
+
+<section id="Problem formulation">
+    <h2>Problem formulation</h2>
+    <div style="position:relative;width:100%">
+        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <ul style="display:inline-block; vertical-align:middle; list-style: none">
+            <li class="fragment">
+            \begin{align}
+            \label{eq:system_dyanmics}
+            \dot{\bfx} = f(\bfx) + g(\bfx)\bfu = \begin{bmatrix} f(\bfx) & g(\bfx)\end{bmatrix} \begin{bmatrix}1\\\bfu\end{bmatrix} =: F(\bfx) \ctrlaff
+            \end{align}
+            </li>
+            <li class="fragment">
+                \[
+                \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
+                \]
+            </li>
+            <li style="position:relative;height:125px">
+                <div class="fragment current-visible" style="position:absolute;">
+                    \begin{align}
+                    \min_{\bfu_k \in \mathcal{U}}&
+                    \text{ Task cost function }
+                    \\
+                    \qquad\text{s.t.}&~~\bbP\bigl(
+                    \text{ Safety constraint }
+                    \mid \bfx_k,\bfu_k
+                    \bigr) \ge \tilde{p}_k,
+                    \end{align}
+                </div>
+                <div class="fragment" style="position:absolute;">
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                    \|\bfu_k -
+                    \cssId{highlight-border-red-1}{\class{fragment}{\pi_\epsilon(\bfx_k)}}
+                    \|_Q
+                \\
+                \qquad\text{s.t.}&~~\bbP\bigl(
+                \cssId{highlight-border-red-1}{\class{fragment}{h(\bfx) > \zeta_h > 0}}
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge \tilde{p}_k,
+                \end{align}
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
+    <aside class="notes" data-markdown>
+        Consider a robot tasked to cross a narrow bridge. In the scenario,
+        the robot dynamics are not known with certainity, we want the robot to
+        learn about its own dynamics to the point that it is safe to cross the
+        bridge with a desired probability.
+
+        Fragment 1:
+        Specifically, we consider a control-affine system. And we write it in in
+        a Linear-form using homogeneous coordinates. We denote homogeneous
+        coordinates with an underline.
+
+        Fragment 2:
+        We assume that state-dependent part of the dynamics, capital F of x, is
+        a Gaussian process whose mean and uncertainity could be estimated.
+
+        Fragment 3:
+        We want to formulate a controller that minimizes task cost function
+        subject to the satisfaction of safety condition with a given probability
+        \(\tilde{p}_k \).
+
+        A specific example of that would be to have an epsilon greedy unsafe
+        controller. The safe controller will closely follow the unsafe controller
+        constrained by safety. The epsilon greedy parts allows the robot to take
+        random actions so that it can reduce the uncertainity of its dynamics.
+    </aside>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li class="fragment highlight-red">
+            Estimate \(F(\bfx)\)  with uncertainity.
+        </li>
+        <li>
+            Propagate uncertainty to the Safety condition.
+        </li>
+        <li>
+            Extension to continous time using Lipchitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher-order relative degree systems.
+        </li>
+    </ul>
+    <!--  li class="fragment">
+         \(
+         \mbox{CBC}(\bfx, \bfu) := \Lie_{f}h(\bfx) + \Lie_{g}h(\bfx)\bfu + \alpha(h(\bfx))
+         \)
+         </li -->
+    <aside class="notes" data-markdown>
+        We will approach this problem in five broad steps.
+        The estimation of F of x with uncertainity using Gaussian Processes.
+        Note that Gaussian Processes are just one-way of estimating F of x. We
+        can also uses Bayesian Neural Networks based on Esembles, Probabilistic
+        Backpropagation and dropouts.
+
+        Then we will focus on propagating the estimated uncertainty to the
+        safety condition.
+
+        And in the end we will talk about extension to higher-order relative
+        degree systems.
+    </aside>
+
+</section>
+
+
+<section>
+    <h2>Matrix Variate Gaussian Processes</h2>
+    <div >
+        \[
+        \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
+        \]
+    </div>
+        <div class="fragment" >
+            Option 1: Alvarez et al (FTML 2012):
+            \[
+            \bfK_0(\bfx, \bfx') = \kappa(\bfx, \bfx') \boldsymbol{\Sigma}
+            \]
+            <cite data-key="Alvarez et al (FTML 2012)"></cite>
+        </div>
+        <div class="fragment " style="position:relative;display:inline-block;">
+            Option 2: Sun et al (AISTATS 2017)
+            <div class="fragment current-visible" style="position:absolute">
+                \[
+                F \sim \mathcal{MVG}(\bfM, \bfA, \bfB) \Leftrightarrow
+                \vect(F) \sim \calN(\vect(M), \bfB \otimes \bfA)
+                \]
+            </div>
+            <div class="fragment">
+                \[
+            \bfK_0(\bfx, \bfx') = \bfB_0(\bfx, \bfx') \otimes \bfA
+            \]
+            <cite data-key="Sun et al, AISTATS 2017"></cite>
+            </div>
+        </div>
+        <br/>
+        <div class="fragment"
+             style="display:inline-block;border: 2px solid red; text-align: left">
+            Factorization assumption:
+            \[
+            \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfB_0(.,.) \otimes \bfA)
+            \]
+        </div>
+    <aside class="notes">
+        Directly learning the vectorized form of Gaussian Process in this form
+        is hard to ensure positive definiteness of each output. That's why
+        simplifying assumptions are used.
+
+        For example, Alvarez et al reviewed a number of multi-output Gaussian
+        processes that decompose the kernel into a scalar kernel that only
+        depends on the input and an input independent matrix that captures the
+        covariance between output components. However, this proposition is for
+        vector-valued Gaussian processes and in our case the matrix Sigma will
+        end up scaling poorly with the state dimension and control vector dimension.
+
+        Another option from Sun et al considers a Matrix Variate Gaussian
+        distribution, where the covariance between rows (B) and columns (A) is
+        considered by separately. In vectorized form the covariance is just the
+        kronecker product of row and column covariance matrices.
+
+        This is the assumption that we use for Matrix Variate Gaussian process
+        and factorize kernel K_0 into column covariance matrix A and row
+        covariance matrix B. By assuming that only the row covariance matrix
+        depends upon input, we will see that we get a nice structure in the
+        inference result.
+    </aside>
+</section>
+
+<section>
+    <h2>Matrix variate Gaussian Process</h2>
+    <div >
+        \(
+        \newcommand{\prl}[1]{\left(#1\right)}
+        \newcommand{\brl}[1]{\left[#1\right]}
+        \newcommand{\crl}[1]{\left\{#1\right\}}
+        \)
+        \begin{equation}
+        \begin{aligned}
+        \vect(F(\bfx)) &\sim \mathcal{GP}(\vect(\bfM_0(\bfx)), \bfB_0(\bfx,\bfx') \otimes \bfA)
+        %F(\bfx)\underline{\bfu} &\sim \mathcal{GP}(\bfM_0(\bfx)\underline{\bfu}, \underline{\bfu}^\top \bfB_0(\bfx,\bfx') \underline{\bfu}' \otimes \bfA)
+        \end{aligned}
+        \end{equation}
+    </div>
+    <div class="fragment">
+        Given data \(\StDat_{1:k} := [\bfx(t_1), \dots, \bfx(t_k)]\),
+        \(\StDtDat_{1:k}=[\dot{\bfx}(t_1), \dots, \dot{\bfx}(t_k)] \),
+        and \( \underline{\boldsymbol{\mathcal{U}}}_{1:k}:= \diag(\ctrlaff_1, \dots, \ctrlaff_k) \).
+    </div>
+    <div class="fragment">
+        \begin{equation*}
+        \begin{aligned}
+        \bfM_k(\bfx_*) &:= \bfM_0(\bfx_*) + \prl{ \dot{\bfX}_{1:k} - \boldsymbol{\mathcal{M}}_{1:k}\underline{\boldsymbol{\mathcal{U}}}_{1:k}} \prl{\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}}^{-1}\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfx_*)\\
+        \bfB_k(\bfx_*,\bfx_*') &:= \bfB_0(\bfx_*,\bfx_*') + \bfB_0(\bfx_*,\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}\prl{\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}}^{-1}\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfx_*')
+        \label{eq:mvg-posterior}
+        \end{aligned}
+        \end{equation*}
+    </div>
+    <div class="fragment " >
+        <div style="border: 2px solid red; display:inline-block; text-align: left; padding: 5px">
+        Inference on MVGP:
+        \begin{align}
+            \vect(F_k(\bfx_*)) &\sim
+            \mathcal{GP}(\vect(\bfM_k(\bfx_*)), \; \bfB_k(\bfx_*,\bfx_*') \otimes \bfA).
+            \\
+            F_k(\bfx_*)\underline{\bfu}_* &\sim
+            \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \;
+            \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
+            \end{align}
+        </div>
+    </div>
+    <aside class="notes" data-markdown>
+        Next we describe how to do inference with the Matrix Variate Gaussian Process.
+
+        Defining some notation regarding collected data. We collect trajectories
+        with state, control and state derivative. If the state derivative is not
+        available, we estimate it numerically. Note while most X data matrices
+        are just row stacking of state vectors. The control data matrix is a
+        diagonal matrix in homogeneous coordinates of control vector.
+
+        Using some algebra using schur complement and typical Gaussian
+        conditional distribution, we can compute mean matrix M_k and row
+        covariance matrix B_k.
+
+        Finally we get the inference result for Mean and variance of Matrix
+        variate Gaussian process. Note that due to the choice of only row
+        covariance matrix B depending upon input x, we get the same GP structure
+        as we started with.
+    </aside>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li class="fragment highlight-current-red" >
+            Estimate \(F(\bfx)\)  with Matrix-Variate Gaussian Process
+        </li>
+        <li class="fragment highlight-red" >
+            Propagate uncertainty to the Safety condition
+        </li>
+        <li>
+            Extension to continous time using Lipchitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher-order relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown>
+        This completes our contribution the estimation of F of x. Next we focus on
+        how to propagate uncertainity to the Safety condition.
+        For safety condition, we use control barrier functions.
+    </aside>
+</section>
+
+<section >
+    <h2>Control Barrier Functions</h2>
+
+    <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li>
+            For differentiable \( h(\bfx) \),
+            <br/>
+            safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
+        </li>
+        <li class="fragment">
+            Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
+        </li>
+        <li class="fragment">
+            Assume system starts in safe state \( \bfx(0) \in \calC \)
+        </li>
+        <li class="fragment" style="padding:5px;border: 2px solid #ff2c2d">
+            Ames et al (ECC 2019):
+            \begin{multline}
+            \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
+            \mbox{CBC}(\bfx,\bfu) := \Lie_f h(\bfx) + \Lie_g h(\bfx) + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
+            \end{multline}
+            where \( \alpha(y) \) is some extended class \( \calK_\infty \) function
+        </li>
+    </ul>
+    <aside class="notes" data-markdow>
+        Recall the motivating example. We define a safe region C by a
+        differentiable function function h of x which is greater than 0 inside
+        the safe region.
+
+        We also assume that the gradient of h of x is non-zero at the boundary of set C.
+
+        Then a theorem from Ames et al says that if the system starts from safe
+        state then it stays in safe state if time derivative of h of x is
+        greater than alpha of h of x.
+
+        Define alpha as a function that belongs to Kappa infinity class, that it
+        is an increasing function that maps a bounded input to zero and infinity.
+    </aside>
+    <cite data-key="Ames et al (ECC 2019)"></cite>
+</section>
+
+<section>
+    <h2>Uncertainity propagation to CBFs</h2>
+    <ul  >
+    <li >
+        \begin{align}
+        \mbox{CBC}(\bfx, \bfu) &:= \Lie_{f}h(\bfx) + \Lie_{g}h(\bfx)\bfu + \alpha(h(\bfx))
+        \end{align}
+    </li>
+    <li class="fragment">
+        \[
+        \mbox{CBC}(\bfx, \bfu)= \grad_\bfx h(\bfx)F_k(\bfx)\ctrlaff + \alpha(h(\bfx))
+        \]
+    </li>
+    <li class="fragment ">
+        Recall:
+        \begin{equation}
+        F_k(\bfx_*)\underline{\bfu}_* \sim  \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
+        \end{equation}
+    </li>
+    <li class="fragment" style="border:2px solid red; padding:5px">
+        Lemma :
+        \[
+        \mbox{CBC}(\bfx, \bfu) \sim \GP(\E[\mbox{CBC}], \Var(\mbox{CBC}))
+        \]
+        \begin{align}
+        \label{eq:parametofpi5543}
+        \E[\mbox{CBC}_k](\bfx, \bfu) &= \nabla_\bfx h(\bfx)^\top \bfM_k(\bfx)\underline{\bfu} + \alpha(h(\bfx)),\\
+        \Var[\mbox{CBC}_k](\bfx, \bfx'; \bfu) &=  \underline{\bfu}^\top\bfB_k(\bfx,\bfx')\underline{\bfu} \nabla_\bfx h(\bfx)^{\top}\bfA\nabla_\bfx h(\bfx')
+        \end{align}
+        Note: mean and variance are Affine and Quadratic in \( \bfu \) respectively.
+    </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        In the last slide we defined CBC as this. It can be written in terms of
+        system dynamics like this. Note that this is affine in the only random
+        term which if F of x. Since F of x is Gaussian hence CBC is also gaussian.
+
+        Also recall the notation for mean and variance of F of x u.
+
+        Using this information we can write the expression for mean and variance of CBC.
+        Note that CBC is GP only in x not in u. Also note that mean is affine in
+        u and the variance is quadratic in u.
+    </aside>
+</section>
+
+<section>
+    <h2>Deterministic condition for controller</h2>
+    <ul>
+        <li style="position:relative;height:125px;width:400px">
+            <div class="fragment current-visible" style="position:absolute;">
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \text{ Task cost function }
+                \\
+                \qquad\text{s.t.}&~~\bbP\bigl(
+                \text{ Safety constraint }
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge \tilde{p}_k,
+                \end{align}
+            </div>
+            <div class="fragment" style="position:absolute;">
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+                \\
+                \qquad\text{s.t.}&~~\bbP\bigl(
+                \style{color:red}{\mbox{CBC}(\bfx_k, \bfu_k) > \zeta > 0}
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge \tilde{p}_k,
+                \end{align}
+            </div>
+        </li>
+        <li class="fragment" >
+            \[
+            \newcommand{\CBC}{\mbox{CBC}}
+            \bbP\bigl(\mbox{CBC}(\bfx_k, \bfu_k) > \zeta \mid \bfx_k,\bfu_k \bigr) \ge \tilde{p}_k
+            \\
+            \Leftrightarrow \frac{1}{2}-\frac{1}{2} \erf\left(
+            \frac{\zeta - \E[\CBC] }{\sqrt{2\Var(\CBC)}}
+            \right) \ge \tilde{p}_k
+            \]
+            where \( \erf(y) \) is there error function.
+        </li>
+        <li class="fragment" style="padding:5px; border: 2px solid red">
+            Safe controller (a QCQP):
+            \begin{align}
+            \min_{\bfu_k \in \mathcal{U}}&
+            \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+            \\
+            \qquad\text{s.t.}\qquad&
+            \cssId{highlight-current-red-1}{\class{fragment}{
+            (\E[\CBC] - \zeta)^2 \ge 2\Var(\CBC)\erf^{-1}(1-2\tilde{p}_k)^2
+            }}
+            \\
+            &
+            \cssId{highlight-current-red-1}{\class{fragment}{
+            \E[\CBC] - \zeta  \ge 0
+            }}
+            \end{align}
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Recall the problem formulation. We want to ensure Safety constraint with
+        some high probability.
+
+        Fragment 1: More specifically, we want to ensure the Control Barrier
+        Condition is greater than 0 by some margin zeta.
+
+        Fragment 2: Since we have already shown that Control Barrier Condition
+        is a Gaussian Process, we can analytically compute this probability in
+        terms of mean and variance.
+
+        Fragment 3: After some algebra we can convert the problem formulation
+        into a nice Quadratically constrained Quadratic program with two
+        conditions. Recall that the mean and variance of CBC are Affine and
+        Quadratic in u respectively.
+
+        Fragment 4: The first condition intuitively means that the CBC should be
+        far from zeta by atleast by a term proportional to the standard
+        deviation. The quadratic form of the first condition allows mean to be
+        either side of zeta, but we want it to be greater than zeta which is
+        greater than 0.
+    </aside>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li>
+            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
+        </li>
+        <li class="fragment highlight-current-red">
+            Propagate uncertainty to the Control Barrier condition.
+        </li>
+        <li class="fragment highlight-red">
+            Extension to continous time using Lipchitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher-order relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Now we have seen how to propagate uncertainty to the Control Barrier
+        condition, we can move on the next step which is to translate the
+        Probabilistic condition to a deterministic one.
+    </aside>
+</section>
+
+
+<section>
+    <h2>Safety beyond triggering times</h2>
+    <ul>
+        <li >
+                So far:
+            \begin{align}
+            \min_{\bfu_k \in \mathcal{U}}&
+            \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+            \\
+                \qquad\text{s.t.}&~~
+                \bbP\bigl(
+                \mbox{CBC}(\style{color:red}{\bfx_k}, \bfu_k) > \style{color:red}{\zeta}
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge \style{color:red}{\tilde{p}_k},
+            \end{align}
+        </li>
+        <li class="fragment" >
+                Next:
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+                \\
+                \qquad\text{s.t.}&~~
+                \bbP\bigl(
+                \mbox{CBC}(\style{color:red}{\bfx(t)}, \bfu_k) > \style{color:red}{0}
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge \style{color:red}{p_k}, \qquad
+                \style{color:red}{\forall t \in [t_k, \tau_k)}
+                \end{align}
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        So far we have considered the problem only on triggering timesteps.
+        But we need safety at all times.
+
+        We assume zero-order hold and analyze what can we say about safety
+        beyond triggering times. Especially for how long we can assume safety
+        after we have ensured safety triggering time.
+    </aside>
+</section>
+
+<section>
+    <h2>Safety beyond triggering times</h2>
+    <ul>
+        <li class="fragment">
+            Assume Lipchitz continuity of dynamics:
+            \begin{align}
+            \textstyle
+            \label{eq:smoth23}
+            \bbP\left(
+            \sup_{s \in [0, \tau_k)}\|F(\bfx(t_k+s))\ctrlaff_k
+            -F(\bfx(t_k))\ctrlaff_k\| \le L_k \|\bfx(t_k+s)-\bfx_k\|
+            \right) \ge q_k:=1-e^{-b_kL_k}.
+            \end{align}
+            <cite data-key="Srinivas et al. (2009)"></cite>
+        </li>
+        <li class="fragment">
+            Assume Lipchitz continuity of \( \alpha(h(\bfx)) \):
+            \begin{align}
+            \label{htym6!7uytf}
+            |\alpha \circ h(\bfx(t_k+s))-\alpha \circ h(\bfx_k)| 
+            \le L_{\alpha \circ h} \|\bfx(t_k+s)-\bfx_k\|.
+            \end{align}
+        </li>
+        <li class="fragment" style="padding:5px; border: 2px solid red;">
+            Theorem:
+            \[
+            \bbP\bigl(
+            \mbox{CBC}(\bfx_k, \bfu_k) > \zeta
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge \tilde{p}_k
+            \quad\Rightarrow\quad
+            \bbP\bigl(
+            \mbox{CBC}(\bfx(t), \bfu_k) > 0
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge p_k, \;
+            \forall t \in [t_k, \tau_k)
+            \]
+            holds with \( p_k = \tilde{p}_k q_k \) and
+            \(
+            \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
+            \)
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Assume stochastic Lipchitz continuity of the dynamics with exponential
+        distribution. This assumption has been made before by Srinivas et al and
+        holds for Gaussian processes with RBF kernels and Mattern kernels.
+
+        Also assume Lipchitz continuity of alpha of h of x. This is true because
+        we already assumed alpha to class Kappa infinity function and h to be
+        differentiable.
+
+        We show that after safety at triggering time with margin
+        zeta ensures safety after the triggering time uptil tau scales with log
+        of the margin zeta.
+    </aside>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li>
+            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
+        </li>
+        <li>
+            Propagate uncertainty to the Control Barrier condition.
+        </li>
+        <li class="fragment highlight-current-red">
+            Extension to continous time using Lipchitz continuity assumptions.
+        </li>
+        <li class="fragment highlight-red">
+            Extension to higher-order relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Now we have seen how to propagate uncertainty to the Control Barrier
+        condition, we can move on the next step which is to translate the
+        Probabilistic condition to a deterministic one.
+    </aside>
+</section>
+
+<section>
+    <h2>Higher relative degree systems </h2>
+</section>
+
+<section chapter-progress-next="True">
+    <h2>Experiments</h2>
+</section>
+
+<section>
+    <h2>Take aways</h2>
+</section>
+
+<section>
+    <h2>Ongoing work</h2>
+    <ul><li>
+        More experiments
+    </li><li>
+        Entropy objective
+    </li><li>
+        Application of Hansen-Wright like inequalities
+    </li></ul>
+</section>
+
+<section>
+    <h1>Thank you</h1>
+    <h4>Paper URL: arxiv.org/abs/1912.10116</h4>
+
+    <ul><li>
+        <img style="vertical-align:middle" height="80px" src="./media/mjkhojas-photo.jpg"/>
+        <span style="display:inline-block;vertical-align:middle">
+            Mohammad Javad Khojasteh\(^*\)
+            <br/>
+            <a>mjkhojas@caltech.edu</a>
+            <br/>
+            <a>http://www.its.caltech.edu/~mjkhojas/</a>
+        </span>
+    </li><li>
+        <img style="vertical-align:middle" height="80px" src="./media/vdhiman.jpg"/>
+        <span style="display:inline-block;vertical-align:middle">
+            <b>Vikas Dhiman</b>\(^*\)
+            <br/>
+            <a>vdhiman@ucsd.edu</a>
+            <br/>
+            <a>vikasdhiman.info</a>
+        </span>
+    </li><li>
+        <img style="vertical-align:middle" height="80px" src="./media/massimo.jpg"/>
+        <span style="display:inline-block;vertical-align:middle">
+        Massimo Franceschetti
+        <br/>
+        <a>https://web.eng.ucsd.edu/~massimo/</a>
+        </span>
+    </li><li>
+        <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
+        <span style="display:inline-block;vertical-align:middle">
+        Nikolay Atanasov
+        <br/>
+        <a>https://natanaso.github.io/</a>
+        </span>
+    </li></ul>
+    <footnote>\(^*\) These authors contributed equally.</footnote>
+</section>
+<section id="bibliography-slide">
+
+    <ul id="bibliography-database" style="display:none">
+        <li id="Sun et al, AISTATS 2017">Shengyang Sun, Changyou Chen,
+            and Lawrence Carin. Learning Structured Weight Uncertainty in
+            Bayesian Neural Networks. In International Conference on Artificial
+            Intelligence and Statistics (AISTATS), pages 1283–1292, 2017.</li>
+        <li id="Ames et al (ECC 2019)">A. D. Ames, S. Coogan, M. Egerstedt, G.
+            Notomista, K. Sreenath, and P. Tabuada. Control barrier functions:
+            Theory and applications. In 2019 18th European Control Conference
+            (ECC), pages 3420–3431, June 2019. doi:
+            10.23919/ECC.2019.8796030.</li>
+        <li id="Alvarez et al (FTML 2012)">
+            Mauricio A Alvarez, Lorenzo Rosasco, and Neil D Lawrence. Kernels
+            for vector-valued functions: A review. Foundations and Trends in
+            Machine Learning, 4(3):195–266, 2012.
+        </li>
+        <li id="Srinivas et al. (2009)">
+            Niranjan Srinivas, Andreas Krause, Sham M Kakade, and Matthias
+            Seeger. Gaussian process opti- mization in the bandit setting: No
+            regret and experimental design. arXiv preprint arXiv:0912.3995,
+            2009.
+        </li>
+    </ul>
+    <h2>Bibliography</h2>
+    <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
+        <!-- Auto populated using <cite> -->
+    </ul>
+</section>
+
+<!-- End of slides -->
+
+<!-- Start of Footer -->
+<div  style="position:absolute; left:0; bottom:10px; width:100%">
+  <div id="footer" ><!-- place holder for footer -->
+  </div>
+  <div id="footer-lower" style="display:flex; justify-content: space-between; width:100%">
+      <img style="height:40px;padding:5px;vertical-align:middle" src="./media/erl-logo.png"/>
+      <img style="height:40px;padding:5px;ertical-align:middle" src="./media/CRI-Logo-white-on-blue.svg"/>
+      <div style="font-size: 12px; opacity:0.8; margin: auto;"> Probablistic Safety Constraints:Vikas Dhiman </div>
+      <img style="height:40px;vertical-align:middle" src="media/UCSDLogo_JSOE-ElectricalComputerEng_BlueGold.svg"  />
+
+      <div style="font-size: 12px; padding:5px; opacity:0.8" id="slide-number-container"> &nbsp; </div>
+  </div>
+</div>
+<div style="clear: both;"></div>
+<!-- End of Footer -->
+            </div> <!-- class="slides" -->
+		</div> <!-- class="reveal"-->
+		<script src="reveal.js/js/reveal.js"></script>
+        <script>
+         window.MathJax = {
+             chtml: {
+                 scale: 0.8
+             },
+             tex: {
+                 packages: ['base', 'ams', 'color', 'boldsymbol', 'newcommand',
+                            'html']
+             },
+             loader: {
+                 load: ['[tex]/ams', '[tex]/color', '[tex]/boldsymbol',
+                 '[tex]/newcommand', '[tex]/html']
+             }
+         };
+        </script>
+        <script type="text/javascript" id="MathJax-script" async
+                src="MathJax/es5/tex-chtml.js">
+        </script>
+        <script src="index.js" > </script>
+    </body>
+</html>

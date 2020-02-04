@@ -1,0 +1,85 @@
+xdg-open: file 'iiiireset' does not exist
+
+(nautilus:16443): Gtk-WARNING **: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
+
+(eog:16640): EOG-WARNING **: Failed to open file '/home/vdhiman/.cache/thumbnails/normal/ff8bb0fe1b4e2c6af133a7d6a7af1f5e.png': No such file or directory
+
+Backtrace:
+emacs[0x50eb79]
+emacs[0x4f4fc7]
+emacs[0x50d52e]
+emacs[0x50d833]
+emacs[0x50d870]
+/lib/x86_64-linux-gnu/libpthread.so.0(+0x11390)[0x7fbaac9f9390]
+/usr/lib/x86_64-linux-gnu/ImageMagick-6.8.9/modules-Q16/coders/svg.so(+0xb8b8)[0x7fba9a94b8b8]
+/usr/lib/x86_64-linux-gnu/libMagickCore-6.Q16.so.2(ReadImage+0x198)[0x7fbaaf18ca48]
+/usr/lib/x86_64-linux-gnu/libMagickWand-6.Q16.so.2(MagickReadImage+0x6a)[0x7fbaaf65ea3a]
+emacs[0x5e146c]
+emacs[0x5e9b8d]
+emacs[0x5ea010]
+emacs[0x56bd56]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56bcc3]
+emacs[0x5a3108]
+emacs[0x56ad10]
+...
+
+(eog:17500): EOG-WARNING **: Failed to open file '/home/vdhiman/.cache/thumbnails/normal/9926ea1e7b3cd793eb8ca55427fd94c7.png': No such file or directory
+
+(nautilus:17668): GLib-GIO-CRITICAL **: g_dbus_interface_skeleton_unexport: assertion 'interface_->priv->connections != NULL' failed
+
+(nautilus:17668): GLib-GIO-CRITICAL **: g_dbus_interface_skeleton_unexport: assertion 'interface_->priv->connections != NULL' failed
+
+(nautilus:17668): Gtk-CRITICAL **: gtk_icon_theme_get_for_screen: assertion 'GDK_IS_SCREEN (screen)' failed
+
+(nautilus:17668): GLib-GObject-WARNING **: invalid (NULL) pointer instance
+
+(nautilus:17668): GLib-GObject-CRITICAL **: g_signal_connect_object: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+ln: failed to create symbolic link '/home/vdhiman/snap/gimp/227/.config/gtk-2.0/gtkfilechooser.ini': File exists
+Gtk-Message: 14:40:56.627: Failed to load module "overlay-scrollbar"
+Gtk-Message: 14:40:56.627: Failed to load module "gail"
+Gtk-Message: 14:40:56.627: Failed to load module "atk-bridge"
+/snap/gimp/227/usr/bin/gimp: Gimp-Widgets-WARNING: parse_iso_codes: error parsing '/build/gimp/parts/gimp/install/usr/share/xml/iso-codes/iso_639.xml': No such file or directory
+
+Gtk-Message: 14:41:00.176: Failed to load module "overlay-scrollbar"
+Gtk-Message: 14:41:00.176: Failed to load module "gail"
+Gtk-Message: 14:41:00.176: Failed to load module "atk-bridge"
+
+(gimp:17704): GLib-GIO-WARNING **: 14:41:36.166: Error creating IO channel for /proc/self/mountinfo: Permission denied (g-file-error-quark, 2)
+
+(gimp:17704): GLib-GIO-WARNING **: 14:41:45.006: Error creating IO channel for /proc/self/mountinfo: Permission denied (g-file-error-quark, 2)
+Gtk-Message: 14:42:22.079: Failed to load module "overlay-scrollbar"
+Gtk-Message: 14:42:22.079: Failed to load module "gail"
+Gtk-Message: 14:42:22.079: Failed to load module "atk-bridge"
+
+(gimp:17704): GLib-GIO-WARNING **: 14:42:27.958: Error creating IO channel for /proc/self/mountinfo: Permission denied (g-file-error-quark, 2)
+
+(nautilus:18320): Gtk-WARNING **: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
+
+(eog:18381): EOG-WARNING **: Failed to open file '/home/vdhiman/.cache/thumbnails/normal/cf90bec438598c4c5d5cf8e0333ca9ae.png': No such file or directory
+
+(nautilus:18767): Gtk-WARNING **: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
