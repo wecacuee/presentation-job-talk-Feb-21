@@ -381,6 +381,10 @@
 \newcommand{\bbY}{\mathbb{Y}}
 \newcommand{\bbZ}{\mathbb{Z}}
 
+\newcommand{\CBCr}{\mbox{CBC}^{(r)}}
+
+\)
+\(
 
 \newenvironment{proof}{\paragraph{Proof:}}{\hfill$\square$}
 %\newtheorem{theorem}{Theorem}
@@ -397,6 +401,7 @@
 \newtheorem{ansatz}{Assumption}
 
 \newtheorem{problem}{Problem}
+
 
 
 \newcommand{\oprocendsymbol}{\hbox{$\bullet$}}
@@ -422,6 +427,7 @@
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\scaleMathLine}[2][1]{\resizebox{#1\linewidth}{!}{$\displaystyle{#2}$}}
+
 
   \)
   </div>
@@ -580,7 +586,7 @@
             Extension to continous time using Lipchitz continuity assumptions.
         </li>
         <li>
-            Extension to higher-order relative degree systems.
+            Extension to higher relative degree systems.
         </li>
     </ul>
     <!--  li class="fragment">
@@ -598,7 +604,7 @@
         Then we will focus on propagating the estimated uncertainty to the
         safety condition.
 
-        And in the end we will talk about extension to higher-order relative
+        And in the end we will talk about extension to higher relative
         degree systems.
     </aside>
 
@@ -632,6 +638,7 @@
             \bfK_0(\bfx, \bfx') = \bfB_0(\bfx, \bfx') \otimes \bfA
             \]
             <cite data-key="Sun et al, AISTATS 2017"></cite>
+            <cite data-key="Louizos and Welling (ICML 2016)"></cite>
             </div>
         </div>
         <br/>
@@ -745,7 +752,7 @@
             Extension to continous time using Lipchitz continuity assumptions.
         </li>
         <li>
-            Extension to higher-order relative degree systems.
+            Extension to higher relative degree systems.
         </li>
     </ul>
     <aside class="notes" data-markdown>
@@ -775,7 +782,7 @@
             Ames et al (ECC 2019):
             \begin{multline}
             \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
-            \mbox{CBC}(\bfx,\bfu) := \Lie_f h(\bfx) + \Lie_g h(\bfx) + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
+            \mbox{CBC}(\bfx,\bfu) := \Lie_f h(\bfx) + \Lie_g h(\bfx)\bfu + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
             \end{multline}
             where \( \alpha(y) \) is some extended class \( \calK_\infty \) function
         </li>
@@ -798,7 +805,7 @@
 </section>
 
 <section>
-    <h2>Uncertainity propagation to CBFs</h2>
+    <h2>Uncertainity propagation to CBC</h2>
     <ul  >
     <li >
         \begin{align}
@@ -938,7 +945,7 @@
             Extension to continous time using Lipchitz continuity assumptions.
         </li>
         <li>
-            Extension to higher-order relative degree systems.
+            Extension to higher relative degree systems.
         </li>
     </ul>
     <aside class="notes" data-markdown >
@@ -1013,7 +1020,8 @@
             \le L_{\alpha \circ h} \|\bfx(t_k+s)-\bfx_k\|.
             \end{align}
         </li>
-        <li class="fragment" style="padding:5px; border: 2px solid red;">
+    </ul>
+        <div class="fragment" style="padding:5px; border: 2px solid red;text-align:left;margin:20px">
             Theorem:
             \[
             \bbP\bigl(
@@ -1031,8 +1039,8 @@
             \(
             \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
             \)
-        </li>
-    </ul>
+            <cite data-key="Khojasteh et al (2019)"></cite>
+        </div>
     <aside class="notes" data-markdown >
         Assume stochastic Lipchitz continuity of the dynamics with exponential
         distribution. This assumption has been made before by Srinivas et al and
@@ -1064,41 +1072,386 @@
             Extension to continous time using Lipchitz continuity assumptions.
         </li>
         <li class="fragment highlight-red">
-            Extension to higher-order relative degree systems.
+            Extension to higher relative degree systems.
         </li>
     </ul>
     <aside class="notes" data-markdown >
-        Now we have seen how to propagate uncertainty to the Control Barrier
-        condition, we can move on the next step which is to translate the
-        Probabilistic condition to a deterministic one.
+        Now we have seen how to extend safety guarantees to untill after
+        triggering time, we focus our attention extending these results to
+        higher relative degree systems.
     </aside>
 </section>
 
 <section>
-    <h2>Higher relative degree systems </h2>
-</section>
+    <h2>Higher relative degree CBFs </h2>
+    <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/pendulum.png" />
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li class="fragment">
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+        <li class="fragment">
+            \begin{align}
+            h\left(\begin{bmatrix}
+            \theta
+            \\
+            \omega
+            \end{bmatrix}
+            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
+            \end{align}
+        </li>
+        <li class="fragment">
+            Note that \( \Lie_g h(\bfx) = \grad h(\bfx) g(\bfx) = 0 \)
+        </li>
+        <li class="fragment">
+            Thus \(  \CBC(\bfx, \bfu) \) is independent of u.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Even pendulum is a higher relative degree system. To see that consider a
+        pendulum with unsafe region defined as the red region.
 
-<section chapter-progress-next="True">
-    <h2>Experiments</h2>
+        We define the state as theta and omega and the control signal is simply
+        the acceleration signal. Pendulum is an control affine system.
+
+        Next we define the control barrier function h based on the cosine
+        distance from the center of unsafe region theta_c.
+
+        Now note that the Lie derivative of h with respect input-gain term g is 0.
+
+        This leads to a condition where our safety constraints so far are
+        independent of u. This is a well-known problem and Ames et al has proposed
+        exponential CBFs for higher relative degree systems.
+    </aside>
 </section>
 
 <section>
-    <h2>Take aways</h2>
+    <h2>Exponential Control Barrier Functions (ECBF)</h2>
+    <ul>
+        <li >
+            \[
+            \CBCr(\bfx, \bfu) := \Lie_f^{(r)} h(\bfx) + \Lie_g \Lie_f^{(r-1)} h(\bfx) \bfu + K_\alpha \begin{bmatrix}
+            h(\bfx) \\
+            \Lie_f h(\bfx) \\
+            \vdots \\
+            \Lie_f^{(r-1)} h(\bfx)
+            \end{bmatrix}
+            \]
+            <cite data-key="Ames et al (ECC 2019)"></cite>
+            <cite data-key="Nguyen and Sreenath (ACC 2016)"></cite>
+        </li>
+        <li class="fragment">
+            \( r \ge 1 \) is the relative degree of CBF, \( h(\bfx) \), then
+            \( \Lie_g \Lie_f^{k} h(\bfx) = 0, \; \forall k = \{0, \dots, r-2 \} \)
+            and \( \Lie_g \Lie_f^{(r-1)} h(\bfx) \ne 0 \) and
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        A Control barrier condition for relative-degree r CBF is defined as this
+        expression. The first two terms of this expression are just rth time
+        derivative of h of x.
+
+        Based on this expression it is easy to understand what relative degree
+        definition should be.
+        The relative degree of a CBF is defined as r greater than 1 such that
+        All the Lie derivatives with respect to g are zero upto r-2 but the last
+        one is non-zero.
+        Alternatively speaking r is the smallest order of control-barrier
+        condition such that CBCr depends upon the contorl u.
+    </aside>
+</section>
+
+<section>
+    <h2>Propagating uncertainity to \( \CBCtwo \)</h2>
+    <ul><li class="fragment">
+        \( \Lie_f h(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP
+    </li><li class="fragment">
+        \[
+        \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
+        \begin{bmatrix}
+        h(\bfx) &
+        \Lie_f h(\bfx)
+        \end{bmatrix}^\top
+        \]
+    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
+        \( \CBCtwo(\bfx, \bfu) \) is a quadratic form of GP.
+        <br/>
+        \( \E[\CBCtwo](\bfx, \bfu) \) is still affine in \( \bfu \).
+        <br/>
+        \( \Var[\CBCtwo](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
+    </li><li class="fragment">
+        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
+        Monte-carlo methods.
+    </li></ul>
+    <aside class="notes" data-markdown >
+        Now that we have defined CBCtwo as the safety condition, we want to see
+a        how to propagate uncertainity to CBCtwo.
+
+        We have already seen that Lie derivative of h wrt to f is a gaussian process.
+
+        The gradients of GPs are GPs, hence the gradient of Lie of h of x is also a GP.
+
+        The dot product of this gradient with system dynamics is a quadratic
+        form of two GPs. Now this is not a GP. But its mean and variacne can be
+        computed analyticallly.
+
+        Note that CBCtwo is affine in this term which is again a quadratic form in GP.
+        Without writing the long expressions for the mean and variance of
+        CBCtwo, I want to convey to you two things; that mean and variance of
+        CBCtwo can be computed analytically and the mean and variance of CBCtwo
+        are affine and quadratic in control signal like CBCone.
+
+    </aside>
+</section>
+
+<section>
+    <h2>Safe controller using ECBF</h2>
+    <ul><li>
+    \begin{align}
+    \min_{\bfu_k \in \mathcal{U}}&
+    \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+    \\
+    \qquad\text{s.t.}&~~
+    \bbP\bigl(
+    \CBCr(\bfx_k, \bfu_k) > \zeta
+    \mid \bfx_k,\bfu_k
+    \bigr) \ge \tilde{p}_k
+    \end{align}
+    </li><li class="fragment">
+        Using Cantelli's (Chebyshev's one-sided) inequality
+    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
+        Safe controller (a QCQP)
+        \begin{align}
+        \min_{\bfu_k \in \mathcal{U}}&
+        \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+        \\
+        \qquad\text{s.t.}\qquad
+        &(\E[\mbox{CBC}_k^{(r)}]-\zeta)^2 \ge \frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]
+        \\
+        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge 0
+        \end{align}
+    </li></ul>
+    <aside class="notes" data-markdown >
+        To derive a safe controller using ECBFs we use Cantelli's inequality
+        that need only mean and variance of the distribution.
+
+        We again derive a safe controller for aribitrary ordered CBCr as long as
+        mean and variance can be estimated. The good thing is that it is still a
+        Quadratic program.
+    </aside>
+</section>
+
+<section chapter-progress-next="True">
+    <h2>Learning Experiments</h2>
+    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
+
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li >
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+        <li >
+            \begin{align}
+            h\left(\begin{bmatrix}
+            \theta
+            \\
+            \omega
+            \end{bmatrix}
+            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
+            \end{align}
+        </li>
+    </ul>
+    <br/>
+    <img class="fragment " src="./media/PendulumDynamics.png" />
+    <aside class="notes" data-markdown >
+        We test our learning framework on the pendulum example that we described earlier.
+
+        We plot different different dimensions of true and learned f of x and g
+        of x. The top row contains the true dynamics plotted with color across
+        theta and omega. The bottom row contains learned dynamics with zero mean
+        and RBF kernel, matrix-variate gaussian processes. The data has been
+        learned with 100 samples.
+
+        You can see that f of x and g of x are learned correctly within one decimal point
+    </aside>
+</section>
+
+<section>
+    <h2>Safe controller using ECBF Experiments</h2>
+    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
+
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li >
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+        <li >
+            \begin{align}
+            h\left(\begin{bmatrix}
+            \theta
+            \\
+            \omega
+            \end{bmatrix}
+            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
+            \end{align}
+        </li>
+    </ul>
+    <br/>
+    <br/>
+    <img class="fragment "
+         src="./media/run_pendulum_control_online_learning_trajectory_100.svg"
+    style="height:300px" />
+    <aside class="notes" data-markdown >
+        We show the behaviour of the pendulum with Safe controller using ECBF.
+
+        We use an exponentially decreasing epsilon-greedy scheme going from 1 to 0.01
+        in 100 steps. Negative control inputs get rejected by the CBF-based
+        constraint, while positive inputs allow the pendulum to bounce back from
+        the unsafe region.
+    </aside>
+</section>
+
+<section>
+    <h2>Take away</h2>
+    <ul>
+        <li >
+            Safety guarantees in stochastic control-affine systems were formuated as
+            Quadratic contraints on the control signal using Exponential Control
+            Barrier Functions.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        If you want to remember one-thing from the talk then I want you to remember this.
+
+        If you need measureable safety guarantees for your stochastic system.
+        There exists a paper out there that provides a way to convert
+        Exponential CBFs into quadratic constraints.
+    </aside>
 </section>
 
 <section>
     <h2>Ongoing work</h2>
-    <ul><li>
-        More experiments
-    </li><li>
-        Entropy objective
-    </li><li>
-        Application of Hansen-Wright like inequalities
+    <ul><li class="fragment">
+        More experiments (closer to the Motivation).
+    </li><li class="fragment">
+        Entropy objective to pick optimal actions for reducing uncertainity.
+    </li><li class="fragment">
+        Application of Hansen-Wright like inequalities for tighter bounds on \( \CBCr \)
     </li></ul>
+    <aside class="notes" data-markdown >
+        This is rapidly developing and ongoing work. We are learning new things
+        everyday. Please let us know if you want to collaborate.
+
+        We are working on better experiments that can be extend to real-robots.
+
+        We want to use entropy objective instead of an e-greedy policy for
+        exploration so that robot can take optimal actions to reduce
+        uncertainity in its dynamics.
+
+        We are also looking at bounding the tails of higher relative degree CBFs
+        using Hansen-Wright like inequalities. If you understand these well, please
+        talk to me. I want to learn.
+    </aside>
 </section>
 
+<section id="bibliography-slide">
+
+    <ul id="bibliography-database" style="display:none">
+        <li id="Sun et al, AISTATS 2017">Shengyang Sun, Changyou Chen,
+            and Lawrence Carin. Learning Structured Weight Uncertainty in
+            Bayesian Neural Networks. In International Conference on Artificial
+            Intelligence and Statistics (AISTATS), pages 1283–1292, 2017.</li>
+        <li id="Ames et al (ECC 2019)">A. D. Ames, S. Coogan, M. Egerstedt, G.
+            Notomista, K. Sreenath, and P. Tabuada. Control barrier functions:
+            Theory and applications. In 2019 18th European Control Conference
+            (ECC), pages 3420–3431, June 2019. doi:
+            10.23919/ECC.2019.8796030.</li>
+        <li id="Alvarez et al (FTML 2012)">
+            Mauricio A Alvarez, Lorenzo Rosasco, and Neil D Lawrence. Kernels
+            for vector-valued functions: A review. Foundations and Trends in
+            Machine Learning, 4(3):195–266, 2012.
+        </li>
+        <li id="Srinivas et al. (2009)">
+            Niranjan Srinivas, Andreas Krause, Sham M Kakade, and Matthias
+            Seeger. Gaussian process opti- mization in the bandit setting: No
+            regret and experimental design. arXiv preprint arXiv:0912.3995,
+            2009.
+        </li>
+        <li id="Nguyen and Sreenath (ACC 2016)"
+        >
+            Quan Nguyen and Koushil Sreenath. Exponential control barrier
+            functions for enforcing high relative- degree safety-critical
+            constraints. In 2016 American Control Conference (ACC), pages
+            322–328. IEEE, 2016a.
+        </li>
+        <li id="Louizos and Welling (ICML 2016)">
+            Louizos, Christos, and Max Welling. "Structured and efficient
+            variational deep learning with matrix gaussian posteriors."
+            International Conference on Machine Learning. 2016.
+        </li>
+        <li id="Khojasteh et al (2019)">
+            Khojasteh, M. J., Dhiman, V., Franceschetti, M., & Atanasov, N. (2019). Probabilistic safety constraints for learned high relative degree system dynamics. arXiv preprint arXiv:1912.10116.
+        </li>
+    </ul>
+    <h2>Bibliography</h2>
+    <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
+        <!-- Auto populated using <cite> -->
+    </ul>
+    <aside class="notes" data-markdown>
+        Here are some citation used throught the presentation.
+    </aside>
+</section>
 <section>
-    <h1>Thank you</h1>
+    <h1>Thank you. Questions?</h1>
     <h4>Paper URL: arxiv.org/abs/1912.10116</h4>
 
     <ul><li>
@@ -1135,35 +1488,6 @@
         </span>
     </li></ul>
     <footnote>\(^*\) These authors contributed equally.</footnote>
-</section>
-<section id="bibliography-slide">
-
-    <ul id="bibliography-database" style="display:none">
-        <li id="Sun et al, AISTATS 2017">Shengyang Sun, Changyou Chen,
-            and Lawrence Carin. Learning Structured Weight Uncertainty in
-            Bayesian Neural Networks. In International Conference on Artificial
-            Intelligence and Statistics (AISTATS), pages 1283–1292, 2017.</li>
-        <li id="Ames et al (ECC 2019)">A. D. Ames, S. Coogan, M. Egerstedt, G.
-            Notomista, K. Sreenath, and P. Tabuada. Control barrier functions:
-            Theory and applications. In 2019 18th European Control Conference
-            (ECC), pages 3420–3431, June 2019. doi:
-            10.23919/ECC.2019.8796030.</li>
-        <li id="Alvarez et al (FTML 2012)">
-            Mauricio A Alvarez, Lorenzo Rosasco, and Neil D Lawrence. Kernels
-            for vector-valued functions: A review. Foundations and Trends in
-            Machine Learning, 4(3):195–266, 2012.
-        </li>
-        <li id="Srinivas et al. (2009)">
-            Niranjan Srinivas, Andreas Krause, Sham M Kakade, and Matthias
-            Seeger. Gaussian process opti- mization in the bandit setting: No
-            regret and experimental design. arXiv preprint arXiv:0912.3995,
-            2009.
-        </li>
-    </ul>
-    <h2>Bibliography</h2>
-    <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
-        <!-- Auto populated using <cite> -->
-    </ul>
 </section>
 
 <!-- End of slides -->
