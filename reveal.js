@@ -1,1 +1,0 @@
-/home/vdhiman/co/reveal.js/
