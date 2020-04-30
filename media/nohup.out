@@ -83,3 +83,147 @@ Gtk-Message: 14:42:22.079: Failed to load module "atk-bridge"
 (eog:18381): EOG-WARNING **: Failed to open file '/home/vdhiman/.cache/thumbnails/normal/cf90bec438598c4c5d5cf8e0333ca9ae.png': No such file or directory
 
 (nautilus:18767): Gtk-WARNING **: Failed to register client: GDBus.Error:org.freedesktop.DBus.Error.ServiceUnknown: The name org.gnome.SessionManager was not provided by any .service files
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+WARNING: unknown type: svg:foreignObject
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:55:50.660: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:55:50.660: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:56:43.936: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:56:43.936: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:58:35.884: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:58:35.884: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:58:45.984: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:58:45.984: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:59:21.407: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:59:21.407: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 08:59:55.736: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 08:59:55.736: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:01:48.901: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:01:48.901: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:04.039: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:04.039: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:09.921: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:09.922: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:13.062: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:13.062: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:23.960: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:23.960: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:26.311: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:26.311: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:27.465: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:27.465: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:02:59.103: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:02:59.103: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:03:14.529: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:03:14.529: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:04:43.575: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:04:43.575: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:04:52.631: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:04:52.631: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:04:55.046: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:04:55.046: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:04:58.390: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:04:58.390: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:04:59.727: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:04:59.727: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:01.230: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:01.230: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:05.893: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:05.893: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:08.029: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:08.029: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:11.028: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:11.028: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:12.580: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:12.580: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:15.941: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:15.941: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:05:18.419: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:05:18.419: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+WARNING: unknown type: svg:foreignObject
+
+** (inkscape:31052): CRITICAL **: 09:40:06.651: void SPObject::requestModified(unsigned int): assertion 'this->document != NULL' failed
+WARNING: unknown type: svg:foreignObject
+
+** (inkscape:31052): CRITICAL **: 09:41:20.032: void SPObject::requestModified(unsigned int): assertion 'this->document != NULL' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:41:22.999: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:41:22.999: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed
+
+(inkscape:31052): GLib-GObject-WARNING **: 09:41:27.839: invalid (NULL) pointer instance
+
+(inkscape:31052): GLib-GObject-CRITICAL **: 09:41:27.839: g_signal_emit_valist: assertion 'G_TYPE_CHECK_INSTANCE (instance)' failed

@@ -26,6 +26,60 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+        <script>
+         function show_on_svgload(svgid, eleid) {
+             var elementids = Array.from(arguments).slice(1);
+             var show_element = function () {
+                 var svg = document.getElementById(svgid)
+                        || console.error("Bad svgid", svgid);
+                 var style_show = svg.getAttribute("style-show") || "display:inherit";
+                 Index.forSVGElementById(
+                     svgid,
+                     elementids,
+                     function (ele) { ele.style.cssText = style_show; });
+             };
+             if (document.readyState == "complete") {
+                 show_element();
+             } else {
+                 window.addEventListener("load", show_element());
+             }
+         };
+         function hide_on_svgload(svgid, eleid) {
+             var elementids = Array.from(arguments).slice(1);
+             var hide_element = function () {
+                 var svg = document.getElementById(svgid)
+                        || console.error("Bad svgid", svgid);
+                 var style_hide = svg.getAttribute("style-hide") || "display:none";
+                 Index.forSVGElementById(
+                     svgid,
+                     elementids,
+                     function (ele) { ele.style.cssText = style_hide; });
+             };
+             if (document.readyState == "complete") {
+                 hide_element();
+             } else {
+                 window.addEventListener("load", hide_element());
+             }
+         };
+        </script>
+        <script>
+         document.presentationtitle = "Probabilistic Safety Constraints";
+         document.presentationauthor = "Vikas Dhiman";
+        </script>
+        <style >
+         .obs-map-plan {
+             height:500px;
+         }
+         .mapping-and-localization {
+             position:absolute;top:38%;left:15%;font-size:24pt;text-align:right;color:red;
+             transform: rotate(-38deg);
+             background-color: var(--main-bg-color);
+         }
+         .deep-reinforcement-learning {
+             position:absolute;top:83%;left:30%;
+             font-size:24pt;text-align:right;color:red
+         }
+        </style>
 	</head>
 	<body>
   <div style="display:none" >
@@ -188,6 +242,7 @@
 
 \newcommand{\CBC}{\mbox{CBC}}
 \newcommand{\CBCtwo}{\CBC^{(2)}}
+\newcommand{\CBCr}{\CBC^{(r)}}
 \newcommand{\Prob}{\mathbb{P}}
 \newcommand{\tdbff}{\bff^*_k}
 
@@ -423,7 +478,8 @@
 \DeclareMathOperator*{\Tr}{Tr}
 \DeclareMathOperator*{\RE}{Re}
 \DeclareMathOperator*{\IM}{Im}
-\DeclareMathOperator{\tr}{\mathbf{tr}}
+\newcommand{\trc}{\mathbf{trc}}
+\newcommand{\Cov}{\mathbf{Cov}}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\scaleMathLine}[2][1]{\resizebox{#1\linewidth}{!}{$\displaystyle{#2}$}}
@@ -481,6 +537,7 @@
       <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
       Nikolay Atanasov
       <footnote>\(^*\) These authors contributed equally.</footnote>
+      <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
   </div>
   <aside class="notes" data-markdown>
       Hi everyone,
@@ -495,6 +552,95 @@
       This work was done under the supervision of Nikolay Atanasov and in
       collaboration with Mohammad and Massimo Franceschetti.
   </aside>
+</section>
+
+<section id="talk-outline" >
+    <h2>My Background</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="talk-outline-obs-map-plan"
+                    class="obs-map-plan"
+                    data-src="./media/obs-map-plan-layered.svg"
+                    onload="show_on_svgload('talk-outline-obs-map-plan', 'slide-nav')"
+            >
+            </object>
+        </div>
+        <div id="talk-outline-obs-map-plan-dummies"
+             class="dummy-to-svg-map"
+             mapped-svg="talk-outline-obs-map-plan"
+        >
+          <span id="talk-outline-map" class="fragment"
+                svg-ele-in-ids="slide-map"
+                svg-ele-out-ids="slide-nav"
+          ></span>
+          <span id="talk-outline-localization"
+                svg-ele-out-ids="slide-map"
+                svg-ele-in-ids="slide-loc"
+                class="fragment"></span>
+          <span id="talk-outline-rl-arrow"
+                svg-ele-out-ids="slide-loc"
+                svg-ele-in-ids="slide-plan"
+                class="fragment"></span>
+          <span id="talk-outline-my-work"
+                svg-ele-out-ids="slide-plan"
+                svg-ele-in-ids="slide-my-work"
+                class="fragment"></span>
+        </div>
+    </div>
+    <cite data-key="<b>Dh</b>KuDaCo ICRA 2014"></cite>
+    <cite data-key="<b>Dh</b>RyCo IROS 2013"></cite>
+    <cite data-key="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017"></cite>
+    <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+    <cite data-key="Ku<b>Dh</b>Co AAAI 2014"></cite>
+    <cite data-key="Ku<b>Dh</b>KoCo PAMI 2017"></cite>
+    <cite data-key="<b>Dh</b>BaSiCo ArXiV 2019"></cite>
+    <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+    <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
+    <aside class="notes" data-markdown>
+      - Navigation is the problem of converting sequence of observation to a
+        sequence of actions for the purpose of going from one place to another.
+      - It is often addressed in three parts.
+      - Mapping---which is the estimation of the static part of the environment.
+      - Localization---which is the estimation of the dynamic state of the
+        environment like the agents location in the map.
+      - and Planning which is the estimation of the sequence of action that
+        moves the agent from current state to the desired goal.
+      + Most of my work has been focused around mapping with some work around
+      localization and planning.
+      + Today I am going to talk about three of my works.
+      + First I am going to talk about my work on making mapping faster by using
+      modern inference methods on factor graphs.
+      + Then I am going to talk about mutual localiztion that intern enables
+      faster mapping by allowing robots to divide and conquer the environment.
+      + In the end I will talk about making goal conditioned reinforcement
+      learning faster by removing redundant computation.
+    </aside>
+</section>
+
+<section id="todays focus">
+    <h2>Today's focus</h2>
+    <div style="position:relative;width:100%">
+        <img style="vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <div style="display:inline-block; vertical-align:middle; list-style: none; font-size: 80%;text-align: left; padding: 50px">
+            <h5 class="fragment">Given:</h5>
+            <ul class="fragment">
+            <li>Map and localization (Full observability)</li>
+            <li>Desired trajectory as a plan</li>
+            <li>Unsafe regions</li>
+            </ul>
+            <h5 class="fragment">Unknown:</h5>
+            <ul class="fragment">
+                <li>Robot system dynamics</li>
+            </ul>
+            <h5 class="fragment">Want:</h5>
+            <ul class="fragment"><li>
+                Follow trajectory avoiding unsafe actions
+            </li>
+            </ul>
+        </div>
+    </div>
 </section>
 
 <section id="Problem formulation">
@@ -613,20 +759,29 @@
 
 <section>
     <h2>Matrix Variate Gaussian Processes</h2>
+    <div style="font-size:80%; text-align:left; width: 500px; margin:auto">
     <div >
         \[
         \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
         \]
     </div>
         <div class="fragment" >
-            Option 1: Alvarez et al (FTML 2012):
+            Option 1: Learn each matrix element independently
+            \[
+            \bfK_0(\bfx, \bfx')_{i, j} = \kappa(\bfx, \bfx')
+            \]
+            <span class="fragment" style="color:red"> No correlation across dimensions</span>
+        </div>
+        <div class="fragment" >
+            Option 2: Alvarez et al (FTML 2012):
             \[
             \bfK_0(\bfx, \bfx') = \kappa(\bfx, \bfx') \boldsymbol{\Sigma}
             \]
             <cite data-key="Alvarez et al (FTML 2012)"></cite>
+            <span class="fragment" style="color:red"> \(\Sigma \in \R^{n(1+m) \times (1+m)n}\) has too many parameters to learn</span>
         </div>
         <div class="fragment " style="position:relative;display:inline-block;">
-            Option 2: Sun et al (AISTATS 2017)
+            Option 3: Sun et al (AISTATS 2017)
             <div class="fragment current-visible" style="position:absolute">
                 \[
                 F \sim \mathcal{MVG}(\bfM, \bfA, \bfB) \Leftrightarrow
@@ -649,6 +804,7 @@
             \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfB_0(.,.) \otimes \bfA)
             \]
         </div>
+    </div>
     <aside class="notes">
         Directly learning the vectorized form of Gaussian Process in this form
         is hard to ensure positive definiteness of each output. That's why
@@ -895,7 +1051,7 @@
             \\
             \qquad\text{s.t.}\qquad&
             \cssId{highlight-current-red-1}{\class{fragment}{
-            (\E[\CBC] - \zeta)^2 \ge 2\Var(\CBC)\erf^{-1}(1-2\tilde{p}_k)^2
+            (\E[\CBC] - \zeta)^2 \ge 2\Var(\CBC)(\erf^{-1}(1-2\tilde{p}_k))^2
             }}
             \\
             &
@@ -1039,7 +1195,7 @@
             \(
             \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
             \)
-            <cite data-key="Khojasteh et al (2019)"></cite>
+            <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
         </div>
     <aside class="notes" data-markdown >
         Assume stochastic Lipchitz continuity of the dynamics with exponential
@@ -1178,30 +1334,70 @@
 
 <section>
     <h2>Propagating uncertainity to \( \CBCtwo \)</h2>
-    <ul><li class="fragment">
-        \( \Lie_f h(\bfx) \) is a Gaussian process
+    <ul>
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
+        <ul class="fragment"><li>
+            If \( p(\bfx) \sim \GP(\mu(\bfx), \kappa(\bfx, \bfx'))\), then
+            <br/>
+            \( \grad_\bfx p(\bfx) \sim \GP(\grad_\bfx \mu(\bfx), H_\bfx \kappa(\bfx, \bfx')) \)
+        </li></ul>
+    </li>
+    </ul>
+</section>
+<section>
+    <h2>Propagating uncertainity to \( \CBCtwo \)</h2>
+    <ul style="font-size:95%">
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
     </li><li class="fragment">
         \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
     </li><li class="fragment">
-        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP
-    </li><li class="fragment">
-        \[
-        \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
-        \begin{bmatrix}
-        h(\bfx) &
-        \Lie_f h(\bfx)
-        \end{bmatrix}^\top
-        \]
-    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
+        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP (not a GP )
+        <ul class="fragment"><li>
+            \(\newcommand{\trc}{\text{tr}}\)
+            If \(p(\bfx)\) and \(q(\bfy)\) are GPs then \(p(\bfx)^\top q(\bfx)\) is also a GP
+            <br/>
+            \begin{multline}
+            p(\bfx)^\top q(\bfx) \sim \GP(\mu_p(\bfx)^\top \mu_q(\bfx) + \trc(\Cov_{p,q}(\bfx, \bfx)), \\
+            2\trc(\Cov_{p,q}(\bfx, \bfx'))^2 )
+            + p(\bfx)^\top \kappa_q(\bfx, \bfx') p(\bfx')
+            \\
+            + q(\bfx)^\top \kappa_p(\bfx, \bfx') q(\bfx')
+            + 2 q(\bfx)^\top \Cov_{p,q}(\bfx, \bfx') p(\bfx')
+            \end{multline}
+            <cite data-key="Seare and Gruber. Linear Models. (Book 1971)"></cite>
+        </li></ul>
+
+    </li>
+    <li class="fragment" style="padding:5px; border: 2px solid red;">
         \( \CBCtwo(\bfx, \bfu) \) is a quadratic form of GP.
         <br/>
         \( \E[\CBCtwo](\bfx, \bfu) \) is still affine in \( \bfu \).
         <br/>
         \( \Var[\CBCtwo](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
-    </li><li class="fragment">
-        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
-        Monte-carlo methods.
-    </li></ul>
+    </li>
+    </ul>
     <aside class="notes" data-markdown >
         Now that we have defined CBCtwo as the safety condition, we want to see
 a        how to propagate uncertainity to CBCtwo.
@@ -1221,6 +1417,35 @@ a        how to propagate uncertainity to CBCtwo.
         are affine and quadratic in control signal like CBCone.
 
     </aside>
+</section>
+
+<section>
+    <h2>Extending to \(\CBCr\)</h2>
+    <ul>
+        <li >
+            \[
+            \CBCr(\bfx, \bfu) = [\grad_\bfx \Lie_f^{(r)} h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx) & \dots \Lie_f^{(r-1)} h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        <img src="./media/computation-graph-cbf-r.png" />
+        </li>
+        <li class="fragment" style="padding:5px; border: 2px solid red;">
+            \( \CBCr(\bfx, \bfu) \) is not a GP
+            <br/>
+            \( \E[\CBCr](\bfx, \bfu) \) is still affine in \( \bfu \).
+            <br/>
+            \( \Var[\CBCr](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
+        </li>
+    <li class="fragment">
+        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
+        Monte-carlo methods.
+    </li>
+    </ul>
 </section>
 
 <section>
@@ -1383,6 +1608,8 @@ a        how to propagate uncertainity to CBCtwo.
     <ul><li class="fragment">
         More experiments (closer to the Motivation).
     </li><li class="fragment">
+        What if QCQP is non-convex?
+    </li><li class="fragment">
         Entropy objective to pick optimal actions for reducing uncertainity.
     </li><li class="fragment">
         Application of Hansen-Wright like inequalities for tighter bounds on \( \CBCr \)
@@ -1438,9 +1665,84 @@ a        how to propagate uncertainity to CBCtwo.
             variational deep learning with matrix gaussian posteriors."
             International Conference on Machine Learning. 2016.
         </li>
-        <li id="Khojasteh et al (2019)">
-            Khojasteh, M. J., Dhiman, V., Franceschetti, M., & Atanasov, N. (2019). Probabilistic safety constraints for learned high relative degree system dynamics. arXiv preprint arXiv:1912.10116.
+        <li id="Kh<b>Dh</b>FrAt L4DC 2020">
+            Khojasteh, M. J., Dhiman, V., Franceschetti, M., & Atanasov, N. (2020). Probabilistic safety constraints for learned high relative degree system dynamics. L4DC 2020. available https://arXiv.org/abs/1912.10116.
         </li>
+        <li id="Bi<b>Dh</b>XiXu AAAI 2020">
+            Learning from Interventions using Hierarchical Policies for Safe Learning
+            J Bi, V Dhiman, T Xiao, C Xu - AAAI 2020. Available https://arXiv.org/abs/1912.02241
+        </li>
+        <li id="Wa<b>Dh</b>At ICRA 2020">
+            Learning Navigation Costs from Demonstration in Partially Observable Environments
+            T Wang, V Dhiman, N Atanasov. ICRA 2020. Available https://arXiv.org/abs/2002.11637
+        </li>
+      <li id="Andrychowicz et al. (2017)">
+          Andrychowicz, Marcin, et al. "Hindsight experience replay." Advances in Neural Information Processing Systems. 2017.
+      </li>
+      <li id="<b>Dh</b>RyCo IROS 2013">
+Mutual localization: Two camera relative 6-dof pose estimation from reciprocal fiducial observation. V Dhiman, J Ryde, JJ Corso. IROS 2013
+      </li>
+      <li id="Ku<b>Dh</b>Co AAAI 2014">
+          Learning Compositional Sparse Models of Bimodal Percepts. S Kumar, V Dhiman, JJ Corso AAAI, 2014
+      </li>
+      <li id="Ry<b>Dh</b>Pl IROS 2013">
+          Voxel planes: Rapid visualization and meshification of point cloud ensembles.
+           J Ryde, V Dhiman, R Platt IROS, 2013
+      </li>
+      <li id="<b>Dh</b>KuDaCo ICRA 2014">
+          Modern MAP inference methods for accurate and fast occupancy grid mapping on higher order factor graphs. V Dhiman, A Kundu, F Dellaert, JJ Corso ICRA 2014
+      </li>
+      <li id="Ch<b>Dh</b> US Patent 2017">
+          Continuous occlusion models for road scene understanding M Chandraker, V Dhiman. US Patent 9,821,813, 2017
+      </li>
+      <li id="<b>Dh</b>TrChCo CVPR 2016">
+          A continuous occlusion model for road scene understanding V Dhiman, QH Tran, JJ Corso, M Chandraker. CVPR 2016
+      </li>
+      <li id="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017">
+          A Critical Investigation of DRL for Navigation V Dhiman, S Banerjee, B Griffin, JM Siskind, JJ Corso NeurIPS DRL Workshop, 2017.
+      </li>
+      <li id="Ku<b>Dh</b>KoCo PAMI 2017">
+          Learning Compositional Sparse Bimodal Models S Kumar, V Dhiman, PA Koch, JJ Corso. PAMI, 2017.
+      </li>
+      <li id="Mirowski ICLR 2017">
+          (Mirowski et al. 2017) Learning to navigate in complex environments. In ICLR 2017. 
+      </li>
+      <li id="Plappert et al. (2018)">
+        Multi-Goal Reinforcement Learning: Challenging Robotics Environments and
+        Request for Research. Matthias Plappert and Marcin Andrychowicz and Alex
+        Ray and Bob McGrew and Bowen Baker and Glenn Powell and Jonas Schneider
+        and Josh Tobin and Maciek Chociej and Peter Welinder and Vikash Kumar and
+        Wojciech Zaremba. ArXiV 2018. 1802.09464
+      </li>
+      <li id="Kaelbling; 1993">
+        Kaelbling, Leslie Pack. "Learning to achieve goals." IJCAI. 1993.
+      </li>
+      <li id="<b>Dh</b>BaSiCo ArXiV 2019">
+        V. Dhiman, S. Banerjee, J. M. Siskind, and J. J. Corso. Learning goal-conditioned
+        value functions with one-step path rewards rather than goal-rewards. In
+        Submitted to ICLR, 2019. Under review.
+      </li>
+      <li id="Zachariou, Peter et al.; 2011"
+      >Zachariou, Peter et al. “SPEEDING Effects on hazard perception and reaction time.” (2011).
+      </li>
+      <li id="Mnih et al. 2015">
+        Mnih, Volodymyr, et al. "Human-level control through deep reinforcement learning." Nature 518.7540 (2015): 529.
+      </li>
+      <li id="Watkins and Dayan; 1992">
+        Watkins, Christopher JCH, and Peter Dayan. "Q-learning." Machine learning 8.3-4 (1992): 279-292.
+      </li>
+      <li id="Pearl; 1986">
+        Pearl, Judea. "Fusion, propagation, and structuring in belief networks." Artificial intelligence 29.3 (1986): 241-288.
+      </li>
+      <li id="Jojic et al. 2010">
+        Jojic, Vladimir, Stephen Gould, and Daphne Koller. "Accelerated dual decomposition for MAP inference." ICML. 2010.
+      </li>
+      <li id="Merali et al. ICRA 2013">
+        Merali, Rehman S., and Timothy D. Barfoot. "Occupancy grid mapping with Markov chain monte carlo Gibbs sampling." Robotics and Automation (ICRA), 2013 IEEE International Conference on. IEEE, 2013.
+      </li>
+      <li id="Seare and Gruber. Linear Models. (Book 1971)">
+          Shayle R Searle and Marvin HJ Gruber.Linear models. John Wiley & Sons, 1971
+      </li>
     </ul>
     <h2>Bibliography</h2>
     <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
@@ -1509,7 +1811,7 @@ a        how to propagate uncertainity to CBCtwo.
 <!-- End of Footer -->
             </div> <!-- class="slides" -->
 		</div> <!-- class="reveal"-->
-    <script src="/BayesCBF-presentation-html/reveal.js/js/reveal.js"></script>
+        <!-- script src="/BayesCBF-presentation-html/reveal.js/js/reveal.js"></script -->
 		<script src="reveal.js/js/reveal.js"></script>
         <script>
          window.MathJax = {
