@@ -8,7 +8,7 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Probabilistic Safety Constraints</title>
+		<title>Safety Constraints under uncertainty</title>
 		<meta name="author" content="Vikas Dhiman">
 
 		<link rel="stylesheet" type="text/css" href="reveal.js/css/reveal.css">
@@ -520,24 +520,11 @@
 
 <!-- Start of slides -->
 <section id="title-slide">
-  <h2>Probabilistic Safety Constraints</h2>
-  <h3>
-      for Learned High Relative Degree System Dynamics
-  </h3>
-  <div>
-      <img style="vertical-align:middle" height="80px" src="./media/mjkhojas-photo.jpg"/>
-      Mohammad Javad Khojasteh\(^*\)
-      <div style="display:inline-block;width:20px"></div>
-      <img style="vertical-align:middle" height="80px" src="./media/vdhiman.jpg"/>
-      <b>Vikas Dhiman</b>\(^*\)
-  </div><div>
-      <img style="vertical-align:middle" height="80px" src="./media/massimo.jpg"/>
-      Massimo Franceschetti
-      <div style="display:inline-block;width:60px"></div>
-      <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
-      Nikolay Atanasov
-      <footnote>\(^*\) These authors contributed equally.</footnote>
-      <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    <h2>Towards safe robots that learn</h2>
+    <div>
+        Vikas Dhiman
+        <br/>
+        Postdoc at UCSD
   </div>
   <aside class="notes" data-markdown>
       Hi everyone,
@@ -552,6 +539,78 @@
       This work was done under the supervision of Nikolay Atanasov and in
       collaboration with Mohammad and Massimo Franceschetti.
   </aside>
+</section>
+
+<section>
+    <h2>Success of Reinforcement Learning </h2>
+    <div style="position:relative;height:400px">
+        <img style="position:absolute;left:05%;height:250px" src="./media/alpha-go-le-sedol.jpg" />
+        <iframe height="250" class="fragment-play fragment display"
+                style="position:absolute;right:05%;"
+                src="https://www.youtube.com/embed/x4O8pojMF0w?start=15&autoplay=1"
+                frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+        gyroscope; picture-in-picture" allowfullscreen></iframe>
+    </div>
+</section>
+
+<section id="need-of-maps" >
+  <div style="position:relative" >
+    <h2>We want autonomous cars</h2>
+    <div  >
+        <h3 style="">Google trends for 'Autonomous cars'</h3>
+        <img  style=""
+             src="./media/2010-2018-auto-car-trends.png" style="height:200px" />
+    </div>
+    <img class="fragment" style="position:absolute;left:05%;top:10%;transform: rotate(-10deg);height:100px"
+        src="./media/2012-calif-auto-legal.png"  />
+    <img class="fragment" style="position:absolute;left:40%;top:10%;transform: rotate(10deg);height:100px"
+        src="./media/2012-300m-google-deemed-ready.png" />
+    <img class="fragment" style="position:absolute;left:60%;top:10%;transform: rotate(0deg);height:100px"
+        src="./media/2014-tc-auto-closer.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:30%;transform: rotate(0deg);height:100px"
+        src="./media/2015-tesla-3-years.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:45%;transform: rotate(-10deg);height:100px"
+        src="./media/2013-tesla-2016.png"  />
+
+    <img class="fragment" style="position:absolute;left:35%;top:45%;transform: rotate(10deg);height:100px"
+        src="./media/2015-tesla-2-years.png" />
+    <img class="fragment" style="position:absolute;left:20%;top:60%;transform: rotate(00deg);height:080px"
+        src="./media/2016-tesla-2-years.png"  />
+    <img class="fragment" style="position:absolute;left:20%;top:75%;transform: rotate(00deg);height:120px"
+        src="./media/2020-driverless-companies.png"  />
+    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(00deg);height:400px"
+         src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+  </div>
+  <aside class="notes" data-markdown>
+    - While talk about navigation we cannot ignore self-driving cars.
+    - Self-driving cars have been getting a lot of attention from public, media
+      and entrepreneurs.
+    - Self-driving cars have covered millions of miles.
+    - States have been legalizing self-driving cars.
+    - The predictions of self-driving cars have been getting closer.
+    - However, what we have got are delayed demos and bad news.
+    - Learning algorithms may have beaten humans at Go, but for driving I still
+      trust humans.
+  </aside>
+</section>
+
+<section>
+    <h2>Why?</h2>
+    <div style="position:relative;height:400px">
+        <img style="position:absolute;left:02%;height:250px" src="./media/alpha-go-le-sedol.jpg" />
+        <img style="position:absolute;right:2%;height:250px"
+             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+    </div>
+</section>
+
+<section>
+    <h2 >Big Data is not enough.</h2>
+    <h2 class="fragment">Data brings uncertainity.</h2>
+    <h2 class="fragment">How to handle uncertainity <b>safely</b>?</h2>
+    <aside class="notes">
+        1. We can take two lessons from this experience.
+    </aside>
 </section>
 
 <section id="talk-outline" >
@@ -630,7 +689,7 @@
             <li>Desired trajectory as a plan</li>
             <li>Unsafe regions</li>
             </ul>
-            <h5 class="fragment">Unknown:</h5>
+            <h5 class="fragment">Unknown (to learn from samples):</h5>
             <ul class="fragment">
                 <li>Robot system dynamics</li>
             </ul>
@@ -1044,19 +1103,14 @@
             where \( \erf(y) \) is there error function.
         </li>
         <li class="fragment" style="padding:5px; border: 2px solid red">
-            Safe controller (a QCQP):
+            Safe controller (an SOCP):
             \begin{align}
             \min_{\bfu_k \in \mathcal{U}}&
             \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
             \\
             \qquad\text{s.t.}\qquad&
             \cssId{highlight-current-red-1}{\class{fragment}{
-            (\E[\CBC] - \zeta)^2 \ge 2\Var(\CBC)(\erf^{-1}(1-2\tilde{p}_k))^2
-            }}
-            \\
-            &
-            \cssId{highlight-current-red-1}{\class{fragment}{
-            \E[\CBC] - \zeta  \ge 0
+            \E[\CBC] - \zeta \ge \sqrt{2\Var(\CBC)(\erf^{-1}(1-2\tilde{p}_k))^2}
             }}
             \end{align}
         </li>
@@ -1464,15 +1518,13 @@ a        how to propagate uncertainity to CBCtwo.
     </li><li class="fragment">
         Using Cantelli's (Chebyshev's one-sided) inequality
     </li><li class="fragment" style="padding:5px; border: 2px solid red;">
-        Safe controller (a QCQP)
+        Safe controller (an SOCP)
         \begin{align}
         \min_{\bfu_k \in \mathcal{U}}&
         \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
         \\
         \qquad\text{s.t.}\qquad
-        &(\E[\mbox{CBC}_k^{(r)}]-\zeta)^2 \ge \frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]
-        \\
-        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge 0
+        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge \sqrt{\frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]}
         \end{align}
     </li></ul>
     <aside class="notes" data-markdown >
@@ -1607,8 +1659,6 @@ a        how to propagate uncertainity to CBCtwo.
     <h2>Ongoing work</h2>
     <ul><li class="fragment">
         More experiments (closer to the Motivation).
-    </li><li class="fragment">
-        What if QCQP is non-convex?
     </li><li class="fragment">
         Entropy objective to pick optimal actions for reducing uncertainity.
     </li><li class="fragment">
