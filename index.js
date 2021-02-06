@@ -8,14 +8,14 @@
   var document = root.document;
   var Index = {};
   // More info about config & dependencies:
-  // - https://github.com/hakimel/reveal.js#configuration
-  // - https://github.com/hakimel/reveal.js#dependencies
+  // https://revealjs.com/config/
   Reveal.initialize({
 
 	// Factor of the display size that should remain empty around the content
 	margin: 0.04,
 
     center : true,
+    overview: true,
 
     // Flags whether to include the current fragment in the URL,
     // so that reloading brings you to the same fragment position
@@ -27,11 +27,8 @@
     controls: false,
     showNotes: false,
     dependencies: [
-      { src: 'reveal.js/plugin/markdown/marked.js' },
       { src: 'reveal.js/plugin/markdown/markdown.js' },
       { src: 'reveal.js/plugin/notes/notes.js', async: true },
-      { src: 'reveal.js/plugin/highlight/highlight.js',
-        async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
       { src: 'socket.io.js', async: true },
       // { src: 'reveal.js/plugin/multiplex/master.js', async: true },
       // and if you want speaker notes
@@ -44,6 +41,7 @@
       38: 'prev', // prev on key down
       40: 'next', // next on key up
     },
+    hideInactiveCursor: false,
     multiplex: {
         // Example values. To generate your own, see the socket.io server instructions.
         "secret": "15428297917341906458",

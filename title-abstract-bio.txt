@@ -1,0 +1,11 @@
+# Title
+
+Safe robots that learn
+
+# Abstract
+
+To enable autonomous robots in unstructured environments, we need robots that learn and adapt to the environment. However, online-learning introduces uncertainty which can lead to unsafe behavior, unless accounted for in control of the robot. In this talk I will focus on learning a model of system dynamics online while satisfying safety constraints. Our objective is to avoid offline system identification or hand-specified models and allow a system to safely and autonomously estimate and adapt its own model during operation. Given streaming observations of the system state, we use Bayesian learning to obtain a distribution over the system dynamics. We show that a safe control policy can be synthesized for systems with arbitrary relative degree and probabilistic CLF-CBF constraints by solving a second order cone program (SOCP). Continuing on this line of enabling safety, I will talk about how to perform accurate occupancy grid mapping by using forward sensor models instead of an inverse sensor model as typically done in the literature. Even the works that use forward sensor models have relied on methods like expectation maximization or Gibbs sampling which have been succeeded by more effective methods of maximum a posteriori (MAP) inference over graphical models. In this paper, we propose the use of modern MAP inference methods along with the forward sensor model. Our implementation and experimental results demonstrate that these modern inference methods deliver more accurate maps more efficiently than previously used methods.
+
+# Bio
+
+Vikas Dhiman is a Postdoctoral Researcher at the Contextual Robotics Institute and the Existential Robotics Lab at the University of California, San Diego. His works lie in the localization, mapping and control algorithms for applications in robotics. He graduated in Elec. Engg (2008) from Indian Institute of Technology, Roorkee, earned his MS (2014) from University at Buffalo, and received his PhD (2019) from the University of Michigan, Ann Arbor. 
