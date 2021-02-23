@@ -8,24 +8,79 @@
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>Probabilistic Safety Constraints</title>
+		<title>Safe Robots that Learn</title>
 		<meta name="author" content="Vikas Dhiman">
 
-		<link rel="stylesheet" type="text/css" href="reveal.js/css/reveal.css">
-		<link rel="stylesheet" type="text/css" href="./reveal.js/css/theme/white.css">
+		<link rel="stylesheet" type="text/css" href="reveal.js/dist/reset.css">
+		<link rel="stylesheet" type="text/css" href="reveal.js/dist/reveal.css">
+		<link rel="stylesheet" type="text/css" href="./reveal.js/dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" type="text/css" href="reveal.js/lib/css/zenburn.css">
+		<link rel="stylesheet" type="text/css" href="reveal.js/plugin/highlight/zenburn.css">
 		<link rel="stylesheet" type="text/css" href="index.css">
 
 		<!-- Printing and PDF exports -->
-		<script>
+		<!-- script>
 			var link = document.createElement( 'link' );
 			link.rel = 'stylesheet';
 			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/css/print/pdf.css' : 'reveal.js/css/print/paper.css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'reveal.js/dist/print/pdf.css' : 'reveal.js/dist/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
+		</script -->
+        <script>
+         function show_on_svgload(svgid, eleid) {
+             var elementids = Array.from(arguments).slice(1);
+             var show_element = function () {
+                 var svg = document.getElementById(svgid)
+                        || console.error("Bad svgid", svgid);
+                 var style_show = svg.getAttribute("style-show") || "display:inherit";
+                 Index.forSVGElementById(
+                     svgid,
+                     elementids,
+                     function (ele) { ele.style.cssText = style_show; });
+             };
+             if (document.readyState == "complete") {
+                 show_element();
+             } else {
+                 window.addEventListener("load", show_element());
+             }
+         };
+         function hide_on_svgload(svgid, eleid) {
+             var elementids = Array.from(arguments).slice(1);
+             var hide_element = function () {
+                 var svg = document.getElementById(svgid)
+                        || console.error("Bad svgid", svgid);
+                 var style_hide = svg.getAttribute("style-hide") || "display:none";
+                 Index.forSVGElementById(
+                     svgid,
+                     elementids,
+                     function (ele) { ele.style.cssText = style_hide; });
+             };
+             if (document.readyState == "complete") {
+                 hide_element();
+             } else {
+                 window.addEventListener("load", hide_element());
+             }
+         };
+        </script>
+        <script>
+         document.presentationtitle = "Safe Robots that Learn";
+         document.presentationauthor = "Vikas Dhiman";
+        </script>
+        <style >
+         .obs-map-plan {
+             height:500px;
+         }
+         .mapping-and-localization {
+             position:absolute;top:38%;left:15%;font-size:24pt;text-align:right;color:red;
+             transform: rotate(-38deg);
+             background-color: var(--main-bg-color);
+         }
+         .deep-reinforcement-learning {
+             position:absolute;top:83%;left:30%;
+             font-size:24pt;text-align:right;color:red
+         }
+        </style>
 	</head>
 	<body>
   <div style="display:none" >
@@ -188,6 +243,7 @@
 
 \newcommand{\CBC}{\mbox{CBC}}
 \newcommand{\CBCtwo}{\CBC^{(2)}}
+\newcommand{\CBCr}{\CBC^{(r)}}
 \newcommand{\Prob}{\mathbb{P}}
 \newcommand{\tdbff}{\bff^*_k}
 
@@ -423,15 +479,15 @@
 \DeclareMathOperator*{\Tr}{Tr}
 \DeclareMathOperator*{\RE}{Re}
 \DeclareMathOperator*{\IM}{Im}
-\DeclareMathOperator{\tr}{\mathbf{tr}}
+\newcommand{\trc}{\mathbf{trc}}
+\newcommand{\Cov}{\mathbf{Cov}}
 \newcommand{\floor}[1]{\lfloor #1 \rfloor}
 \newcommand{\ceil}[1]{\lceil #1 \rceil}
 \newcommand{\scaleMathLine}[2][1]{\resizebox{#1\linewidth}{!}{$\displaystyle{#2}$}}
-
-
+\newcommand{\ubfu}{\underline{\mathbf{u}}}
   \)
   </div>
-        <div class="reveal">
+        <div class="reveal" >
 			<div class="slides" >
 
 <!-- Start of header -->
@@ -456,7 +512,7 @@
         </style>
         <span class="chapter-progress" ><span>Estimation</span></span>
         <span class="chapter-progress" ><span>Propagation</span></span>
-        <span class="chapter-progress" ><span>Continous time</span></span>
+        <span class="chapter-progress" ><span>Continuous time</span></span>
         <span class="chapter-progress" ><span>Higher relative degree</span></span>
     </div>
 </div>
@@ -464,23 +520,11 @@
 
 <!-- Start of slides -->
 <section id="title-slide">
-  <h2>Probabilistic Safety Constraints</h2>
-  <h3>
-      for Learned High Relative Degree System Dynamics
-  </h3>
-  <div>
-      <img style="vertical-align:middle" height="80px" src="./media/mjkhojas-photo.jpg"/>
-      Mohammad Javad Khojasteh\(^*\)
-      <div style="display:inline-block;width:20px"></div>
-      <img style="vertical-align:middle" height="80px" src="./media/vdhiman.jpg"/>
-      <b>Vikas Dhiman</b>\(^*\)
-  </div><div>
-      <img style="vertical-align:middle" height="80px" src="./media/massimo.jpg"/>
-      Massimo Franceschetti
-      <div style="display:inline-block;width:60px"></div>
-      <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
-      Nikolay Atanasov
-      <footnote>\(^*\) These authors contributed equally.</footnote>
+    <h2>Safe Robots that Learn</h2>
+    <div>
+        Vikas Dhiman
+        <br/>
+        Postdoc at UCSD
   </div>
   <aside class="notes" data-markdown>
       Hi everyone,
@@ -497,46 +541,413 @@
   </aside>
 </section>
 
+
+<section id="why-learning">
+    <div class="r-stack">
+    <h2 class="fragment fade-out">Why learning?</h2>
+    <h2 class="fragment">Need robots that learn and adapt</h2>
+    </div>
+    <table><tr>
+        <th style="text-align:center">So far</th>
+        <th style="text-align:center"
+            data-fragment-index="0"
+            class="fragment"
+        >Next era</th>
+    </tr><tr class="img-row">
+            <td>
+                <img data-src="./media/industrial-robots.jpeg" height="300" />
+            </td>
+            <td class="fragment" data-fragment-index="0">
+                <img
+                     data-src="./media/delivery-robots.jpeg"
+                     height="100" />
+                <img
+                     data-src="./media/cleaning-robots.jpeg"
+                     height="100" />
+                <img
+                     data-src="./media/drone-delivery.webp"
+                     height="100" />
+                <img
+                     data-src="./media/autonomous-driving.webp"
+                     height="100" />
+                <img data-src="./media/human-robot-collaboration.jpeg"
+                     height="100"/>
+            </td>
+    </tr>
+    </table>
+
+</section>
+
+<section id="why-ml-control-rob"  data-visibility="hidden">
+    <h2>Robotics and Learning</h2>
+    <aside class="notes" data-markdown>
+        Applications:
+        - Industrial robots
+        - Corobots
+        - Construction
+        - Agricultural ()
+        - Medical (Elderly care)
+        - Home/Domestic (Roomba,  lawn mowers, )
+        - Disastor recovery (nuclear facility shutdown)
+        - Autonomous cars
+
+        Problems:
+        - Power source ()
+        - Actuation (motors, hydraulic etc)
+        - Sensing (vision, lidar, radar, ultrasonics, touch, speech etc)
+        - Manipulation (grippers, suction, full human hand)
+        - Navigation (flying, n-wheel (n=1, ..., 6))
+        - Bipedal
+        - Human-robot interaction
+        - Controls
+
+    </aside>
+</section>
+
+
+<section>
+    <h2> Learning </h2>
+    <table><tr><td class="img-row">
+        <img style="height:220px" class="fragment" data-src="./media/alpha-go-le-sedol.jpg" />
+        <span style="width:85px;display:inline-block"> &nbsp; </span>
+        <img style="height:220px" class="fragment" data-src="./media/protein-folding.png" />
+
+    </td></tr>
+    <tr><td class="img-row">
+        <img style="height:220px" class="fragment" data-src="./media/dall-e.png" />
+        <span class="fragment">
+        <video
+            class="fragment-play"
+            style="height:220px"
+            loop="true"
+            muted="True"
+            currentTime="60"
+            height="245"
+        >
+            <source type="video/mp4" data-src="media/rubiks-cube.mp4#t=30,45"/>
+        </video>
+        </span>
+    </td></tr></table>
+</section>
+
+<section id="need-of-maps" >
+  <div style="position:relative" >
+    <h2>Learning applied to autonomous cars</h2>
+    <div  >
+        <h3 style="">Google trends for 'Autonomous cars'</h3>
+        <img  style=""
+             src="./media/2010-2018-auto-car-trends.png" style="height:200px" />
+    </div>
+    <img class="fragment" style="position:absolute;left:05%;top:10%;transform: rotate(-10deg);height:100px"
+        src="./media/2012-calif-auto-legal.png"  />
+    <img class="fragment" style="position:absolute;left:40%;top:10%;transform: rotate(10deg);height:100px"
+        src="./media/2012-300m-google-deemed-ready.png" />
+    <img class="fragment" style="position:absolute;left:60%;top:10%;transform: rotate(0deg);height:100px"
+        src="./media/2014-tc-auto-closer.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:30%;transform: rotate(0deg);height:100px"
+        src="./media/2015-tesla-3-years.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:45%;transform: rotate(-10deg);height:100px"
+        src="./media/2013-tesla-2016.png"  />
+
+    <img class="fragment" style="position:absolute;left:35%;top:45%;transform: rotate(10deg);height:100px"
+        src="./media/2015-tesla-2-years.png" />
+    <img class="fragment" style="position:absolute;left:20%;top:60%;transform: rotate(00deg);height:080px"
+        src="./media/2016-tesla-2-years.png"  />
+    <img class="fragment" style="position:absolute;left:20%;top:75%;transform: rotate(00deg);height:120px"
+        src="./media/2020-driverless-companies.png"  />
+    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(10deg);height:400px"
+         src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+
+    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(-10deg);height:400px"
+         src="./media/uber-crash.jpeg"
+    />
+  </div>
+  <aside class="notes" data-markdown>
+    - While talk about navigation we cannot ignore self-driving cars.
+    - Self-driving cars have been getting a lot of attention from public, media
+      and entrepreneurs.
+    - Self-driving cars have covered millions of miles.
+    - States have been legalizing self-driving cars.
+    - The predictions of self-driving cars have been getting closer.
+    - However, what we have got are delayed demos and bad news.
+    - Learning algorithms may have beaten humans at Go, but for driving I still
+      trust humans.
+  </aside>
+</section>
+
+
+<section>
+    <h2>Why?</h2>
+    <div style="position:relative;height:400px">
+        <img style="position:absolute;left:02%;height:250px" src="./media/alpha-go-le-sedol.jpg" />
+        <img style="position:absolute;right:2%;height:250px"
+             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+    </div>
+</section>
+
+<section>
+    <h2 >Data brings uncertainty.</h2>
+    <img data-src="./media/data-uncertainity.png" />
+    <h2 class="fragment">How to handle uncertainty <b>safely</b>?</h2>
+    <aside class="notes">
+        1. We can take two lessons from this experience.
+    </aside>
+</section>
+
+<section id="kinds-of-safety" >
+<h2 id="different-kinds-of-safety">Safety</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="safety-levels"
+                    style="height:700px"
+                    data-src="./media/safety-levels.svg"
+            >
+            </object>
+        </div>
+        <div id="safety-levels-dummy"
+             class="dummy-to-svg-map"
+             mapped-svg="safety-levels"
+        >
+          <span id="safety-levels-dummy-1" class="fragment"
+                svg-ele-in-ids="safety-levels"
+          ></span>
+        </div>
+    </div>
+</section>
+
+<section id="talk-outline" >
+    <h2>My Background</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="talk-outline-obs-map-plan"
+                    class="obs-map-plan"
+                    data-src="./media/obs-map-plan-layered.svg"
+                    onload="show_on_svgload('talk-outline-obs-map-plan',
+                          'slide-nav')"
+            >
+            </object>
+        </div>
+        <div id="talk-outline-obs-map-plan-dummies"
+             class="dummy-to-svg-map"
+             mapped-svg="talk-outline-obs-map-plan"
+        >
+          <span id="talk-outline-map" class="fragment"
+                svg-ele-in-ids="slide-map"
+                svg-ele-out-ids="slide-nav"
+          ></span>
+          <span id="talk-outline-localization"
+                svg-ele-out-ids="slide-map"
+                svg-ele-in-ids="slide-loc"
+                class="fragment"></span>
+          <span id="talk-outline-plan"
+                svg-ele-out-ids="slide-loc"
+                svg-ele-in-ids="slide-plan"
+                class="fragment"></span>
+          <span id="talk-outline-rl-arrow"
+                svg-ele-out-ids="slide-plan"
+                svg-ele-in-ids="slide-map-loc-plan-rl"
+                class="fragment"></span>
+          <span id="talk-outline-my-work"
+                svg-ele-out-ids="slide-map-loc-plan-rl"
+                svg-ele-in-ids="slide-my-work"
+                class="fragment"></span>
+        </div>
+    </div>
+    <cite data-key="<b>Dh</b>KuDaCo ICRA 2014"></cite>
+    <cite data-key="<b>Dh</b>RyCo IROS 2013"></cite>
+    <cite data-key="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017"></cite>
+    <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+    <cite data-key="Ku<b>Dh</b>Co AAAI 2014"></cite>
+    <cite data-key="Ku<b>Dh</b>KoCo PAMI 2017"></cite>
+    <cite data-key="<b>Dh</b>BaSiCo ArXiV 2019"></cite>
+    <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+    <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
+    <aside class="notes" data-markdown>
+      - Navigation is the problem of converting sequence of observation to a
+        sequence of actions for the purpose of going from one place to another.
+      - It is often addressed in three parts.
+      - Mapping---which is the estimation of the static part of the environment.
+      - Localization---which is the estimation of the dynamic state of the
+        environment like the agents location in the map.
+      - and Planning which is the estimation of the sequence of action that
+        moves the agent from current state to the desired goal.
+      + Most of my work has been focused around mapping with some work around
+      localization and planning.
+      + Today I am going to talk about three of my works.
+      + First I am going to talk about my work on making mapping faster by using
+      modern inference methods on factor graphs.
+      + Then I am going to talk about mutual localiztion that intern enables
+      faster mapping by allowing robots to divide and conquer the environment.
+      + In the end I will talk about making goal conditioned reinforcement
+      learning faster by removing redundant computation.
+    </aside>
+</section>
+
+
+<section id="todays focus">
+    <h2>Safe control while learning</h2>
+    <div style="position:relative;width:100%">
+        <img style="vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <div style="display:inline-block; vertical-align:middle; list-style: none; font-size: 80%;text-align: left; padding: 50px">
+            <h5 class="fragment">Given:</h5>
+            <ul class="fragment">
+            <li>Map and localization</li>
+            <li>Desired trajectory as a plan</li>
+            <li>Unsafe regions</li>
+            </ul>
+            <h5 class="fragment">Unknown (to learn from samples):</h5>
+            <ul class="fragment">
+                <li>Robot system dynamics</li>
+            </ul>
+            <h5 class="fragment">Want:</h5>
+            <ul class="fragment"><li>
+                Follow trajectory avoiding unsafe actions
+            </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="why-gp">
+    <h2>How to learn dynamics?</h2>
+    <ul>
+            <li class="fragment">Koopman operators
+                ( Mamakoukas et al (2020) )
+            </li>
+            <li class="fragment">Model based reinforcement Learning
+                (  Wang et al  (2019) )
+            </li>
+            <li class="fragment">Ensemble neural networks
+                ( Pearce et al (2018) )
+            </li>
+            <li class="fragment">Dropout neural networks
+                ( Gal and Ghahramani (2016) )
+            </li >
+            <li class="fragment">Probabilistic Backpropagation
+                ( Hernández-Lobato and Adams (2015) )
+            </li >
+            <li class="fragment">Gaussian Processes (Rasmussen (2003))
+            </li>
+    </ul>
+</section>
+
+<section>
+    <h2>Gaussian Processes</h2>
+    <table><tr><td style="vertical-align:top" class="fragment">
+        <img 
+            style="width:500px" data-src="./media/gp-prior.png" />
+        <footnote>Image source: https://peterroelants.github.io/</footnote>
+    </td>
+    <td style="vertical-align:top;font-size: smaller">
+        <ul>
+            <li class="fragment" >
+                \[
+                \begin{bmatrix}
+                f_1
+                \\
+                \vdots \\
+                f_n
+                \end{bmatrix}
+                \sim \calN\left(
+                \begin{bmatrix}
+                \mu_1 \\ \vdots \\ \mu_n
+                \end{bmatrix},
+
+                \begin{bmatrix}
+                \sigma_{1,1} & \dots & \sigma_{1,n} \\
+                \vdots & \dots & \vdots \\
+                \sigma_{n,1} & \dots & \sigma_{n,n}
+                \end{bmatrix}
+                \right)
+                \]
+            </li><li class="fragment" >
+                \[
+                \begin{bmatrix}
+                f(\bfx_1)
+                \\
+                \vdots \\
+                f(\bfx_n)
+                \end{bmatrix}
+                \sim \calN\left(
+                \begin{bmatrix}
+                \mu(\bfx_1) \\ \vdots \\ \mu(\bfx_n)
+                \end{bmatrix},
+                \begin{bmatrix}
+                \sigma(\bfx_1,\bfx_1) & \dots & \sigma(\bfx_1,\bfx_n) \\
+                \vdots & \dots & \vdots \\
+                \sigma(\bfx_n,\bfx_1) & \dots & \sigma(\bfx_n, \bfx_n)
+                \end{bmatrix}
+                \right)
+                \]
+            </li>
+            <li class="fragment" >
+                \[
+                f \sim \GP(\mu, \sigma)
+                \]
+            </li>
+            <li class="fragment" >
+                \[
+                f(\bfx^*) | \{ f(\bfx_1) \dots  f(\bfx_n) \}
+                \sim \N( \mu_{*|n}(\bfx^*), \sigma_{*|n}(\bfx^*) )
+                \]
+            </li>
+        </ul>
+
+    </td>
+    </tr></table>
+</section>
+
 <section id="Problem formulation">
     <h2>Problem formulation</h2>
     <div style="position:relative;width:100%">
         <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
         <ul style="display:inline-block; vertical-align:middle; list-style: none">
             <li class="fragment">
-            \begin{align}
-            \label{eq:system_dyanmics}
-            \dot{\bfx} = f(\bfx) + g(\bfx)\bfu = \begin{bmatrix} f(\bfx) & g(\bfx)\end{bmatrix} \begin{bmatrix}1\\\bfu\end{bmatrix} =: F(\bfx) \ctrlaff
-            \end{align}
+                \(\bfx \in \bbR^n \) is the state
             </li>
             <li class="fragment">
+                \(\bfu \in \bbR^m \) is the control signal
+            </li>
+            <li  class="r-stack">
+                <div class="fragment current-visible">
+                        \begin{align}
+                        \label{eq:system_dyanmics}
+                    \dot{\bfx} = f(\bfx) + g(\bfx)\bfu
+                    \end{align}
+                </div>
+                <div class="fragment">
+                    \begin{align}
+                    \dot{\bfx} = \begin{bmatrix} f(\bfx) & g(\bfx)\end{bmatrix} \begin{bmatrix}1\\\bfu\end{bmatrix} =: F(\bfx) \ctrlaff
+                    \end{align}
+                </div>
+            </li>
+            <li class="r-stack">
+                <div class="fragment current-visible">
+                    \[
+                    \vect(F(\bfx)) = \begin{bmatrix} f(\bfx) \\ g_{:,1}(\bfx) \\ \vdots \\ g_{:, m}(\bfx)
+                    \end{bmatrix}
+                    \]
+                </div>
+                <div class="fragment">
                 \[
                 \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
                 \]
+                </div>
             </li>
             <li style="position:relative;height:125px">
-                <div class="fragment current-visible" style="position:absolute;">
+                <div class="fragment " style="position:absolute;">
                     \begin{align}
-                    \min_{\bfu_k \in \mathcal{U}}&
-                    \text{ Task cost function }
+                    \min_{\bfu \in \mathcal{U}}&
+                    \|\bfR(\bfx) (\bfu - \pi_\epsilon(\bfx)) \|_2^2
                     \\
                     \qquad\text{s.t.}&~~\bbP\bigl(
                     \text{ Safety constraint }
-                    \mid \bfx_k,\bfu_k
+                    \mid \bfx_k,\bfu
                     \bigr) \ge \tilde{p}_k,
                     \end{align}
-                </div>
-                <div class="fragment" style="position:absolute;">
-                \begin{align}
-                \min_{\bfu_k \in \mathcal{U}}&
-                    \|\bfu_k -
-                    \cssId{highlight-border-red-1}{\class{fragment}{\pi_\epsilon(\bfx_k)}}
-                    \|_Q
-                \\
-                \qquad\text{s.t.}&~~\bbP\bigl(
-                \cssId{highlight-border-red-1}{\class{fragment}{h(\bfx) > \zeta_h > 0}}
-                \mid \bfx_k,\bfu_k
-                \bigr) \ge \tilde{p}_k,
-                \end{align}
                 </div>
                 <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
                 controller.</footnote-->
@@ -556,7 +967,7 @@
 
         Fragment 2:
         We assume that state-dependent part of the dynamics, capital F of x, is
-        a Gaussian process whose mean and uncertainity could be estimated.
+        a Gaussian process whose mean and uncertainty could be estimated.
 
         Fragment 3:
         We want to formulate a controller that minimizes task cost function
@@ -566,8 +977,141 @@
         A specific example of that would be to have an epsilon greedy unsafe
         controller. The safe controller will closely follow the unsafe controller
         constrained by safety. The epsilon greedy parts allows the robot to take
-        random actions so that it can reduce the uncertainity of its dynamics.
+        random actions so that it can reduce the uncertainty of its dynamics.
     </aside>
+</section>
+
+<section id="Problem 1">
+    <h2>Problem 1</h2>
+    <div style="position:relative;width:100%">
+        <!-- -  img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" /-->
+        <ul style="display:inline-block; vertical-align:middle; list-style: none">
+            <li class="fragment">
+                \begin{align}
+                \dot{\bfx} =  F(\bfx) \ctrlaff
+                \end{align}
+            </li>
+            <li class="fragment">
+                \[
+                \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
+                \]
+            </li>
+            <li class="fragment">
+                \[\StDat_{1:k} \triangleq [\bfx(t_1), \dots, \bfx(t_k)]\]
+            </li>
+            <li class="fragment">
+                \[\bfU_{1:k} \triangleq [\bfu(t_1), \dots, \bfu(t_k)]\]
+
+            </li>
+            <li class="fragment">
+                \[
+                \StDtDat_{1:k} \triangleq [\dot{\bfx}(t_1), \dots, \dot{\bfx}(t_k)]
+                \]
+            </li>
+            <li style="position:relative;height:125px">
+                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
+                    Compute the posterior distribution \(\calG\calP(\vect(\bfM_k(\bfx)), \bfK_k(\bfx,\bfx'))\) of \(\vect(F(\bfx)) \mid (\StDat_{1:k}, \bfU_{1:k}, \StDtDat_{1:k})\).
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section id="CBF">
+    <h2>Control Barrier Functions</h2>
+
+    <div style="position:relative;width:100%">
+    <!-- img style="positon:absolute;left:40px;top:200px; vertical-align:middle;height:200px" src="./media/motivation-fig.svg" /-->
+    <ul class="dotted" style="display:inline-block; vertical-align:middle; list-style: none">
+        <li>
+            For differentiable \( h(\bfx) \),
+            <br/>
+            safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
+        </li>
+        <li class="fragment">
+            Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
+        </li>
+        <li class="fragment">
+            Assume system starts in safe state \( \bfx(0) \in \calC \)
+        </li>
+        <li class="fragment">
+            <p> System stays safe iff</p>
+            <div class="r-stack">
+            <div class="fragment current-visible">
+            \[
+                \dot{h}(\bfx) \ge - \alpha ( h(\bfx) )
+            \]
+            </div>
+            <div class="fragment current-visible">
+                \[
+                [\grad_\bfx h(\bfx)]^\top \dot{\bfx} \ge - \alpha( h(\bfx) )
+                \]
+            </div>
+            <div class="fragment">
+                \[
+                [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff \ge - \alpha( h(\bfx) )
+                \]
+            </div>
+            </div>
+        </li>
+        <li class="fragment" style="padding:5px;border: 2px solid #ff2c2d">
+            Ames et al (ECC 2019):
+            \begin{multline}
+            \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
+            \mbox{CBC}(\bfx,\bfu) := [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
+            \end{multline}
+            where \( \alpha(y) \) is some extended class \( \calK_\infty \) function
+        </li>
+    </ul>
+    </div>
+    <aside class="notes" data-markdow>
+        Recall the motivating example. We define a safe region C by a
+        differentiable function function h of x which is greater than 0 inside
+        the safe region.
+
+        We also assume that the gradient of h of x is non-zero at the boundary of set C.
+
+        Then a theorem from Ames et al says that if the system starts from safe
+        state then it stays in safe state if time derivative of h of x is
+        greater than alpha of h of x.
+
+        Define alpha as a function that belongs to Kappa infinity class, that it
+        is an increasing function that maps a bounded input to zero and infinity.
+    </aside>
+    <cite data-key="Ames et al (ECC 2019)"></cite>
+</section>
+
+
+<section id="Problem 2">
+    <h2>Problem 2</h2>
+    <div style="position:relative;width:100%">
+        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <ul style="display:inline-block; vertical-align:middle; list-style: none">
+            <li class="fragment">
+                \begin{align}
+                \dot{\bfx} =  F(\bfx) \ctrlaff
+                \end{align}
+            </li>
+            <li class="fragment">
+                \[
+                \vect(F(\bfx)) \sim \GP(\vect(\bfM_k(.)), \bfK_k(.,.))
+                \]
+            </li>
+            <li style="position:relative;height:125px">
+                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
+                    Find \(\bfu_k\) and \(\tau_k\) such that for \(\bfu(t) = \bfu_k\)
+                    \[
+                    \mathbb{P}(\mbox{CBC}(\bfx(t),\bfu_k) \ge 0) \ge p_k
+                    \]
+                    for all \( t \in [t_k,t_k+\tau_k) \)
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
 </section>
 
 <section
@@ -577,13 +1121,13 @@
     <h2>Approach</h2>
     <ul class="dotted">
         <li class="fragment highlight-red">
-            Estimate \(F(\bfx)\)  with uncertainity.
+            Estimate posterior distribution over \(F(\bfx)\)
         </li>
         <li>
             Propagate uncertainty to the Safety condition.
         </li>
         <li>
-            Extension to continous time using Lipchitz continuity assumptions.
+            Extension to continuous time using Lipschitz continuity assumptions.
         </li>
         <li>
             Extension to higher relative degree systems.
@@ -596,7 +1140,7 @@
          </li -->
     <aside class="notes" data-markdown>
         We will approach this problem in five broad steps.
-        The estimation of F of x with uncertainity using Gaussian Processes.
+        The estimation of F of x with uncertainty using Gaussian Processes.
         Note that Gaussian Processes are just one-way of estimating F of x. We
         can also uses Bayesian Neural Networks based on Esembles, Probabilistic
         Backpropagation and dropouts.
@@ -611,22 +1155,30 @@
 </section>
 
 
-<section>
-    <h2>Matrix Variate Gaussian Processes</h2>
+<section id="mvgp">
+    <div style="font-size:80%; text-align:left; width: 500px; margin:auto">
     <div >
         \[
         \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
         \]
     </div>
         <div class="fragment" >
-            Option 1: Alvarez et al (FTML 2012):
+            Decoupled GPs: Learn each element of \(F(\bfx)\) independently:
+            \[
+            \bfK_0(\bfx, \bfx') = \diag([\kappa(\bfx, \bfx'), \dots ])
+            \]
+            <span class="fragment" style="color:red"> No correlation across dimensions, training data still correlated.</span>
+        </div>
+        <div class="fragment" >
+            Corregionalization models: Alvarez et al (FTML 2012):
             \[
             \bfK_0(\bfx, \bfx') = \kappa(\bfx, \bfx') \boldsymbol{\Sigma}
             \]
             <cite data-key="Alvarez et al (FTML 2012)"></cite>
+            <span class="fragment" style="color:red"> \(\Sigma \in \R^{n(1+m) \times (1+m)n}\) has too many parameters to learn</span>
         </div>
         <div class="fragment " style="position:relative;display:inline-block;">
-            Option 2: Sun et al (AISTATS 2017)
+            Matrix Variate Gaussian: Inspired from Sun et al (AISTATS 2017)
             <div class="fragment current-visible" style="position:absolute">
                 \[
                 F \sim \mathcal{MVG}(\bfM, \bfA, \bfB) \Leftrightarrow
@@ -649,6 +1201,7 @@
             \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfB_0(.,.) \otimes \bfA)
             \]
         </div>
+    </div>
     <aside class="notes">
         Directly learning the vectorized form of Gaussian Process in this form
         is hard to ensure positive definiteness of each output. That's why
@@ -690,15 +1243,27 @@
         \end{equation}
     </div>
     <div class="fragment">
-        Given data \(\StDat_{1:k} := [\bfx(t_1), \dots, \bfx(t_k)]\),
-        \(\StDtDat_{1:k}=[\dot{\bfx}(t_1), \dots, \dot{\bfx}(t_k)] \),
-        and \( \underline{\boldsymbol{\mathcal{U}}}_{1:k}:= \diag(\ctrlaff_1, \dots, \ctrlaff_k) \).
+        Given data \(\StDat_{1:k}\),
+        \(\StDtDat_{1:k} \),
+        and \( \underline{\boldsymbol{\mathcal{U}}}_{1:k} \).
     </div>
     <div class="fragment">
         \begin{equation*}
+        \newcommand{\ubcalU}{\underline{\boldsymbol{\calU}}}
+        \newcommand{\bcalM}{\boldsymbol{\calM}}
+        \newcommand{\bcalB}{\boldsymbol{\calB}}
+        \newcommand{\bcalC}{\boldsymbol{\calC}}
         \begin{aligned}
-        \bfM_k(\bfx_*) &:= \bfM_0(\bfx_*) + \prl{ \dot{\bfX}_{1:k} - \boldsymbol{\mathcal{M}}_{1:k}\underline{\boldsymbol{\mathcal{U}}}_{1:k}} \prl{\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}}^{-1}\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfx_*)\\
-        \bfB_k(\bfx_*,\bfx_*') &:= \bfB_0(\bfx_*,\bfx_*') + \bfB_0(\bfx_*,\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}\prl{\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfX_{1:k})\underline{\boldsymbol{\mathcal{U}}}_{1:k}}^{-1}\underline{\boldsymbol{\mathcal{U}}}_{1:k}^\top\bfB_0(\bfX_{1:k},\bfx_*')
+        &\bfM_k(\bfx) \triangleq \bfM_0(\bfx) +
+        \left( \dot{\bfX}_{1:k} - \bcalM_{1:k}\ubcalU_{1:k}\right) \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
+        \\
+        &\bfB_k(\bfx,\bfx') \triangleq \bfB_0(\bfx,\bfx') 
+        -
+        \bcalB_{1:k}(\bfx)\ubcalU_{1:k} \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx')\right)^\dagger
+        \\
+        &\left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
+        \triangleq
+        \left(\ubcalU_{1:k}^\top\bcalB_{1:k}^{1:k}\ubcalU_{1:k} + \sigma^2 \bfI_k\right)^{-1}\ubcalU_{1:k}^\top\bcalB_{1:k}^\top(\bfx).
         \label{eq:mvg-posterior}
         \end{aligned}
         \end{equation*}
@@ -736,6 +1301,56 @@
     </aside>
 </section>
 
+<section >
+    <h2>Learning Experiments</h2>
+    <div class="r-stack">
+        <div class="fragment current-visible">
+    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
+
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li >
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+    </ul>
+    <br/>
+    
+        </div>
+    <img class="fragment " data-src="media/bayes_cbf_fig/learn_matrix_vector_v1.5.2-2-g31b30e1/learned_f_g_vs_true_f_g_mat_vec_ind.svg" />
+    </div>
+    <aside class="notes" data-markdown >
+        We test our learning framework on the pendulum example that we described earlier.
+
+        We plot different different dimensions of true and learned f of x and g
+        of x. The top row contains the true dynamics plotted with color across
+        theta and omega. The bottom row contains learned dynamics with zero mean
+        and RBF kernel, matrix-variate gaussian processes. The data has been
+        learned with 100 samples.
+
+        You can see that f of x and g of x are learned correctly within one decimal point
+    </aside>
+</section>
+
+<section id="learning-exp-quant">
+    <h2> Learning Experiments</h2>
+    <img src="media/bayes_cbf_fig/speed_test_matrix_vector_v1.6.1/speed_test_mat_vec_ind.svg"/>
+</section>
+
 <section
     chapter-progress-next="True"
     class="center"
@@ -749,7 +1364,7 @@
             Propagate uncertainty to the Safety condition
         </li>
         <li>
-            Extension to continous time using Lipchitz continuity assumptions.
+            Extension to continuous time using Lipschitz continuity assumptions.
         </li>
         <li>
             Extension to higher relative degree systems.
@@ -757,61 +1372,14 @@
     </ul>
     <aside class="notes" data-markdown>
         This completes our contribution the estimation of F of x. Next we focus on
-        how to propagate uncertainity to the Safety condition.
+        how to propagate uncertainty to the Safety condition.
         For safety condition, we use control barrier functions.
     </aside>
 </section>
 
-<section >
-    <h2>Control Barrier Functions</h2>
-
-    <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
-    <ul class="dotted" style="display:inline-block; vertical-align: middle">
-        <li>
-            For differentiable \( h(\bfx) \),
-            <br/>
-            safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
-        </li>
-        <li class="fragment">
-            Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
-        </li>
-        <li class="fragment">
-            Assume system starts in safe state \( \bfx(0) \in \calC \)
-        </li>
-        <li class="fragment" style="padding:5px;border: 2px solid #ff2c2d">
-            Ames et al (ECC 2019):
-            \begin{multline}
-            \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
-            \mbox{CBC}(\bfx,\bfu) := \Lie_f h(\bfx) + \Lie_g h(\bfx)\bfu + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
-            \end{multline}
-            where \( \alpha(y) \) is some extended class \( \calK_\infty \) function
-        </li>
-    </ul>
-    <aside class="notes" data-markdow>
-        Recall the motivating example. We define a safe region C by a
-        differentiable function function h of x which is greater than 0 inside
-        the safe region.
-
-        We also assume that the gradient of h of x is non-zero at the boundary of set C.
-
-        Then a theorem from Ames et al says that if the system starts from safe
-        state then it stays in safe state if time derivative of h of x is
-        greater than alpha of h of x.
-
-        Define alpha as a function that belongs to Kappa infinity class, that it
-        is an increasing function that maps a bounded input to zero and infinity.
-    </aside>
-    <cite data-key="Ames et al (ECC 2019)"></cite>
-</section>
-
 <section>
-    <h2>Uncertainity propagation to CBC</h2>
+    <h2>Uncertainty propagation to CBC</h2>
     <ul  >
-    <li >
-        \begin{align}
-        \mbox{CBC}(\bfx, \bfu) &:= \Lie_{f}h(\bfx) + \Lie_{g}h(\bfx)\bfu + \alpha(h(\bfx))
-        \end{align}
-    </li>
     <li class="fragment">
         \[
         \mbox{CBC}(\bfx, \bfu)= \grad_\bfx h(\bfx)F_k(\bfx)\ctrlaff + \alpha(h(\bfx))
@@ -867,7 +1435,7 @@
             <div class="fragment" style="position:absolute;">
                 \begin{align}
                 \min_{\bfu_k \in \mathcal{U}}&
-                \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+                \|\bfR(\bfx)(\bfu_k - \pi_\epsilon(\bfx_k)) \|_2^2
                 \\
                 \qquad\text{s.t.}&~~\bbP\bigl(
                 \style{color:red}{\mbox{CBC}(\bfx_k, \bfu_k) > \zeta > 0}
@@ -876,7 +1444,7 @@
                 \end{align}
             </div>
         </li>
-        <li class="fragment" >
+        <!-- li class="fragment" >
             \[
             \newcommand{\CBC}{\mbox{CBC}}
             \bbP\bigl(\mbox{CBC}(\bfx_k, \bfu_k) > \zeta \mid \bfx_k,\bfu_k \bigr) \ge \tilde{p}_k
@@ -885,25 +1453,21 @@
             \frac{\zeta - \E[\CBC] }{\sqrt{2\Var(\CBC)}}
             \right) \ge \tilde{p}_k
             \]
-            where \( \erf(y) \) is there error function.
-        </li>
+            where \( \erf(y) \) is the error function.
+        </li -->
         <li class="fragment" style="padding:5px; border: 2px solid red">
-            Safe controller (a QCQP):
+            Safe controller (an SOCP):
             \begin{align}
             \min_{\bfu_k \in \mathcal{U}}&
-            \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+            \|\bfR(\bfx)(\bfu_k - \pi_\epsilon(\bfx_k)) \|_2^2
             \\
             \qquad\text{s.t.}\qquad&
             \cssId{highlight-current-red-1}{\class{fragment}{
-            (\E[\CBC] - \zeta)^2 \ge 2\Var(\CBC)\erf^{-1}(1-2\tilde{p}_k)^2
-            }}
-            \\
-            &
-            \cssId{highlight-current-red-1}{\class{fragment}{
-            \E[\CBC] - \zeta  \ge 0
+            \E[\CBC] - \zeta \ge \sqrt{2\Var(\CBC)(\erf^{-1}(1-2\tilde{p}_k))^2}
             }}
             \end{align}
         </li>
+        <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
     </ul>
     <aside class="notes" data-markdown >
         Recall the problem formulation. We want to ensure Safety constraint with
@@ -929,8 +1493,7 @@
     </aside>
 </section>
 
-<section
-    chapter-progress-next="True"
+<section data-visibility="hidden"
     class="center"
 >
     <h2>Approach</h2>
@@ -942,7 +1505,7 @@
             Propagate uncertainty to the Control Barrier condition.
         </li>
         <li class="fragment highlight-red">
-            Extension to continous time using Lipchitz continuity assumptions.
+            Extension to continuous time using Lipschitz continuity assumptions.
         </li>
         <li>
             Extension to higher relative degree systems.
@@ -956,14 +1519,16 @@
 </section>
 
 
-<section>
+<section
+    chapter-progress-next="True"
+>
     <h2>Safety beyond triggering times</h2>
     <ul>
         <li >
                 So far:
             \begin{align}
             \min_{\bfu_k \in \mathcal{U}}&
-            \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+            \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
             \\
                 \qquad\text{s.t.}&~~
                 \bbP\bigl(
@@ -976,14 +1541,14 @@
                 Next:
                 \begin{align}
                 \min_{\bfu_k \in \mathcal{U}}&
-                \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+                \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
                 \\
                 \qquad\text{s.t.}&~~
                 \bbP\bigl(
                 \mbox{CBC}(\style{color:red}{\bfx(t)}, \bfu_k) > \style{color:red}{0}
                 \mid \bfx_k,\bfu_k
                 \bigr) \ge \style{color:red}{p_k}, \qquad
-                \style{color:red}{\forall t \in [t_k, \tau_k)}
+                \style{color:red}{\forall t \in [t_k, t_k + \tau_k)}
                 \end{align}
         </li>
     </ul>
@@ -1001,7 +1566,7 @@
     <h2>Safety beyond triggering times</h2>
     <ul>
         <li class="fragment">
-            Assume Lipchitz continuity of dynamics:
+            Assume Lipschitz continuity of dynamics:
             \begin{align}
             \textstyle
             \label{eq:smoth23}
@@ -1013,15 +1578,21 @@
             <cite data-key="Srinivas et al. (2009)"></cite>
         </li>
         <li class="fragment">
-            Assume Lipchitz continuity of \( \alpha(h(\bfx)) \):
+            Assume Lipschitz continuity of \( \alpha(h(\bfx)) \):
             \begin{align}
             \label{htym6!7uytf}
             |\alpha \circ h(\bfx(t_k+s))-\alpha \circ h(\bfx_k)| 
             \le L_{\alpha \circ h} \|\bfx(t_k+s)-\bfx_k\|.
             \end{align}
         </li>
+        <li class="fragment">
+            \[
+            \sup_{s \in [0, \tau_k)}
+            \| \grad_\bfx h(x(t_k + s)) \| \le \chi_k
+            \]
+        </li>
     </ul>
-        <div class="fragment" style="padding:5px; border: 2px solid red;text-align:left;margin:20px">
+        <div class="fragment" style="padding:5px; border: 2px solid red;text-align:left;margin:20px;font-size:smaller">
             Theorem:
             \[
             \bbP\bigl(
@@ -1033,20 +1604,20 @@
             \mbox{CBC}(\bfx(t), \bfu_k) > 0
             \mid \bfx_k,\bfu_k
             \bigr) \ge p_k, \;
-            \forall t \in [t_k, \tau_k)
+            \forall t \in [t_k, t_k + \tau_k)
             \]
             holds with \( p_k = \tilde{p}_k q_k \) and
             \(
             \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
             \)
-            <cite data-key="Khojasteh et al (2019)"></cite>
+            <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
         </div>
     <aside class="notes" data-markdown >
-        Assume stochastic Lipchitz continuity of the dynamics with exponential
+        Assume stochastic Lipschitz continuity of the dynamics with exponential
         distribution. This assumption has been made before by Srinivas et al and
         holds for Gaussian processes with RBF kernels and Mattern kernels.
 
-        Also assume Lipchitz continuity of alpha of h of x. This is true because
+        Also assume Lipschitz continuity of alpha of h of x. This is true because
         we already assumed alpha to class Kappa infinity function and h to be
         differentiable.
 
@@ -1069,7 +1640,7 @@
             Propagate uncertainty to the Control Barrier condition.
         </li>
         <li class="fragment highlight-current-red">
-            Extension to continous time using Lipchitz continuity assumptions.
+            Extension to continuous time using Lipschitz continuity assumptions.
         </li>
         <li class="fragment highlight-red">
             Extension to higher relative degree systems.
@@ -1116,12 +1687,12 @@
             \end{align}
         </li>
         <li class="fragment">
-            Note that \( \Lie_g h(\bfx) = \grad h(\bfx) g(\bfx) = 0 \)
-        </li>
-        <li class="fragment">
-            Thus \(  \CBC(\bfx, \bfu) \) is independent of u.
+            Note that \( \underbrace{\grad_\bfx h(\bfx) g(\bfx)}_{\Lie_g h(\bfx)} = 0 \)
         </li>
     </ul>
+    <div class="fragment" style="font-size:larger">
+        \(  \CBC(\bfx, \bfu) = \underbrace{[\grad_\bfx h(\bfx)]^\top f(\bfx)}_{\Lie_f h(\bfx)}  +   \underbrace{[\grad_\bfx h(\bfx)]^\top g(\bfx)}_{\Lie_g h(\bfx)} \bfu + \alpha(h(\bfx))  \) <br/> is independent of \(\bfu\).
+    </div>
     <aside class="notes" data-markdown >
         Even pendulum is a higher relative degree system. To see that consider a
         pendulum with unsafe region defined as the red region.
@@ -1145,7 +1716,13 @@
     <ul>
         <li >
             \[
-            \CBCr(\bfx, \bfu) := \Lie_f^{(r)} h(\bfx) + \Lie_g \Lie_f^{(r-1)} h(\bfx) \bfu + K_\alpha \begin{bmatrix}
+            \CBCr(\bfx, \bfu) := \Lie_f^{(r)} h(\bfx)
+            +
+
+            \cssId{highlight-current-red-1}{\class{fragment}{
+            \Lie_g \Lie_f^{(r-1)} h(\bfx)
+            }}
+            \bfu + \bfk_\alpha^\top \begin{bmatrix}
             h(\bfx) \\
             \Lie_f h(\bfx) \\
             \vdots \\
@@ -1155,11 +1732,11 @@
             <cite data-key="Ames et al (ECC 2019)"></cite>
             <cite data-key="Nguyen and Sreenath (ACC 2016)"></cite>
         </li>
-        <li class="fragment">
+        <!-- li class="fragment">
             \( r \ge 1 \) is the relative degree of CBF, \( h(\bfx) \), then
             \( \Lie_g \Lie_f^{k} h(\bfx) = 0, \; \forall k = \{0, \dots, r-2 \} \)
             and \( \Lie_g \Lie_f^{(r-1)} h(\bfx) \ne 0 \) and
-        </li>
+        </li -->
     </ul>
     <aside class="notes" data-markdown >
         A Control barrier condition for relative-degree r CBF is defined as this
@@ -1176,35 +1753,77 @@
     </aside>
 </section>
 
+<section data-visibility="hidden">
+    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
+    <ul>
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
+        <ul class="fragment"><li>
+            If \( p(\bfx) \sim \GP(\mu(\bfx), \kappa(\bfx, \bfx'))\), then
+            <br/>
+            \( \grad_\bfx p(\bfx) \sim \GP(\grad_\bfx \mu(\bfx), H_\bfx \kappa(\bfx, \bfx')) \)
+        </li></ul>
+    </li>
+    </ul>
+</section>
 <section>
-    <h2>Propagating uncertainity to \( \CBCtwo \)</h2>
-    <ul><li class="fragment">
-        \( \Lie_f h(\bfx) \) is a Gaussian process
+    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
+    <ul style="font-size:95%">
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
     </li><li class="fragment">
         \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
     </li><li class="fragment">
-        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP
-    </li><li class="fragment">
-        \[
-        \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + K_\alpha
-        \begin{bmatrix}
-        h(\bfx) &
-        \Lie_f h(\bfx)
-        \end{bmatrix}^\top
-        \]
-    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
+        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP (not a GP )
+        <!-- 
+        <ul class="fragment"><li>
+            \(\newcommand{\trc}{\text{tr}}\)
+            If \(p(\bfx)\) and \(q(\bfy)\) are GPs then \(p(\bfx)^\top q(\bfx)\) is also a GP
+            <br/>
+            \begin{multline}
+            p(\bfx)^\top q(\bfx) \sim \GP(\mu_p(\bfx)^\top \mu_q(\bfx) + \trc(\Cov_{p,q}(\bfx, \bfx)), \\
+            2\trc(\Cov_{p,q}(\bfx, \bfx'))^2 )
+            + p(\bfx)^\top \kappa_q(\bfx, \bfx') p(\bfx')
+            \\
+            + q(\bfx)^\top \kappa_p(\bfx, \bfx') q(\bfx')
+            + 2 q(\bfx)^\top \Cov_{p,q}(\bfx, \bfx') p(\bfx')
+            \end{multline}
+            <cite data-key="Seare and Gruber. Linear Models. (Book 1971)"></cite>
+        </li></ul>
+    -->
+
+    </li>
+    <li class="fragment" style="padding:5px; border: 2px solid red;">
         \( \CBCtwo(\bfx, \bfu) \) is a quadratic form of GP.
         <br/>
         \( \E[\CBCtwo](\bfx, \bfu) \) is still affine in \( \bfu \).
         <br/>
         \( \Var[\CBCtwo](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
-    </li><li class="fragment">
-        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
-        Monte-carlo methods.
-    </li></ul>
+    </li>
+    </ul>
     <aside class="notes" data-markdown >
         Now that we have defined CBCtwo as the safety condition, we want to see
-a        how to propagate uncertainity to CBCtwo.
+a        how to propagate uncertainty to CBCtwo.
 
         We have already seen that Lie derivative of h wrt to f is a gaussian process.
 
@@ -1224,11 +1843,40 @@ a        how to propagate uncertainity to CBCtwo.
 </section>
 
 <section>
+    <h2>Extending to \(\CBCr\)</h2>
+    <ul>
+        <li >
+            \[
+            \CBCr(\bfx, \bfu) = [\grad_\bfx \Lie_f^{(r)} h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx) & \dots \Lie_f^{(r-1)} h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        <img src="./media/computation-graph-cbf-r.png" />
+        </li>
+        <li class="fragment" style="padding:5px; border: 2px solid red;">
+            \( \CBCr(\bfx, \bfu) \) is not a GP
+            <br/>
+            \( \E[\CBCr](\bfx, \bfu) \) is still affine in \( \bfu \).
+            <br/>
+            \( \Var[\CBCr](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
+        </li>
+    <li class="fragment">
+        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
+        Monte-carlo methods.
+    </li>
+    </ul>
+</section>
+
+<section>
     <h2>Safe controller using ECBF</h2>
     <ul><li>
     \begin{align}
     \min_{\bfu_k \in \mathcal{U}}&
-    \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+    \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
     \\
     \qquad\text{s.t.}&~~
     \bbP\bigl(
@@ -1239,15 +1887,13 @@ a        how to propagate uncertainity to CBCtwo.
     </li><li class="fragment">
         Using Cantelli's (Chebyshev's one-sided) inequality
     </li><li class="fragment" style="padding:5px; border: 2px solid red;">
-        Safe controller (a QCQP)
+        Safe controller (an SOCP)
         \begin{align}
         \min_{\bfu_k \in \mathcal{U}}&
-        \|\bfu_k - \pi_\epsilon(\bfx_k) \|_Q
+        \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
         \\
         \qquad\text{s.t.}\qquad
-        &(\E[\mbox{CBC}_k^{(r)}]-\zeta)^2 \ge \frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]
-        \\
-        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge 0
+        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge \sqrt{\frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]}
         \end{align}
     </li></ul>
     <aside class="notes" data-markdown >
@@ -1257,56 +1903,6 @@ a        how to propagate uncertainity to CBCtwo.
         We again derive a safe controller for aribitrary ordered CBCr as long as
         mean and variance can be estimated. The good thing is that it is still a
         Quadratic program.
-    </aside>
-</section>
-
-<section chapter-progress-next="True">
-    <h2>Learning Experiments</h2>
-    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
-
-    <ul class="dotted" style="display:inline-block; vertical-align: middle">
-        <li >
-            \begin{align}
-            \begin{bmatrix}
-            \dot{\theta}
-            \\
-            \dot{\omega}
-            \end{bmatrix}
-            = \underbrace{\begin{bmatrix}
-            \omega
-            \\
-            -\frac{g}{l} \sin(\theta)
-            \end{bmatrix}}_{f(\bfx)}
-            +
-            \underbrace{\begin{bmatrix}
-            0 \\  \frac{1}{ml}
-            \end{bmatrix}}_{g(\bfx)}
-            u
-            \end{align}
-        </li>
-        <li >
-            \begin{align}
-            h\left(\begin{bmatrix}
-            \theta
-            \\
-            \omega
-            \end{bmatrix}
-            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
-            \end{align}
-        </li>
-    </ul>
-    <br/>
-    <img class="fragment " src="./media/PendulumDynamics.png" />
-    <aside class="notes" data-markdown >
-        We test our learning framework on the pendulum example that we described earlier.
-
-        We plot different different dimensions of true and learned f of x and g
-        of x. The top row contains the true dynamics plotted with color across
-        theta and omega. The bottom row contains learned dynamics with zero mean
-        and RBF kernel, matrix-variate gaussian processes. The data has been
-        learned with 100 samples.
-
-        You can see that f of x and g of x are learned correctly within one decimal point
     </aside>
 </section>
 
@@ -1348,8 +1944,8 @@ a        how to propagate uncertainity to CBCtwo.
     <br/>
     <br/>
     <img class="fragment "
-         src="./media/run_pendulum_control_online_learning_trajectory_100.svg"
-    style="height:300px" />
+         src="./media/bayes_cbf_fig/run_pendulum_control_online_learning_trajectory_160.svg"
+    style="height:287px" />
     <aside class="notes" data-markdown >
         We show the behaviour of the pendulum with Safe controller using ECBF.
 
@@ -1361,12 +1957,32 @@ a        how to propagate uncertainity to CBCtwo.
 </section>
 
 <section>
+    <h2>Experiments</h2>
+
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" height="450"
+    />
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" height="450"
+    />
+</section>
+
+<section>
+    <h2>Experiments</h2>
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_no_learning_gets_stuck_v1.2.3_animation.gif"
+         height="450"
+    />
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_learning_helps_avoid_getting_stuck_v1.2.3_animation.gif"
+         height="450"
+    />
+</section>
+
+<section>
     <h2>Take away</h2>
     <ul>
         <li >
-            Safety guarantees in stochastic control-affine systems were formuated as
-            Quadratic contraints on the control signal using Exponential Control
-            Barrier Functions.
+            Matrix Variate Gaussian Process enables uncertainty-aware learning
+        </li>
+        <li class="control">
+            Uncertainty aware controller can be formulated as SOCP controller
         </li>
     </ul>
     <aside class="notes" data-markdown >
@@ -1379,31 +1995,275 @@ a        how to propagate uncertainity to CBCtwo.
 </section>
 
 <section>
-    <h2>Ongoing work</h2>
-    <ul><li class="fragment">
-        More experiments (closer to the Motivation).
-    </li><li class="fragment">
-        Entropy objective to pick optimal actions for reducing uncertainity.
-    </li><li class="fragment">
-        Application of Hansen-Wright like inequalities for tighter bounds on \( \CBCr \)
-    </li></ul>
-    <aside class="notes" data-markdown >
-        This is rapidly developing and ongoing work. We are learning new things
-        everyday. Please let us know if you want to collaborate.
-
-        We are working on better experiments that can be extend to real-robots.
-
-        We want to use entropy objective instead of an e-greedy policy for
-        exploration so that robot can take optimal actions to reduce
-        uncertainity in its dynamics.
-
-        We are also looking at bounding the tails of higher relative degree CBFs
-        using Hansen-Wright like inequalities. If you understand these well, please
-        talk to me. I want to learn.
-    </aside>
+    <h2 id="safety-fut-work">Future work</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="safety-levels-fut"
+                    style="height:700px"
+                    data-src="./media/safety-levels.svg"
+                    onload="show_on_svgload('safety-levels-fut', 'safety-levels')"
+            >
+            </object>
+        </div>
+    </div>
 </section>
 
-<section id="bibliography-slide">
+
+<section>
+    <h2>How much safety can we aim for?</h2>
+    <div style="position:relative;height:220px">
+        <img style="position:absolute;left:29%;height:200px"
+             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+    </div>
+    <div >
+        <div style="position:relative;height:250px;width:400px;display:inline-block" >
+            <img style="position:absolute;left:13%;height:200px;display:block"
+                 src="./media/human-driver.webp" />
+            <div style="font-size:larger;color:red;position:absolute;left:10%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
+                150 deaths per 10 billion miles</div>
+        </div>
+        <div style="position:relative;height:250px;width:400px;display:inline-block" >
+            <img style="position:absolute;right:13%;height:200px"
+                 src="./media/aircraft.jpeg" />
+            <div style="font-size:larger;color:red;position:absolute;right:13%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
+                0.2 deaths per 10 billion miles</div>
+        </div>
+        <!-- div style="opacity:0.7;background-color:white;height:220px;position:relative" class="fragment">
+        <div sytle="font-size:larger;text-color:red;position:absolute;left:10%;top:10%;display:inline-block">150 deaths per 10 billion miles</div>
+        <div sytle="font-size:larger;text-color:green;position:absolute;right:10%;top:10%;display:inline-block">0.2 deaths per 10 billion miles</div>
+        </div -->
+    </div>
+</section>
+
+<section id="other-work">
+    <h2>Other work</h2>
+    <style>
+     .div-row div {
+         display: inline-block;
+     }
+     .div-row div video {
+         margin: 5px 0;
+         height: 190px;
+     }
+    </style>
+
+    <div class="div-row">
+        <!-- video
+            class="fragment-play"
+            style="height:400px"
+            loop="true"
+            muted="True"
+            currentTime="60"
+            height="245"
+        >
+            <source type="video/mp4" data-src="media/orcvio/jackal_orcvio-2020-11-20_17.06.49.mp4"/>
+        </video-->
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                currentTime="60"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/orcvio/OrcVIO Unity demo with cars, doors, barriers-I4MwpeSFVho.mp4"/>
+            </video>
+            <h4>OrcVIO</h4>
+        </div>
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+                >
+                <source type="video/mp4" data-src="media/mutloc/concatenated-ffmpeg-faster.ogg"/>
+            </video>
+            <h4>Mutual Localization</h4>
+            <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+        </div>
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/irl/Inverse reinforcement learning for autonomous navigation via semantic mapping and planning-CqIcN3j_NVo.mp4"/>
+            </video>
+            <h4>Semantic Inverse RL</h4>
+            <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
+        </div>
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/jing-bi-aaai-2020/compressed.mp4"/>
+            </video>
+            <h4>Learning from Interventions</h4>
+            <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+        </div>
+    </div>
+</section>
+
+<section id="fut-work-end-to-end-rl">
+    <h2>Future work</h2>
+
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="talk-outline-fut-work"
+                    class="obs-map-plan"
+                    data-src="./media/obs-map-plan-layered.svg"
+                    onload="show_on_svgload('talk-outline-fut-work',
+                          'slide-my-work')"
+            >
+            </object>
+        </div>
+        <div id="talk-outline-fut-work-dummies"
+             class="dummy-to-svg-map"
+             mapped-svg="talk-outline-fut-work"
+        >
+          <span id="talk-outline-fut-work-dummies-fut-work" class="fragment"
+                svg-ele-in-ids="slide-fut-work"
+                svg-ele-out-ids="slide-my-work"
+          ></span>
+          <span id="talk-outline-fut-work-dummies-fut-work-causal" class="fragment"
+                svg-ele-in-ids="slide-fut-work-causal"
+                svg-ele-out-ids="slide-fut-work"
+          ></span>
+        </div>
+    </div>
+</section>
+
+<section id="teaching" >
+    <h2>Teaching @ IITB</h2>
+    <table>
+        <tr><td>CS 213 M</td><td>   Data Structures and Algorithms</td></tr>
+        <tr><td>CS 228	</td><td>   Logic For CS</td></tr>
+        <tr><td>CS 419 M</td><td>   Introduction to Machine Learning</td></tr>
+        <tr><td>CS 748  </td><td>   Advances in Intelligent and Learning Agents</td></tr>
+        <tr><td>CS 769	</td><td>   Optimization in Machine Learning</td></tr>
+        <tr><td>CS XXX	</td><td>   Perception for Robotics</td></tr>
+    </table>
+</section>
+
+<section id="collaborators">
+    <style>
+     #collaborators-row img {
+         display: inline-block;
+         height: 120px;
+         margin: 5px 0;
+     }
+    </style>
+    <h2>Collaborators</h2>
+    <div id="collaborators-row" style="width:800px;margin:auto">
+        <img  data-src="media/collaborators/pic-jcorso.jpg"/>
+        <img  data-src="media/collaborators/hic-ucsd-sdut.jpg" />
+        <img  data-src="media/collaborators/Atanasov.jpg" />
+        <img  data-src="media/collaborators/mkchandraker.jpg" />
+        <img  data-src="media/collaborators/qobi.gif" />
+        <img  data-src="media/collaborators/frank-dallaert.jpeg" />
+        <img  data-src="media/collaborators/cxu.jpg" />
+        <img  data-src="media/collaborators/Julian.jpg" />
+        <img  data-src="media/collaborators/rob_closeup3.jpg" />
+        <img  data-src="media/collaborators/suren.jpg" />
+        <img  data-src="media/collaborators/quoc-huy.jpg" />
+        <img  data-src="media/collaborators/brent.jpeg" />
+        <img  data-src="media/collaborators/mjkhojasteh.jpg" />
+        <img  data-src="media/collaborators/kundu.jpeg" />
+        <img  data-src="media/collaborators/shurjo.jpg" />
+        <img  data-src="media/collaborators/tianyu.jpeg" />
+        <img  data-src="media/collaborators/Mo_Shan3.jpg" />
+        <img  data-src="media/collaborators/jing-bi.png" />
+    </div>
+</section>
+
+<section id="final">
+    <h2>Questions?</h2>
+    <style>
+     .div-row div {
+         display: inline-block;
+     }
+     .div-row div video {
+         margin: 5px 0;
+         height: 190px;
+     }
+     .div-row div img {
+         margin: 5px 0;
+         height: 190px;
+         object-fit: cover;
+         object-position: top;
+         height: 190px;
+         width: 190px;
+     }
+    </style>
+
+    <div class="div-row">
+        <!-- video
+            class="fragment-play"
+            style="height:400px"
+            loop="true"
+            muted="True"
+            currentTime="60"
+            height="245"
+        >
+            <source type="video/mp4" data-src="media/orcvio/jackal_orcvio-2020-11-20_17.06.49.mp4"/>
+        </video-->
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                currentTime="60"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/orcvio/OrcVIO Unity demo with cars, doors, barriers-I4MwpeSFVho.mp4"/>
+            </video>
+            <h4>OrcVIO</h4>
+        </div>
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+                >
+                <source type="video/mp4" data-src="media/mutloc/concatenated-ffmpeg-faster.ogg"/>
+            </video>
+            <h4>Mutual Localization</h4>
+            <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+        </div>
+        <br/>
+        <div >
+            <img data-src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" height="190"
+            />
+            <img data-src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" height="190"
+            />
+            <h4>Safe control</h4>
+            <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+        </div>
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/jing-bi-aaai-2020/compressed.mp4"/>
+            </video>
+            <h4>Learning from Interventions</h4>
+            <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+        </div>
+    </div>
+</section>
+
+
+<section id="bibliography-slide" data-visibility="uncounted">
 
     <ul id="bibliography-database" style="display:none">
         <li id="Sun et al, AISTATS 2017">Shengyang Sun, Changyou Chen,
@@ -1438,9 +2298,84 @@ a        how to propagate uncertainity to CBCtwo.
             variational deep learning with matrix gaussian posteriors."
             International Conference on Machine Learning. 2016.
         </li>
-        <li id="Khojasteh et al (2019)">
-            Khojasteh, M. J., Dhiman, V., Franceschetti, M., & Atanasov, N. (2019). Probabilistic safety constraints for learned high relative degree system dynamics. arXiv preprint arXiv:1912.10116.
+        <li id="Kh<b>Dh</b>FrAt L4DC 2020">
+            Khojasteh, M. J., Dhiman, V., Franceschetti, M., & Atanasov, N. (2020). Probabilistic safety constraints for learned high relative degree system dynamics. L4DC 2020. available https://arXiv.org/abs/1912.10116.
         </li>
+        <li id="Bi<b>Dh</b>XiXu AAAI 2020">
+            Learning from Interventions using Hierarchical Policies for Safe Learning
+            J Bi, V Dhiman, T Xiao, C Xu - AAAI 2020. Available https://arXiv.org/abs/1912.02241
+        </li>
+        <li id="Wa<b>Dh</b>At ICRA 2020">
+            Learning Navigation Costs from Demonstration in Partially Observable Environments
+            T Wang, V Dhiman, N Atanasov. ICRA 2020. Available https://arXiv.org/abs/2002.11637
+        </li>
+      <li id="Andrychowicz et al. (2017)">
+          Andrychowicz, Marcin, et al. "Hindsight experience replay." Advances in Neural Information Processing Systems. 2017.
+      </li>
+      <li id="<b>Dh</b>RyCo IROS 2013">
+Mutual localization: Two camera relative 6-dof pose estimation from reciprocal fiducial observation. V Dhiman, J Ryde, JJ Corso. IROS 2013
+      </li>
+      <li id="Ku<b>Dh</b>Co AAAI 2014">
+          Learning Compositional Sparse Models of Bimodal Percepts. S Kumar, V Dhiman, JJ Corso AAAI, 2014
+      </li>
+      <li id="Ry<b>Dh</b>Pl IROS 2013">
+          Voxel planes: Rapid visualization and meshification of point cloud ensembles.
+           J Ryde, V Dhiman, R Platt IROS, 2013
+      </li>
+      <li id="<b>Dh</b>KuDaCo ICRA 2014">
+          Modern MAP inference methods for accurate and fast occupancy grid mapping on higher order factor graphs. V Dhiman, A Kundu, F Dellaert, JJ Corso ICRA 2014
+      </li>
+      <li id="Ch<b>Dh</b> US Patent 2017">
+          Continuous occlusion models for road scene understanding M Chandraker, V Dhiman. US Patent 9,821,813, 2017
+      </li>
+      <li id="<b>Dh</b>TrChCo CVPR 2016">
+          A continuous occlusion model for road scene understanding V Dhiman, QH Tran, JJ Corso, M Chandraker. CVPR 2016
+      </li>
+      <li id="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017">
+          A Critical Investigation of DRL for Navigation V Dhiman, S Banerjee, B Griffin, JM Siskind, JJ Corso NeurIPS DRL Workshop, 2017.
+      </li>
+      <li id="Ku<b>Dh</b>KoCo PAMI 2017">
+          Learning Compositional Sparse Bimodal Models S Kumar, V Dhiman, PA Koch, JJ Corso. PAMI, 2017.
+      </li>
+      <li id="Mirowski ICLR 2017">
+          (Mirowski et al. 2017) Learning to navigate in complex environments. In ICLR 2017. 
+      </li>
+      <li id="Plappert et al. (2018)">
+        Multi-Goal Reinforcement Learning: Challenging Robotics Environments and
+        Request for Research. Matthias Plappert and Marcin Andrychowicz and Alex
+        Ray and Bob McGrew and Bowen Baker and Glenn Powell and Jonas Schneider
+        and Josh Tobin and Maciek Chociej and Peter Welinder and Vikash Kumar and
+        Wojciech Zaremba. ArXiV 2018. 1802.09464
+      </li>
+      <li id="Kaelbling; 1993">
+        Kaelbling, Leslie Pack. "Learning to achieve goals." IJCAI. 1993.
+      </li>
+      <li id="<b>Dh</b>BaSiCo ArXiV 2019">
+        V. Dhiman, S. Banerjee, J. M. Siskind, and J. J. Corso. Learning goal-conditioned
+        value functions with one-step path rewards rather than goal-rewards. In
+        Submitted to ICLR, 2019. Under review.
+      </li>
+      <li id="Zachariou, Peter et al.; 2011"
+      >Zachariou, Peter et al. “SPEEDING Effects on hazard perception and reaction time.” (2011).
+      </li>
+      <li id="Mnih et al. 2015">
+        Mnih, Volodymyr, et al. "Human-level control through deep reinforcement learning." Nature 518.7540 (2015): 529.
+      </li>
+      <li id="Watkins and Dayan; 1992">
+        Watkins, Christopher JCH, and Peter Dayan. "Q-learning." Machine learning 8.3-4 (1992): 279-292.
+      </li>
+      <li id="Pearl; 1986">
+        Pearl, Judea. "Fusion, propagation, and structuring in belief networks." Artificial intelligence 29.3 (1986): 241-288.
+      </li>
+      <li id="Jojic et al. 2010">
+        Jojic, Vladimir, Stephen Gould, and Daphne Koller. "Accelerated dual decomposition for MAP inference." ICML. 2010.
+      </li>
+      <li id="Merali et al. ICRA 2013">
+        Merali, Rehman S., and Timothy D. Barfoot. "Occupancy grid mapping with Markov chain monte carlo Gibbs sampling." Robotics and Automation (ICRA), 2013 IEEE International Conference on. IEEE, 2013.
+      </li>
+      <li id="Seare and Gruber. Linear Models. (Book 1971)">
+          Shayle R Searle and Marvin HJ Gruber.Linear models. John Wiley & Sons, 1971
+      </li>
     </ul>
     <h2>Bibliography</h2>
     <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
@@ -1450,67 +2385,30 @@ a        how to propagate uncertainity to CBCtwo.
         Here are some citation used throught the presentation.
     </aside>
 </section>
-<section>
-    <h1>Thank you. Questions?</h1>
-    <h4>Paper URL: arxiv.org/abs/1912.10116</h4>
 
-    <ul><li>
-        <img style="vertical-align:middle" height="80px" src="./media/mjkhojas-photo.jpg"/>
-        <span style="display:inline-block;vertical-align:middle">
-            Mohammad Javad Khojasteh\(^*\)
-            <br/>
-            <a>mjkhojas@caltech.edu</a>
-            <br/>
-            <a>http://www.its.caltech.edu/~mjkhojas/</a>
-        </span>
-    </li><li>
-        <img style="vertical-align:middle" height="80px" src="./media/vdhiman.jpg"/>
-        <span style="display:inline-block;vertical-align:middle">
-            <b>Vikas Dhiman</b>\(^*\)
-            <br/>
-            <a>vdhiman@ucsd.edu</a>
-            <br/>
-            <a>vikasdhiman.info</a>
-        </span>
-    </li><li>
-        <img style="vertical-align:middle" height="80px" src="./media/massimo.jpg"/>
-        <span style="display:inline-block;vertical-align:middle">
-        Massimo Franceschetti
-        <br/>
-        <a>https://web.eng.ucsd.edu/~massimo/</a>
-        </span>
-    </li><li>
-        <img style="vertical-align:middle" height="80px" src="./media/Atanasov.jpg"/>
-        <span style="display:inline-block;vertical-align:middle">
-        Nikolay Atanasov
-        <br/>
-        <a>https://natanaso.github.io/</a>
-        </span>
-    </li></ul>
-    <footnote>\(^*\) These authors contributed equally.</footnote>
-</section>
+
 
 <!-- End of slides -->
 
 <!-- Start of Footer -->
-<div  style="position:absolute; left:0; bottom:10px; width:100%">
+<div  style="position:absolute; left:0; bottom:0px; width:100%">
   <div id="footer" ><!-- place holder for footer -->
   </div>
   <div id="footer-lower" style="display:flex; justify-content: space-between; width:100%">
       <img style="height:40px;padding:5px;vertical-align:middle" src="./media/erl-logo.png"/>
-      <img style="height:40px;padding:5px;ertical-align:middle" src="./media/CRI-Logo-white-on-blue.svg"/>
-      <div style="font-size: 12px; opacity:0.8; margin: auto;"> Probabilistic Safety Constraints:Vikas Dhiman </div>
+      <img style="height:40px;padding:5px;vertical-align:middle" src="./media/CRI-Logo-white-on-blue.svg"/>
+      <div style="font-size: 14px; opacity:0.8; margin: auto;"> Safe Robots that Learn: Vikas Dhiman </div>
       <img style="height:40px;vertical-align:middle" src="media/UCSDLogo_JSOE-ElectricalComputerEng_BlueGold.svg"  />
 
-      <div style="font-size: 12px; padding:5px; opacity:0.8" id="slide-number-container"> &nbsp; </div>
+      <div style="font-size: 14px; padding:5px; opacity:0.8; margin: 2px 0" id="slide-number-container"> &nbsp; </div>
   </div>
 </div>
 <div style="clear: both;"></div>
 <!-- End of Footer -->
             </div> <!-- class="slides" -->
 		</div> <!-- class="reveal"-->
-    <script src="/BayesCBF-presentation-html/reveal.js/js/reveal.js"></script>
-		<script src="reveal.js/js/reveal.js"></script>
+        <script src="reveal.js/dist/reveal.js"></script>
+        <script src="index.js" > </script>
         <script>
          window.MathJax = {
              chtml: {
@@ -1530,6 +2428,6 @@ a        how to propagate uncertainity to CBCtwo.
          src="MathJax/es5/tex-chtml.js"  >
          <!-- src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"-->
         </script>
-        <script src="index.js" > </script>
+
     </body>
 </html>

@@ -236,3 +236,22 @@ ul {
         opacity: 1.0;
         visibility: inherit;
     }
+
+.reveal #footer-lower img {
+    margin: 0 0;
+}
+
+table tr.img-row td {
+    vertical-align: middle;
+    text-align: center;
+}
+table tr.img-row td img {
+    display: inline-block;
+}
+
+table tr.img-row td video {
+    display: inline-block;
+}
+.reveal video {
+    margin: 20px 0;
+}
