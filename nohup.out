@@ -4,3 +4,4 @@ void gimp_gegl_convert_color_profile(GeglBuffer*, const GeglRectangle*, GimpColo
 Nautilus-Share-Message: 11:00:52.706: Called "net usershare info" but it failed: Failed to execute child process “net” (No such file or directory)
 Nautilus-Share-Message: 01:36:20.679: Called "net usershare info" but it failed: Failed to execute child process “net” (No such file or directory)
 Nautilus-Share-Message: 16:47:24.750: Called "net usershare info" but it failed: Failed to execute child process “net” (No such file or directory)
+Nautilus-Share-Message: 17:15:45.478: Called "net usershare info" but it failed: Failed to execute child process “net” (No such file or directory)
