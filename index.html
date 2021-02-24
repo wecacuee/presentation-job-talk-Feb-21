@@ -541,6 +541,239 @@
   </aside>
 </section>
 
+<section id="talk-outline-pre" >
+    <h2>My Background</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="talk-outline-obs-map-plan-pre"
+                    class="obs-map-plan"
+                    data-src="./media/obs-map-plan-layered.svg"
+                    onload="show_on_svgload('talk-outline-obs-map-plan-pre',
+                          'slide-nav')"
+            >
+            </object>
+        </div>
+        <div id="talk-outline-obs-map-plan-dummies-pre"
+             class="dummy-to-svg-map"
+             mapped-svg="talk-outline-obs-map-plan-pre"
+        >
+          <span id="talk-outline-mapp-pre" class="fragment"
+                svg-ele-in-ids="slide-map"
+                svg-ele-out-ids="slide-nav"
+          ></span>
+          <span id="talk-outline-localization-pre"
+                svg-ele-out-ids="slide-map"
+                svg-ele-in-ids="slide-loc"
+                class="fragment"></span>
+          <span id="talk-outline-plan-pre"
+                svg-ele-out-ids="slide-loc"
+                svg-ele-in-ids="slide-plan"
+                class="fragment"></span>
+          <span id="talk-outline-rl-arrow-pre"
+                svg-ele-out-ids="slide-plan"
+                svg-ele-in-ids="slide-map-loc-plan-rl"
+                class="fragment"></span>
+          <span id="talk-outline-my-work-pre"
+                svg-ele-out-ids="slide-map-loc-plan-rl"
+                svg-ele-in-ids="slide-my-work"
+                class="fragment"></span>
+        </div>
+    </div>
+    <cite data-key="<b>Dh</b>KuDaCo ICRA 2014"></cite>
+    <cite data-key="<b>Dh</b>RyCo IROS 2013"></cite>
+    <cite data-key="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017"></cite>
+    <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+    <cite data-key="Ku<b>Dh</b>Co AAAI 2014"></cite>
+    <cite data-key="Ku<b>Dh</b>KoCo PAMI 2017"></cite>
+    <cite data-key="<b>Dh</b>BaSiCo ArXiV 2019"></cite>
+    <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+    <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
+    <aside class="notes" data-markdown>
+      - Navigation is the problem of converting sequence of observation to a
+        sequence of actions for the purpose of going from one place to another.
+      - It is often addressed in three parts.
+      - Mapping---which is the estimation of the static part of the environment.
+      - Localization---which is the estimation of the dynamic state of the
+        environment like the agents location in the map.
+      - and Planning which is the estimation of the sequence of action that
+        moves the agent from current state to the desired goal.
+      + Most of my work has been focused around mapping with some work around
+      localization and planning.
+      + Today I am going to talk about three of my works.
+      + First I am going to talk about my work on making mapping faster by using
+      modern inference methods on factor graphs.
+      + Then I am going to talk about mutual localiztion that intern enables
+      faster mapping by allowing robots to divide and conquer the environment.
+      + In the end I will talk about making goal conditioned reinforcement
+      learning faster by removing redundant computation.
+    </aside>
+</section>
+
+<section id="talk-outline-video" >
+    <h2>My Background</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <style>
+         .div-row-stack div {
+             display: inline-block;
+             background-color: white;
+             opacity: 100%;
+         }
+         .div-row-stack div video {
+             margin: 5px 0;
+             height: 225px;
+         }
+         .overlay-stack div {
+             display: inline-block;
+             background-color: white;
+             opacity: 100%;
+         }
+         .overlay-stack div video {
+             margin: 5px 0;
+             height: 450px;
+         }
+        </style>
+        <div class="overlay-stack r-stack"
+             style="background-color:white;">
+            <div >
+                <video
+                    class="slide-play"
+                    loop="True"
+                    muted="True"
+                    playbackRate = "2.0"
+                >
+                    <source type="video/mp4" data-src="media/orcvio/jackal_orcvio-2020-11-20_11.31.39.mp4#t=40,50"/>
+                </video>
+                <h6>OrcVIO</h6>
+            </div>
+            <div class="fragment current-visible">
+                <video
+                    class="fragment-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/mutloc/concatenated-ffmpeg-faster.ogg#t=10,20"/>
+                </video>
+                <h4>Mutual Localization</h4>
+                <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+            </div>
+            <div class="fragment current-visible">
+                <video
+                    class="fragment-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/jing-bi-aaai-2020/compressed.mp4#t=35,60"/>
+                </video>
+                <h4>Learning from Interventions</h4>
+                <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+            </div>
+            <div class="fragment current-visible">
+                <video
+                    class="fragment-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/cvpr2016/allenergies_2.mp4#t=10,20"/>
+                </video>
+                <h4>Continuous occlusion modeling</h4>
+                <cite data-key="<b>Dh</b>TrChCo CVPR 2016"></cite>
+            </div>
+        </div>
+        <div class="div-row-stack fragment"
+             style="background-color:white;position:absolute;top:0;left:0">
+            <div >
+                <video
+                    class="slide-play"
+                    loop="True"
+                    muted="True"
+                    playbackRate = "2.0"
+                >
+                    <source type="video/mp4" data-src="media/orcvio/jackal_orcvio-2020-11-20_17.06.49.mp4#t=40,50"/>
+                </video>
+                <h6>Visual Inertial Odometry</h6>
+            </div>
+            <div class="">
+                <video
+                    class="slide-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/mutloc/concatenated-ffmpeg-faster.ogg#t=10,20"/>
+                </video>
+                <h4>Mutual Localization</h4>
+                <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+            </div>
+            <div class="">
+                <video
+                    class="slide-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/jing-bi-aaai-2020/compressed.mp4#t=35,60"/>
+                </video>
+                <h4>Learning from Interventions</h4>
+                <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+            </div>
+            <div class="">
+                <video
+                    class="slide-play"
+                    loop="true"
+                    muted="True"
+                    height="250"
+                    playbackRate="2.0"
+                >
+                    <source type="video/mp4" data-src="media/cvpr2016/allenergies_2.mp4#t=10,20"/>
+                </video>
+                <h4>Continuous occlusion modeling</h4>
+                <cite data-key="<b>Dh</b>TrChCo CVPR 2016"></cite>
+            </div>
+        </div>
+    </div>
+    <cite data-key="<b>Dh</b>KuDaCo ICRA 2014"></cite>
+    <cite data-key="<b>Dh</b>RyCo IROS 2013"></cite>
+    <cite data-key="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017"></cite>
+    <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
+    <cite data-key="Ku<b>Dh</b>Co AAAI 2014"></cite>
+    <cite data-key="Ku<b>Dh</b>KoCo PAMI 2017"></cite>
+    <cite data-key="<b>Dh</b>BaSiCo ArXiV 2019"></cite>
+    <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
+    <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
+    <aside class="notes" data-markdown>
+      - Navigation is the problem of converting sequence of observation to a
+        sequence of actions for the purpose of going from one place to another.
+      - It is often addressed in three parts.
+      - Mapping---which is the estimation of the static part of the environment.
+      - Localization---which is the estimation of the dynamic state of the
+        environment like the agents location in the map.
+      - and Planning which is the estimation of the sequence of action that
+        moves the agent from current state to the desired goal.
+      + Most of my work has been focused around mapping with some work around
+      localization and planning.
+      + Today I am going to talk about three of my works.
+      + First I am going to talk about my work on making mapping faster by using
+      modern inference methods on factor graphs.
+      + Then I am going to talk about mutual localiztion that intern enables
+      faster mapping by allowing robots to divide and conquer the environment.
+      + In the end I will talk about making goal conditioned reinforcement
+      learning faster by removing redundant computation.
+    </aside>
+</section>
+
+
+
 
 <section id="why-learning">
     <div class="r-stack">
@@ -716,77 +949,6 @@
     </div>
 </section>
 
-<section id="talk-outline" >
-    <h2>My Background</h2>
-    <div style="position:relative;margin:auto;display:inline-block;left:2%">
-        <div class="" style="position:relative; top:-50px" >
-            <object type="image/svg+xml"
-                    id="talk-outline-obs-map-plan"
-                    class="obs-map-plan"
-                    data-src="./media/obs-map-plan-layered.svg"
-                    onload="show_on_svgload('talk-outline-obs-map-plan',
-                          'slide-nav')"
-            >
-            </object>
-        </div>
-        <div id="talk-outline-obs-map-plan-dummies"
-             class="dummy-to-svg-map"
-             mapped-svg="talk-outline-obs-map-plan"
-        >
-          <span id="talk-outline-map" class="fragment"
-                svg-ele-in-ids="slide-map"
-                svg-ele-out-ids="slide-nav"
-          ></span>
-          <span id="talk-outline-localization"
-                svg-ele-out-ids="slide-map"
-                svg-ele-in-ids="slide-loc"
-                class="fragment"></span>
-          <span id="talk-outline-plan"
-                svg-ele-out-ids="slide-loc"
-                svg-ele-in-ids="slide-plan"
-                class="fragment"></span>
-          <span id="talk-outline-rl-arrow"
-                svg-ele-out-ids="slide-plan"
-                svg-ele-in-ids="slide-map-loc-plan-rl"
-                class="fragment"></span>
-          <span id="talk-outline-my-work"
-                svg-ele-out-ids="slide-map-loc-plan-rl"
-                svg-ele-in-ids="slide-my-work"
-                class="fragment"></span>
-        </div>
-    </div>
-    <cite data-key="<b>Dh</b>KuDaCo ICRA 2014"></cite>
-    <cite data-key="<b>Dh</b>RyCo IROS 2013"></cite>
-    <cite data-key="<b>Dh</b>BaGrSiCo NeurIPS Wkshp 2017"></cite>
-    <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
-    <cite data-key="Ku<b>Dh</b>Co AAAI 2014"></cite>
-    <cite data-key="Ku<b>Dh</b>KoCo PAMI 2017"></cite>
-    <cite data-key="<b>Dh</b>BaSiCo ArXiV 2019"></cite>
-    <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
-    <cite data-key="Bi<b>Dh</b>XiXu AAAI 2020"></cite>
-    <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
-    <aside class="notes" data-markdown>
-      - Navigation is the problem of converting sequence of observation to a
-        sequence of actions for the purpose of going from one place to another.
-      - It is often addressed in three parts.
-      - Mapping---which is the estimation of the static part of the environment.
-      - Localization---which is the estimation of the dynamic state of the
-        environment like the agents location in the map.
-      - and Planning which is the estimation of the sequence of action that
-        moves the agent from current state to the desired goal.
-      + Most of my work has been focused around mapping with some work around
-      localization and planning.
-      + Today I am going to talk about three of my works.
-      + First I am going to talk about my work on making mapping faster by using
-      modern inference methods on factor graphs.
-      + Then I am going to talk about mutual localiztion that intern enables
-      faster mapping by allowing robots to divide and conquer the environment.
-      + In the end I will talk about making goal conditioned reinforcement
-      learning faster by removing redundant computation.
-    </aside>
-</section>
-
-
 <section id="todays focus">
     <h2>Safe control while learning</h2>
     <div style="position:relative;width:100%">
@@ -814,23 +976,29 @@
 <section id="why-gp">
     <h2>How to learn dynamics?</h2>
     <ul>
-            <li class="fragment">Koopman operators
+        <li class="fragment">
+            Maximum Likelihood models.
+            <ul> <li>Koopman operators
                 ( Mamakoukas et al (2020) )
             </li>
-            <li class="fragment">Model based reinforcement Learning
-                (  Wang et al  (2019) )
+            <li >Model based reinforcement Learning (  Wang et al  (2019) )
             </li>
-            <li class="fragment">Ensemble neural networks
-                ( Pearce et al (2018) )
-            </li>
-            <li class="fragment">Dropout neural networks
-                ( Gal and Ghahramani (2016) )
-            </li >
-            <li class="fragment">Probabilistic Backpropagation
-                ( Hernández-Lobato and Adams (2015) )
-            </li >
-            <li class="fragment">Gaussian Processes (Rasmussen (2003))
-            </li>
+            </ul>
+       <li class="fragment">
+           Bayesian methods
+           <ul>
+               <li >Ensemble neural networks
+                   ( Pearce et al (2018) )
+               </li>
+               <li >Dropout neural networks
+                   ( Gal and Ghahramani (2016) )
+               </li >
+               <li >Probabilistic Backpropagation
+                   ( Hernández-Lobato and Adams (2015) )
+               </li >
+               <li >Gaussian Processes (Rasmussen (2003))
+               </li>
+           </ul>
     </ul>
 </section>
 
@@ -1115,6 +1283,7 @@
 </section>
 
 <section
+    data-visibility="hidden"
     chapter-progress-next="True"
     class="center"
 >
@@ -1354,6 +1523,7 @@
 <section
     chapter-progress-next="True"
     class="center"
+    data-visibility="hidden"
 >
     <h2>Approach</h2>
     <ul class="dotted">
@@ -1630,6 +1800,7 @@
 <section
     chapter-progress-next="True"
     class="center"
+    data-visibility="hidden"
 >
     <h2>Approach</h2>
     <ul class="dotted">
@@ -1777,7 +1948,7 @@
     </li>
     </ul>
 </section>
-<section>
+<section data-visibility="hidden">
     <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
     <ul style="font-size:95%">
         <li class="fragment">
@@ -1957,21 +2128,24 @@ a        how to propagate uncertainty to CBCtwo.
 </section>
 
 <section>
-    <h2>Experiments</h2>
+    <h2>Ackerman Drive Simulations</h2>
 
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" height="450"
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" 
+         style="height:450px"
     />
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" height="450"
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" style="height:450px"
+         class="fragment"
     />
 </section>
 
 <section>
-    <h2>Experiments</h2>
+    <h2>Ackerman Drive Simulations</h2>
     <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_no_learning_gets_stuck_v1.2.3_animation.gif"
          height="450"
     />
     <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_learning_helps_avoid_getting_stuck_v1.2.3_animation.gif"
          height="450"
+         class="fragment"
     />
 </section>
 
@@ -2036,7 +2210,7 @@ a        how to propagate uncertainty to CBCtwo.
     </div>
 </section>
 
-<section id="other-work">
+<section id="other-work" data-visibility="hidden">
     <h2>Other work</h2>
     <style>
      .div-row div {
@@ -2141,14 +2315,23 @@ a        how to propagate uncertainty to CBCtwo.
 </section>
 
 <section id="teaching" >
-    <h2>Teaching @ IITB</h2>
+    <h2>Teaching @ IISc</h2>
     <table>
-        <tr><td>CS 213 M</td><td>   Data Structures and Algorithms</td></tr>
-        <tr><td>CS 228	</td><td>   Logic For CS</td></tr>
-        <tr><td>CS 419 M</td><td>   Introduction to Machine Learning</td></tr>
-        <tr><td>CS 748  </td><td>   Advances in Intelligent and Learning Agents</td></tr>
-        <tr><td>CS 769	</td><td>   Optimization in Machine Learning</td></tr>
-        <tr><td>CS XXX	</td><td>   Perception for Robotics</td></tr>
+        <tr><td>E0 219</td><td>   Linear Algebra and Applications </td></tr>
+        <tr><td>E0 232</td><td>  Probability and Statistics </td></tr>
+        <tr><td>E0 238</td><td>   Artificial Intelligence</td></tr>
+        <tr><td>E0 270</td><td>   Machine Learning</td></tr>
+        <tr><td>E1 277</td><td>   Reinforcement Learning</td></tr>
+        <tr><td>EX XXX</td><td>   Perception for Robotics</td></tr>
+    </table>
+</section>
+
+<section id="lab" >
+    <h2>Lab @ IISc</h2>
+    <table>
+        <tr><td> 3-4 Ground robots like Clearpath Husky </td></tr>
+        <tr><td> 3-4 Aerial robots</td></tr>
+        <tr><td> 4-5 PhD Students</td></tr>
     </table>
 </section>
 
