@@ -960,11 +960,11 @@
             <li>Desired trajectory as a plan</li>
             <li>Unsafe regions</li>
             </ul>
-            <h5 class="fragment">Unknown (to learn from samples):</h5>
+            <h5 class="fragment">Problem 1:</h5>
             <ul class="fragment">
-                <li>Robot system dynamics</li>
+                <li>Learn uncertainty aware robot system dynamics</li>
             </ul>
-            <h5 class="fragment">Want:</h5>
+            <h5 class="fragment">Problem 2:</h5>
             <ul class="fragment"><li>
                 Follow trajectory avoiding unsafe actions
             </li>
@@ -1191,35 +1191,53 @@
     <h2>Control Barrier Functions</h2>
 
     <div style="position:relative;width:100%">
-    <!-- img style="positon:absolute;left:40px;top:200px; vertical-align:middle;height:200px" src="./media/motivation-fig.svg" /-->
-    <ul class="dotted" style="display:inline-block; vertical-align:middle; list-style: none">
+    <div class="" style="display:inline-block" >
+        <object type="image/svg+xml"
+                id="cbf-layered-svg"
+                style="width:300px"
+                data-src="./media/cbf-layered.svg"
+                onload="show_on_svgload('cbf-layered-svg', 'base')"
+        >
+        </object>
+    </div>
+    <ul class="dotted" style="display:inline-block; vertical-align:middle; list-style: none"
+        mapped-svg="cbf-layered-svg"
+        class="dummy-to-svg-map"
+        id="cbf-layered-svg-dummy"
+    >
         <li>
             For differentiable \( h(\bfx) \),
             <br/>
             safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
         </li>
-        <li class="fragment">
+        <li class="fragment"
+            svg-ele-out-ids=""
+        svg-ele-in-ids="gradh">
             Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
         </li>
-        <li class="fragment">
+        <li class="fragment"
+        >
             Assume system starts in safe state \( \bfx(0) \in \calC \)
         </li>
-        <li class="fragment">
+        <li class="fragment"
+            svg-ele-in-ids="doth"
+            svg-ele-out-ids="gradh"
+        >
             <p> System stays safe iff</p>
             <div class="r-stack">
             <div class="fragment current-visible">
             \[
-                \dot{h}(\bfx) \ge - \alpha ( h(\bfx) )
+                \dot{h}(\bfx) \ge - \gamma h(\bfx)
             \]
             </div>
             <div class="fragment current-visible">
                 \[
-                [\grad_\bfx h(\bfx)]^\top \dot{\bfx} \ge - \alpha( h(\bfx) )
+                [\grad_\bfx h(\bfx)]^\top \dot{\bfx} \ge - \gamma  h(\bfx)
                 \]
             </div>
             <div class="fragment">
                 \[
-                [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff \ge - \alpha( h(\bfx) )
+                [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff \ge - \gamma h(\bfx)
                 \]
             </div>
             </div>
@@ -1228,9 +1246,8 @@
             Ames et al (ECC 2019):
             \begin{multline}
             \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
-            \mbox{CBC}(\bfx,\bfu) := [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff + \alpha(h(\bfx)) \ge 0 \;~ \forall \bfx \in \calX.
+            \mbox{CBC}(\bfx,\bfu) := [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff + \gamma h(\bfx)  \ge 0 \;~ \forall \bfx \in \calX.
             \end{multline}
-            where \( \alpha(y) \) is some extended class \( \calK_\infty \) function
         </li>
     </ul>
     </div>
@@ -2315,23 +2332,23 @@ a        how to propagate uncertainty to CBCtwo.
 </section>
 
 <section id="teaching" >
-    <h2>Teaching @ IISc</h2>
+    <h2>Teaching @ IITD</h2>
     <table>
-        <tr><td>E0 219</td><td>   Linear Algebra and Applications </td></tr>
-        <tr><td>E0 232</td><td>  Probability and Statistics </td></tr>
-        <tr><td>E0 238</td><td>   Artificial Intelligence</td></tr>
-        <tr><td>E0 270</td><td>   Machine Learning</td></tr>
-        <tr><td>E1 277</td><td>   Reinforcement Learning</td></tr>
-        <tr><td>EX XXX</td><td>   Perception for Robotics</td></tr>
+        <tr><<td>   Linear Algebra and Applications </td></tr>
+        <tr><<td>   Probability and Statistics </td></tr>
+        <tr><<td>   Reinforcement Learning</td></tr>
+        <tr><<td>   Perception for Robotics</td></tr>
     </table>
 </section>
 
 <section id="lab" >
-    <h2>Lab @ IISc</h2>
+    <h2>Lab @ IITD</h2>
     <table>
         <tr><td> 3-4 Ground robots like Clearpath Husky </td></tr>
         <tr><td> 3-4 Aerial robots</td></tr>
-        <tr><td> 4-5 PhD Students</td></tr>
+        <tr><td> 3-4 PhD Students</td></tr>
+        <tr><td> 2-3 Master Students</td></tr>
+        <tr><td> 4-5 Undergrad Students</td></tr>
     </table>
 </section>
 
