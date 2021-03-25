@@ -36,6 +36,7 @@ body { background-color: #000; }
   background: -o-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
   background: -ms-linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
   background: linear-gradient(#ffffff, #ffffff 85%, #e6e6e6);
+  overflow: hidden;
 }
 
 .reveal section img {

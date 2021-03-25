@@ -16,8 +16,8 @@
 		<link rel="stylesheet" type="text/css" href="./reveal.js/dist/theme/white.css">
 
 		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" type="text/css" href="reveal.js/plugin/highlight/zenburn.css">
-		<link rel="stylesheet" type="text/css" href="index.css">
+        <link rel="stylesheet" type="text/css" href="reveal.js/plugin/highlight/zenburn.css">
+        <link rel="stylesheet" type="text/css" href="index.css">
 
 		<!-- Printing and PDF exports -->
 		<!-- script>hm
@@ -82,7 +82,7 @@
          }
         </style>
 	</head>
-	<body>
+	<body style="background-color: #000">
   <div style="display:none" >
   \(
 \newcommand{\TODO}[1]{{\color{red}TODO: {#1}}}
@@ -1908,7 +1908,9 @@
             +
 
             \cssId{highlight-current-red-1}{\class{fragment}{
+            \underbrace{
             \Lie_g \Lie_f^{(r-1)} h(\bfx)
+            }_{\ne 0}
             }}
             \bfu + \bfk_\alpha^\top \begin{bmatrix}
             h(\bfx) \\
@@ -2148,9 +2150,10 @@ a        how to propagate uncertainty to CBCtwo.
     <h2>Ackerman Drive Simulations</h2>
 
     <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" 
-         style="height:450px"
+         style="height:550px"
     />
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" style="height:450px"
+    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif"
+         style="height:550px"
          class="fragment"
     />
 </section>
@@ -2158,10 +2161,10 @@ a        how to propagate uncertainty to CBCtwo.
 <section>
     <h2>Ackerman Drive Simulations</h2>
     <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_no_learning_gets_stuck_v1.2.3_animation.gif"
-         height="450"
+         height="550"
     />
     <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_learning_helps_avoid_getting_stuck_v1.2.3_animation.gif"
-         height="450"
+         height="550"
          class="fragment"
     />
 </section>
@@ -2418,13 +2421,25 @@ a        how to propagate uncertainty to CBCtwo.
             <cite data-key="Ry<b>Dh</b>Pl IROS 2013"></cite>
         </div>
         <h6><b>vikasdhiman.info</b></h6>
-        <div >
+        <!-- div >
             <img data-src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif" height="190"
             />
             <img data-src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" height="190"
             />
             <h6>Safe control</h6>
             <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+        </div -->
+        <div >
+            <video
+                class="slide-play"
+                loop="true"
+                muted="True"
+                height="250"
+            >
+                <source type="video/mp4" data-src="media/irl/Inverse reinforcement learning for autonomous navigation via semantic mapping and planning-CqIcN3j_NVo.mp4"/>
+            </video>
+            <h6>Inverse Reinforcement Learning</h6>
+            <cite data-key="Wa<b>Dh</b>At ICRA 2020"></cite>
         </div>
         <div >
             <video
@@ -2582,10 +2597,10 @@ Mutual localization: Two camera relative 6-dof pose estimation from reciprocal f
 <section id="lab" data-visibility="uncounted">
     <h2>Lab @ IIT Bombay</h2>
     <table>
-        <tr><td> 3-4 Ground robots like Clearpath Husky </td></tr>
-        <tr><td> 3-4 Aerial robots</td></tr>
-        <tr><td> 3-4 PhD Students</td></tr>
-        <tr><td> 2-3 Master Students</td></tr>
+        <tr><td> 2-3 Ground robots like Clearpath Husky </td></tr>
+        <tr><td> 2-3 Aerial robots</td></tr>
+        <tr><td> GPU based compute cluster</td></tr>
+        <tr><td> 3-4 PhD/Master Students</td></tr>
         <tr><td> 4-5 Undergrad Students</td></tr>
     </table>
 </section>
