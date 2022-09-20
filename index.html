@@ -15,9 +15,15 @@
 		<link rel="stylesheet" type="text/css" href="reveal.js/dist/reveal.css">
 		<link rel="stylesheet" type="text/css" href="./reveal.js/dist/theme/white.css">
 
+	    <link rel="stylesheet" href="reveal.js-plugins/chalkboard/style.css">
+
+
 		<!-- Theme used for syntax highlighting of code -->
         <link rel="stylesheet" type="text/css" href="reveal.js/plugin/highlight/zenburn.css">
         <link rel="stylesheet" type="text/css" href="index.css">
+
+	    <!-- Font awesome -->
+	    <link rel="stylesheet" href="../reveal.js-plugins/menu/font-awesome/css/fontawesome.css">
 
 		<!-- Printing and PDF exports -->
 		<!-- script>hm
@@ -541,6 +547,210 @@
   </aside>
 </section>
 
+<!--  section id="why-learning">
+    <div class="r-stack">
+    <h2 class="fragment fade-out">Why learning?</h2>
+    <h2 class="fragment">Need robots that learn and adapt</h2>
+    </div>
+    <table><tr>
+        <th style="text-align:center">So far</th>
+        <th style="text-align:center"
+            data-fragment-index="0"
+            class="fragment"
+        >Next era</th>
+    </tr><tr class="img-row">
+            <td>
+                <img data-src="./media/industrial-robots.jpeg" height="300" />
+            </td>
+            <td class="fragment" data-fragment-index="0">
+                <img
+                     data-src="./media/delivery-robots.jpeg"
+                     height="100" />
+                <img
+                     data-src="./media/cleaning-robots.jpeg"
+                     height="100" />
+                <img
+                     data-src="./media/drone-delivery.webp"
+                     height="100" />
+                <img
+                     data-src="./media/autonomous-driving.webp"
+                     height="100" />
+                <img data-src="./media/human-robot-collaboration.jpeg"
+                     height="100"/>
+            </td>
+    </tr>
+    </table>
+
+</section -->
+
+<section id="why-ml-control-rob"  data-visibility="hidden">
+    <h2>Robotics and Learning</h2>
+    <aside class="notes" data-markdown>
+        Applications:
+        - Industrial robots
+        - Corobots
+        - Construction
+        - Agricultural ()
+        - Medical (Elderly care)
+        - Home/Domestic (Roomba,  lawn mowers, )
+        - Disastor recovery (nuclear facility shutdown)
+        - Autonomous cars
+
+        Problems:
+        - Power source ()
+        - Actuation (motors, hydraulic etc)
+        - Sensing (vision, lidar, radar, ultrasonics, touch, speech etc)
+        - Manipulation (grippers, suction, full human hand)
+        - Navigation (flying, n-wheel (n=1, ..., 6))
+        - Bipedal
+        - Human-robot interaction
+        - Controls
+
+    </aside>
+</section>
+
+<section id="need-of-maps" >
+  <div style="position:relative" >
+    <h2>Self-driving cars</h2>
+    <div  >
+        <h3 style="">Google trends for 'Self-driving cars'</h3>
+        <img  style=""
+             src="./media/2010-2022-self-driving-car-trends.png" style="height:200px" />
+    </div>
+    <img class="fragment" style="position:absolute;left:05%;top:10%;transform: rotate(-10deg);height:100px"
+        src="./media/2012-calif-auto-legal.png"  />
+    <img class="fragment" style="position:absolute;left:40%;top:10%;transform: rotate(10deg);height:100px"
+        src="./media/2012-300m-google-deemed-ready.png" />
+    <img class="fragment" style="position:absolute;left:60%;top:10%;transform: rotate(0deg);height:100px"
+        src="./media/2014-tc-auto-closer.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:30%;transform: rotate(0deg);height:100px"
+        src="./media/2015-tesla-3-years.png"  />
+    <img class="fragment" style="position:absolute;left:05%;top:45%;transform: rotate(-10deg);height:100px"
+        src="./media/2013-tesla-2016.png"  />
+
+    <img class="fragment" style="position:absolute;left:35%;top:45%;transform: rotate(10deg);height:100px"
+        src="./media/2022-self-driving-austin.png" />
+    <img class="fragment" style="position:absolute;left:20%;top:60%;transform: rotate(-10deg);height:150px"
+        src="./media/2022-self-driving-not-far-away.png"  />
+    <img class="fragment" style="position:absolute;left:20%;top:75%;transform: rotate(00deg);height:120px"
+        src="./media/2022-self-driving-linked-crashes.png"  />
+    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(10deg);height:400px"
+         src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+
+    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(-10deg);height:400px"
+         src="./media/uber-crash.jpeg"
+    />
+  </div>
+  <aside class="notes" data-markdown>
+    - While talk about navigation we cannot ignore self-driving cars.
+    - Self-driving cars have been getting a lot of attention from public, media
+      and entrepreneurs.
+    - Self-driving cars have covered millions of miles.
+    - States have been legalizing self-driving cars.
+    - The predictions of self-driving cars have been getting closer.
+    - However, what we have got are delayed demos and bad news.
+    - Learning algorithms may have beaten humans at Go, but for driving I still
+      trust humans.
+  </aside>
+</section>
+
+<section>
+    <h2>Lessons from aerospace</h2>
+    <div style="position:relative;height:220px">
+        <img style="position:absolute;left:29%;height:200px"
+             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+    </div>
+    <div >
+        <div class="fragment" style="position:relative;height:250px;width:400px;display:inline-block" >
+            <img style="position:absolute;left:13%;height:200px;display:block"
+                 src="./media/human-driver.webp" />
+            <div style="font-size:larger;color:red;position:absolute;left:10%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
+                150 deaths per 10 billion miles</div>
+        </div>
+        <div style="position:relative;height:250px;width:400px;display:inline-block" >
+            <div class="r-stack" style="position:absolute;right:13%">
+                <div class="fragment ">
+            <img data-src="./media/aircraft.jpeg" style="height:250px"/>
+            <div style="font-size:larger;color:red;position:absolute;right:13%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
+                0.2 deaths per 10 billion miles</div>
+                </div>
+                <div class="fragment" >
+                    <img style="height:250px"
+                         data-src="./media/Fatalities_per_revenue_passenger_kilometre_in_air_transport_since_1970.png"
+                </div>
+            </div>
+        </div>
+        <!-- div style="opacity:0.7;background-color:white;height:220px;position:relative" class="fragment">
+        <div sytle="font-size:larger;text-color:red;position:absolute;left:10%;top:10%;display:inline-block">150 deaths per 10 billion miles</div>
+        <div sytle="font-size:larger;text-color:green;position:absolute;right:10%;top:10%;display:inline-block">0.2 deaths per 10 billion miles</div>
+        </div -->
+    </div>
+</section>
+
+<section id="ai">
+    <h2> Artificial Intelligence </h2>
+    <table><tr><td class="img-row">
+        <img style="height:220px" class="fragment" data-src="./media/alpha-go-le-sedol.jpg" />
+        <span style="width:85px;display:inline-block"> &nbsp; </span>
+        <img style="height:220px" class="fragment" data-src="./media/protein-folding.png" />
+
+    </td></tr>
+    <tr><td class="img-row">
+        <img style="height:220px" class="fragment" data-src="./media/2022-stable-diffusion.png" />
+        <span class="fragment">
+            <video
+                class="fragment-play"
+                style="height:220px"
+                loop="true"
+                muted="True"
+                currentTime="60"
+                height="245"
+            >
+                <source type="video/mp4" data-src="media/rubiks-cube.mp4#t=30,45"/>
+            </video>
+        </span>
+    </td></tr></table>
+</section>
+
+
+
+<section>
+    <h2>Why?</h2>
+    <div style="position:relative;height:400px">
+        <img style="position:absolute;left:02%;height:250px" src="./media/alpha-go-le-sedol.jpg" />
+        <img style="position:absolute;right:2%;height:250px"
+             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
+    </div>
+</section>
+
+<section>
+    <h2 >Bias-Variance trade-off</h2>
+    <img data-src="./media/overfitting-and-underfitting.png" />
+    <footnote>Image source: educative.io</footnote>
+    <aside class="notes">
+        1. We can take two lessons from this experience.
+    </aside>
+</section>
+
+<section>
+    <h2 >Bayesian Learning</h2>
+    <img data-src="./media/data-uncertainity.png" />
+
+    <img 
+        style="width:500px" data-src="./media/gp-prior.png" class=""fragment"/>
+    <footnote>Image source: peterroelants.github.io</footnote>
+    <footnote>Image source: educative.io</footnote>
+    <h2 class="fragment">How to handle uncertainty <b>safely</b>?</h2>
+    <aside class="notes">
+        1. We can take two lessons from this experience.
+    </aside>
+</section>
+
+<section id="talk-outline-pre-1" >
+    <h2>My research area</h2>
+    <img src="./media/LfI+IRL-mapping-localization-planning.png"  />
+</section>
+
 <section id="talk-outline-pre" >
     <h2>My Background</h2>
     <div style="position:relative;margin:auto;display:inline-block;left:2%">
@@ -611,8 +821,1304 @@
     </aside>
 </section>
 
-<section id="talk-outline-video" >
-    <h2>My Background</h2>
+
+
+<section id="kinds-of-safety" >
+    <h2 id="different-kinds-of-safety">Safety</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="safety-levels"
+                    style="height:700px"
+                    data-src="./media/safety-levels.svg"
+            >
+            </object>
+        </div>
+        <div id="safety-levels-dummy"
+             class="dummy-to-svg-map"
+             mapped-svg="safety-levels"
+        >
+            <span id="safety-levels-dummy-1" class="fragment"
+                  svg-ele-in-ids="safety-levels"
+            ></span>
+        </div>
+    </div>
+</section>
+
+
+
+<section id="todays focus">
+    <h2>Safe control while learning</h2>
+    <div style="position:relative;width:100%">
+        <img style="vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <div style="display:inline-block; vertical-align:middle; list-style: none; font-size: 80%;text-align: left; padding: 50px">
+            <h5 class="fragment">Given:</h5>
+            <ul class="fragment">
+            <li>Map and localization</li>
+            <li>Desired trajectory as a plan</li>
+            <li>Unsafe regions</li>
+            </ul>
+            <h5 class="fragment">Problem 1:</h5>
+            <ul class="fragment">
+                <li>Learn uncertainty aware robot system dynamics</li>
+            </ul>
+            <h5 class="fragment">Problem 2:</h5>
+            <ul class="fragment"><li>
+                Follow trajectory avoiding unsafe actions
+            </li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="why-gp" data-visibility="hidden">
+    <h2>How to learn dynamics?</h2>
+    <ul>
+        <li class="fragment">
+            Maximum Likelihood models.
+            <ul> <li>Koopman operators
+                ( Mamakoukas et al (2020) )
+            </li>
+            <li >Model based reinforcement Learning (  Wang et al  (2019) )
+            </li>
+            </ul>
+       <li class="fragment">
+           Bayesian methods
+           <ul>
+               <li >Ensemble neural networks
+                   ( Pearce et al (2018) )
+               </li>
+               <li >Dropout neural networks
+                   ( Gal and Ghahramani (2016) )
+               </li >
+               <li >Probabilistic Backpropagation
+                   ( Hernández-Lobato and Adams (2015) )
+               </li >
+               <li >Gaussian Processes (Rasmussen (2003))
+               </li>
+           </ul>
+    </ul>
+</section>
+
+<section id="gp-def" data-visibility="hidden">
+    <h2>Gaussian Processes</h2>
+    <table><tr><td style="vertical-align:top" class="fragment">
+        <img 
+            style="width:500px" data-src="./media/gp-prior.png" />
+        <footnote>Image source: https://peterroelants.github.io/</footnote>
+    </td>
+    <td style="vertical-align:top;font-size: smaller">
+        <ul>
+            <li class="fragment" >
+                \[
+                \begin{bmatrix}
+                f_1
+                \\
+                \vdots \\
+                f_n
+                \end{bmatrix}
+                \sim \calN\left(
+                \begin{bmatrix}
+                \mu_1 \\ \vdots \\ \mu_n
+                \end{bmatrix},
+
+                \begin{bmatrix}
+                \sigma_{1,1} & \dots & \sigma_{1,n} \\
+                \vdots & \dots & \vdots \\
+                \sigma_{n,1} & \dots & \sigma_{n,n}
+                \end{bmatrix}
+                \right)
+                \]
+            </li><li class="fragment" >
+                \[
+                \begin{bmatrix}
+                f(\bfx_1)
+                \\
+                \vdots \\
+                f(\bfx_n)
+                \end{bmatrix}
+                \sim \calN\left(
+                \begin{bmatrix}
+                \mu(\bfx_1) \\ \vdots \\ \mu(\bfx_n)
+                \end{bmatrix},
+                \begin{bmatrix}
+                \sigma(\bfx_1,\bfx_1) & \dots & \sigma(\bfx_1,\bfx_n) \\
+                \vdots & \dots & \vdots \\
+                \sigma(\bfx_n,\bfx_1) & \dots & \sigma(\bfx_n, \bfx_n)
+                \end{bmatrix}
+                \right)
+                \]
+            </li>
+            <li class="fragment" >
+                \[
+                f \sim \GP(\mu, \sigma)
+                \]
+            </li>
+            <li class="fragment" >
+                \[
+                f(\bfx^*) | \{ f(\bfx_1) \dots  f(\bfx_n) \}
+                \sim \N( \mu_{*|n}(\bfx^*), \sigma_{*|n}(\bfx^*) )
+                \]
+            </li>
+        </ul>
+
+    </td>
+    </tr></table>
+</section>
+
+<section id="Problem formulation">
+    <h2>Problem formulation</h2>
+    <div style="position:relative;width:100%">
+        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <ul style="display:inline-block; width:400px; vertical-align:middle; list-style: none">
+            <li style="position:relative;height:125px" >
+                <div class="fragment " style="position:absolute;">
+                    \begin{align}
+                    \min_{\bfu \in \mathcal{U}}&
+                    \text{ Cost function }
+                    \\
+                    \qquad\text{s.t.}&~~\bbP\bigl(
+                    \text{ Safety constraint }
+                    \bigr) \ge 1-\epsilon,
+                    \end{align}
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
+    <aside class="notes" data-markdown>
+        Consider a robot tasked to cross a narrow bridge. In the scenario,
+        the robot dynamics are not known with certainity, we want the robot to
+        learn about its own dynamics to the point that it is safe to cross the
+        bridge with a desired probability.
+
+        Fragment 1:
+        Specifically, we consider a control-affine system. And we write it in in
+        a Linear-form using homogeneous coordinates. We denote homogeneous
+        coordinates with an underline.
+
+        Fragment 2:
+        We assume that state-dependent part of the dynamics, capital F of x, is
+        a Gaussian process whose mean and uncertainty could be estimated.
+
+        Fragment 3:
+        We want to formulate a controller that minimizes task cost function
+        subject to the satisfaction of safety condition with a given probability
+        \(1-\epsilon \).
+
+        A specific example of that would be to have an epsilon greedy unsafe
+        controller. The safe controller will closely follow the unsafe controller
+        constrained by safety. The epsilon greedy parts allows the robot to take
+        random actions so that it can reduce the uncertainty of its dynamics.
+    </aside>
+</section>
+
+<section id="Problem 1" data-visibility="hidden">
+    <h2>Problem 1</h2>
+    <div style="position:relative;width:100%">
+        <!-- -  img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" /-->
+        <ul style="display:inline-block; vertical-align:middle; list-style: none">
+            <li class="fragment">
+                \begin{align}
+                \dot{\bfx} =  F(\bfx) \ctrlaff
+                \end{align}
+            </li>
+            <li class="fragment">
+                \[
+                \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
+                \]
+            </li>
+            <li class="fragment">
+                \[\StDat_{1:k} \triangleq [\bfx(t_1), \dots, \bfx(t_k)]\]
+            </li>
+            <li class="fragment">
+                \[\bfU_{1:k} \triangleq [\bfu(t_1), \dots, \bfu(t_k)]\]
+
+            </li>
+            <li class="fragment">
+                \[
+                \StDtDat_{1:k} \triangleq [\dot{\bfx}(t_1), \dots, \dot{\bfx}(t_k)]
+                \]
+            </li>
+            <li style="position:relative;height:125px">
+                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
+                    Compute the posterior distribution \(\calG\calP(\vect(\bfM_k(\bfx)), \bfK_k(\bfx,\bfx'))\) of \(\vect(F(\bfx)) \mid (\StDat_{1:k}, \bfU_{1:k}, \StDtDat_{1:k})\).
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section id="CBF">
+    <h2>Control Barrier Functions</h2>
+
+    <div style="position:relative;width:100%">
+    <div class="" style="display:inline-block" >
+        <object type="image/svg+xml"
+                id="cbf-layered-svg"
+                style="width:300px"
+                data-src="./media/cbf-layered.svg"
+                onload="show_on_svgload('cbf-layered-svg', 'base')"
+        >
+        </object>
+    </div>
+    <ul class="dotted" style="display:inline-block; vertical-align:middle; list-style: none"
+        mapped-svg="cbf-layered-svg"
+        class="dummy-to-svg-map"
+        id="cbf-layered-svg-dummy"
+    >
+        <li>
+            For differentiable \( h(\bfx) \),
+            <br/>
+            safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
+        </li>
+        <li class="fragment"
+            svg-ele-out-ids=""
+        svg-ele-in-ids="gradh">
+            Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
+        </li>
+        <li class="fragment"
+        >
+            Assume system starts in safe state \( \bfx(0) \in \calC \)
+        </li>
+        <li class="fragment"
+            svg-ele-in-ids="doth"
+            svg-ele-out-ids="gradh"
+        >
+            <p> System stays safe iff</p>
+            <div class="r-stack">
+            <div class="fragment ">
+            \[
+                \dot{h}(\bfx) \ge - \gamma h(\bfx)
+            \]
+            </div>
+            <!-- div class="fragment current-visible">
+                \[
+                [\grad_\bfx h(\bfx)]^\top \dot{\bfx} \ge - \gamma  h(\bfx)
+                \]
+            </div>
+            <div class="fragment">
+                \[
+                [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff \ge - \gamma h(\bfx)
+                \]
+            </div -->
+            </div>
+        </li>
+        <li class="fragment" style="padding:5px;border: 2px solid #ff2c2d">
+            Ames et al (ECC 2019):
+            \begin{multline}
+            \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
+            \mbox{CBC}(\bfx,\bfu) := [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff + \gamma h(\bfx)  \ge 0 \;~ \forall \bfx \in \calX.
+            \end{multline}
+        </li>
+    </ul>
+    </div>
+    <aside class="notes" data-markdow>
+        Recall the motivating example. We define a safe region C by a
+        differentiable function function h of x which is greater than 0 inside
+        the safe region.
+
+        We also assume that the gradient of h of x is non-zero at the boundary of set C.
+
+        Then a theorem from Ames et al says that if the system starts from safe
+        state then it stays in safe state if time derivative of h of x is
+        greater than alpha of h of x.
+
+        Define alpha as a function that belongs to Kappa infinity class, that it
+        is an increasing function that maps a bounded input to zero and infinity.
+    </aside>
+    <cite data-key="Ames et al (ECC 2019)"></cite>
+</section>
+
+
+<section id="Problem 2" data-visibility="hidden">
+    <h2>Problem 2</h2>
+    <div style="position:relative;width:100%">
+        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
+        <ul style="display:inline-block; vertical-align:middle; list-style: none">
+            <li class="fragment">
+                \begin{align}
+                \dot{\bfx} =  F(\bfx) \ctrlaff
+                \end{align}
+            </li>
+            <li class="fragment">
+                \[
+                \vect(F(\bfx)) \sim \GP(\vect(\bfM_k(.)), \bfK_k(.,.))
+                \]
+            </li>
+            <li style="position:relative;height:125px">
+                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
+                    Find \(\bfu_k\) and \(\tau_k\) such that for \(\bfu(t) = \bfu_k\)
+                    \[
+                    \mathbb{P}(\mbox{CBC}(\bfx(t),\bfu_k) \ge 0) \ge p_k
+                    \]
+                    for all \( t \in [t_k,t_k+\tau_k) \)
+                </div>
+                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
+                controller.</footnote-->
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section
+    data-visibility="hidden"
+    chapter-progress-next="True"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li class="fragment highlight-red">
+            Estimate posterior distribution over \(F(\bfx)\)
+        </li>
+        <li>
+            Propagate uncertainty to the Safety condition.
+        </li>
+        <li>
+            Extension to continuous time using Lipschitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher relative degree systems.
+        </li>
+    </ul>
+    <!--  li class="fragment">
+         \(
+         \mbox{CBC}(\bfx, \bfu) := \Lie_{f}h(\bfx) + \Lie_{g}h(\bfx)\bfu + \alpha(h(\bfx))
+         \)
+         </li -->
+    <aside class="notes" data-markdown>
+        We will approach this problem in five broad steps.
+        The estimation of F of x with uncertainty using Gaussian Processes.
+        Note that Gaussian Processes are just one-way of estimating F of x. We
+        can also uses Bayesian Neural Networks based on Esembles, Probabilistic
+        Backpropagation and dropouts.
+
+        Then we will focus on propagating the estimated uncertainty to the
+        safety condition.
+
+        And in the end we will talk about extension to higher relative
+        degree systems.
+    </aside>
+
+</section>
+
+
+<section id="mvgp" data-visibility="hidden">
+    <div style="font-size:80%; text-align:left; width: 500px; margin:auto">
+    <div >
+        \[
+        \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
+        \]
+    </div>
+        <div class="fragment" >
+            Decoupled GPs: Learn each element of \(F(\bfx)\) independently:
+            \[
+            \bfK_0(\bfx, \bfx') = \diag([\kappa(\bfx, \bfx'), \dots ])
+            \]
+            <span class="fragment" style="color:red"> No correlation across dimensions, training data still correlated.</span>
+        </div>
+        <div class="fragment" >
+            Corregionalization models: Alvarez et al (FTML 2012):
+            \[
+            \bfK_0(\bfx, \bfx') = \kappa(\bfx, \bfx') \boldsymbol{\Sigma}
+            \]
+            <cite data-key="Alvarez et al (FTML 2012)"></cite>
+            <span class="fragment" style="color:red"> \(\Sigma \in \R^{n(1+m) \times (1+m)n}\) has too many parameters to learn</span>
+        </div>
+        <div class="fragment " style="position:relative;display:inline-block;">
+            Matrix Variate Gaussian: Inspired from Sun et al (AISTATS 2017)
+            <div class="fragment current-visible" style="position:absolute">
+                \[
+                F \sim \mathcal{MVG}(\bfM, \bfA, \bfB) \Leftrightarrow
+                \vect(F) \sim \calN(\vect(M), \bfB \otimes \bfA)
+                \]
+            </div>
+            <div class="fragment">
+                \[
+            \bfK_0(\bfx, \bfx') = \bfB_0(\bfx, \bfx') \otimes \bfA
+            \]
+            <cite data-key="Sun et al, AISTATS 2017"></cite>
+            <cite data-key="Louizos and Welling (ICML 2016)"></cite>
+            </div>
+        </div>
+        <br/>
+        <div class="fragment"
+             style="display:inline-block;border: 2px solid red; text-align: left">
+            Factorization assumption:
+            \[
+            \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfB_0(.,.) \otimes \bfA)
+            \]
+        </div>
+    </div>
+    <aside class="notes">
+        Directly learning the vectorized form of Gaussian Process in this form
+        is hard to ensure positive definiteness of each output. That's why
+        simplifying assumptions are used.
+
+        For example, Alvarez et al reviewed a number of multi-output Gaussian
+        processes that decompose the kernel into a scalar kernel that only
+        depends on the input and an input independent matrix that captures the
+        covariance between output components. However, this proposition is for
+        vector-valued Gaussian processes and in our case the matrix Sigma will
+        end up scaling poorly with the state dimension and control vector dimension.
+
+        Another option from Sun et al considers a Matrix Variate Gaussian
+        distribution, where the covariance between rows (B) and columns (A) is
+        considered by separately. In vectorized form the covariance is just the
+        kronecker product of row and column covariance matrices.
+
+        This is the assumption that we use for Matrix Variate Gaussian process
+        and factorize kernel K_0 into column covariance matrix A and row
+        covariance matrix B. By assuming that only the row covariance matrix
+        depends upon input, we will see that we get a nice structure in the
+        inference result.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Matrix variate Gaussian Process</h2>
+    <div >
+        \(
+        \newcommand{\prl}[1]{\left(#1\right)}
+        \newcommand{\brl}[1]{\left[#1\right]}
+        \newcommand{\crl}[1]{\left\{#1\right\}}
+        \)
+        \begin{equation}
+        \begin{aligned}
+        \vect(F(\bfx)) &\sim \mathcal{GP}(\vect(\bfM_0(\bfx)), \bfB_0(\bfx,\bfx') \otimes \bfA)
+        %F(\bfx)\underline{\bfu} &\sim \mathcal{GP}(\bfM_0(\bfx)\underline{\bfu}, \underline{\bfu}^\top \bfB_0(\bfx,\bfx') \underline{\bfu}' \otimes \bfA)
+        \end{aligned}
+        \end{equation}
+    </div>
+    <div class="fragment">
+        Given data \(\StDat_{1:k}\),
+        \(\StDtDat_{1:k} \),
+        and \( \underline{\boldsymbol{\mathcal{U}}}_{1:k} \).
+    </div>
+    <div class="fragment">
+        \begin{equation*}
+        \newcommand{\ubcalU}{\underline{\boldsymbol{\calU}}}
+        \newcommand{\bcalM}{\boldsymbol{\calM}}
+        \newcommand{\bcalB}{\boldsymbol{\calB}}
+        \newcommand{\bcalC}{\boldsymbol{\calC}}
+        \begin{aligned}
+        &\bfM_k(\bfx) \triangleq \bfM_0(\bfx) +
+        \left( \dot{\bfX}_{1:k} - \bcalM_{1:k}\ubcalU_{1:k}\right) \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
+        \\
+        &\bfB_k(\bfx,\bfx') \triangleq \bfB_0(\bfx,\bfx') 
+        -
+        \bcalB_{1:k}(\bfx)\ubcalU_{1:k} \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx')\right)^\dagger
+        \\
+        &\left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
+        \triangleq
+        \left(\ubcalU_{1:k}^\top\bcalB_{1:k}^{1:k}\ubcalU_{1:k} + \sigma^2 \bfI_k\right)^{-1}\ubcalU_{1:k}^\top\bcalB_{1:k}^\top(\bfx).
+        \label{eq:mvg-posterior}
+        \end{aligned}
+        \end{equation*}
+    </div>
+    <div class="fragment " >
+        <div style="border: 2px solid red; display:inline-block; text-align: left; padding: 5px">
+        Inference on MVGP:
+        \begin{align}
+            \vect(F_k(\bfx_*)) &\sim
+            \mathcal{GP}(\vect(\bfM_k(\bfx_*)), \; \bfB_k(\bfx_*,\bfx_*') \otimes \bfA).
+            \\
+            F_k(\bfx_*)\underline{\bfu}_* &\sim
+            \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \;
+            \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
+            \end{align}
+        </div>
+    </div>
+    <aside class="notes" data-markdown>
+        Next we describe how to do inference with the Matrix Variate Gaussian Process.
+
+        Defining some notation regarding collected data. We collect trajectories
+        with state, control and state derivative. If the state derivative is not
+        available, we estimate it numerically. Note while most X data matrices
+        are just row stacking of state vectors. The control data matrix is a
+        diagonal matrix in homogeneous coordinates of control vector.
+
+        Using some algebra using schur complement and typical Gaussian
+        conditional distribution, we can compute mean matrix M_k and row
+        covariance matrix B_k.
+
+        Finally we get the inference result for Mean and variance of Matrix
+        variate Gaussian process. Note that due to the choice of only row
+        covariance matrix B depending upon input x, we get the same GP structure
+        as we started with.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Learning Experiments</h2>
+    <div class="r-stack">
+        <div class="fragment current-visible">
+    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
+
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li >
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+    </ul>
+    <br/>
+    
+        </div>
+    <img class="fragment " data-src="media/bayes_cbf_fig/learn_matrix_vector_v1.5.2-2-g31b30e1/learned_f_g_vs_true_f_g_mat_vec_ind.svg" />
+    </div>
+    <aside class="notes" data-markdown >
+        We test our learning framework on the pendulum example that we described earlier.
+
+        We plot different different dimensions of true and learned f of x and g
+        of x. The top row contains the true dynamics plotted with color across
+        theta and omega. The bottom row contains learned dynamics with zero mean
+        and RBF kernel, matrix-variate gaussian processes. The data has been
+        learned with 100 samples.
+
+        You can see that f of x and g of x are learned correctly within one decimal point
+    </aside>
+</section>
+
+<section id="learning-exp-quant" data-visibility="hidden">
+    <h2> Learning Experiments</h2>
+    <img src="media/bayes_cbf_fig/speed_test_matrix_vector_v1.6.1/speed_test_mat_vec_ind.svg"/>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+    data-visibility="hidden"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li class="fragment highlight-current-red" >
+            Estimate \(F(\bfx)\)  with Matrix-Variate Gaussian Process
+        </li>
+        <li class="fragment highlight-red" >
+            Propagate uncertainty to the Safety condition
+        </li>
+        <li>
+            Extension to continuous time using Lipschitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown>
+        This completes our contribution the estimation of F of x. Next we focus on
+        how to propagate uncertainty to the Safety condition.
+        For safety condition, we use control barrier functions.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Uncertainty propagation to CBC</h2>
+    <ul  >
+    <li class="fragment">
+        \[
+        \mbox{CBC}(\bfx, \bfu)= \grad_\bfx h(\bfx)F_k(\bfx)\ctrlaff + \alpha(h(\bfx))
+        \]
+    </li>
+    <li class="fragment ">
+        Recall:
+        \begin{equation}
+        F_k(\bfx_*)\underline{\bfu}_* \sim  \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
+        \end{equation}
+    </li>
+    <li class="fragment" style="border:2px solid red; padding:5px">
+        Lemma :
+        \[
+        \mbox{CBC}(\bfx, \bfu) \sim \GP(\E[\mbox{CBC}], \Var(\mbox{CBC}))
+        \]
+        \begin{align}
+        \label{eq:parametofpi5543}
+        \E[\mbox{CBC}_k](\bfx, \bfu) &= \nabla_\bfx h(\bfx)^\top \bfM_k(\bfx)\underline{\bfu} + \alpha(h(\bfx)),\\
+        \Var[\mbox{CBC}_k](\bfx, \bfx'; \bfu) &=  \underline{\bfu}^\top\bfB_k(\bfx,\bfx')\underline{\bfu} \nabla_\bfx h(\bfx)^{\top}\bfA\nabla_\bfx h(\bfx')
+        \end{align}
+        Note: mean and variance are Affine and Quadratic in \( \bfu \) respectively.
+    </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        In the last slide we defined CBC as this. It can be written in terms of
+        system dynamics like this. Note that this is affine in the only random
+        term which if F of x. Since F of x is Gaussian hence CBC is also gaussian.
+
+        Also recall the notation for mean and variance of F of x u.
+
+        Using this information we can write the expression for mean and variance of CBC.
+        Note that CBC is GP only in x not in u. Also note that mean is affine in
+        u and the variance is quadratic in u.
+    </aside>
+</section>
+
+<section>
+    <h2>Deterministic condition for controller</h2>
+    <ul>
+        <li style="position:relative;height:125px;width:400px">
+            <div class="fragment current-visible" style="position:absolute;">
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \text{ Cost function }
+                \\
+                \qquad\text{s.t.}&~~\bbP\bigl(
+                \text{ Safety constraint }
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge 1-\epsilon,
+                \end{align}
+            </div>
+            <div class="fragment" style="position:absolute;">
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \text{ Quadratic cost function }
+                \\
+                \qquad\text{s.t.}&~~\bbP\bigl(
+                \style{color:red}{\mbox{CBC}(\bfx_k, \bfu_k) > \zeta > 0}
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge 1-\epsilon,
+                \end{align}
+            </div>
+        </li>
+        <!-- li class="fragment" >
+            \[
+            \newcommand{\CBC}{\mbox{CBC}}
+            \bbP\bigl(\mbox{CBC}(\bfx_k, \bfu_k) > \zeta \mid \bfx_k,\bfu_k \bigr) \ge 1-\epsilon
+            \\
+            \Leftrightarrow \frac{1}{2}-\frac{1}{2} \erf\left(
+            \frac{\zeta - \E[\CBC] }{\sqrt{2\Var(\CBC)}}
+            \right) \ge 1-\epsilon
+            \]
+            where \( \erf(y) \) is the error function.
+        </li -->
+        <li class="fragment" style="padding:5px; border: 2px solid red">
+            Safe controller (an SOCP):
+            \begin{align}
+            \min_{\bfu_k \in \mathcal{U}}&
+            \text{ Quadratic cost function }
+            \\
+            \qquad\text{s.t.}\qquad&
+            \cssId{highlight-current-red-1}{\class{fragment}{
+            \E[\CBC] - \zeta \ge \sqrt{2\Var(\CBC)(\erf^{-1}(2\epsilon-1))^2}
+            }}
+            \end{align}
+        </li>
+        <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+    </ul>
+    <aside class="notes" data-markdown >
+        Recall the problem formulation. We want to ensure Safety constraint with
+        some high probability.
+
+        Fragment 1: More specifically, we want to ensure the Control Barrier
+        Condition is greater than 0 by some margin zeta.
+
+        Fragment 2: Since we have already shown that Control Barrier Condition
+        is a Gaussian Process, we can analytically compute this probability in
+        terms of mean and variance.
+
+        Fragment 3: After some algebra we can convert the problem formulation
+        into a nice Quadratically constrained Quadratic program with two
+        conditions. Recall that the mean and variance of CBC are Affine and
+        Quadratic in u respectively.
+
+        Fragment 4: The first condition intuitively means that the CBC should be
+        far from zeta by atleast by a term proportional to the standard
+        deviation. The quadratic form of the first condition allows mean to be
+        either side of zeta, but we want it to be greater than zeta which is
+        greater than 0.
+    </aside>
+</section>
+
+<section data-visibility="hidden"
+    class="center"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li>
+            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
+        </li>
+        <li class="fragment highlight-current-red">
+            Propagate uncertainty to the Control Barrier condition.
+        </li>
+        <li class="fragment highlight-red">
+            Extension to continuous time using Lipschitz continuity assumptions.
+        </li>
+        <li>
+            Extension to higher relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Now we have seen how to propagate uncertainty to the Control Barrier
+        condition, we can move on the next step which is to translate the
+        Probabilistic condition to a deterministic one.
+    </aside>
+</section>
+
+
+<section
+    chapter-progress-next="True"
+    data-visibility="hidden"
+>
+    <h2>Safety beyond triggering times</h2>
+    <ul>
+        <li >
+                So far:
+            \begin{align}
+            \min_{\bfu_k \in \mathcal{U}}&
+            \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
+            \\
+                \qquad\text{s.t.}&~~
+                \bbP\bigl(
+                \mbox{CBC}(\style{color:red}{\bfx_k}, \bfu_k) > \style{color:red}{\zeta}
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge \style{color:red}{1-\epsilon},
+            \end{align}
+        </li>
+        <li class="fragment" >
+                Next:
+                \begin{align}
+                \min_{\bfu_k \in \mathcal{U}}&
+                \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
+                \\
+                \qquad\text{s.t.}&~~
+                \bbP\bigl(
+                \mbox{CBC}(\style{color:red}{\bfx(t)}, \bfu_k) > \style{color:red}{0}
+                \mid \bfx_k,\bfu_k
+                \bigr) \ge \style{color:red}{p_k}, \qquad
+                \style{color:red}{\forall t \in [t_k, t_k + \tau_k)}
+                \end{align}
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        So far we have considered the problem only on triggering timesteps.
+        But we need safety at all times.
+
+        We assume zero-order hold and analyze what can we say about safety
+        beyond triggering times. Especially for how long we can assume safety
+        after we have ensured safety triggering time.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Safety beyond triggering times</h2>
+    <ul>
+        <li class="fragment">
+            Assume Lipschitz continuity of dynamics:
+            \begin{align}
+            \textstyle
+            \label{eq:smoth23}
+            \bbP\left(
+            \sup_{s \in [0, \tau_k)}\|F(\bfx(t_k+s))\ctrlaff_k
+            -F(\bfx(t_k))\ctrlaff_k\| \le L_k \|\bfx(t_k+s)-\bfx_k\|
+            \right) \ge q_k:=1-e^{-b_kL_k}.
+            \end{align}
+            <cite data-key="Srinivas et al. (2009)"></cite>
+        </li>
+        <li class="fragment">
+            Assume Lipschitz continuity of \( \alpha(h(\bfx)) \):
+            \begin{align}
+            \label{htym6!7uytf}
+            |\alpha \circ h(\bfx(t_k+s))-\alpha \circ h(\bfx_k)| 
+            \le L_{\alpha \circ h} \|\bfx(t_k+s)-\bfx_k\|.
+            \end{align}
+        </li>
+        <li class="fragment">
+            \[
+            \sup_{s \in [0, \tau_k)}
+            \| \grad_\bfx h(x(t_k + s)) \| \le \chi_k
+            \]
+        </li>
+    </ul>
+        <div class="fragment" style="padding:5px; border: 2px solid red;text-align:left;margin:20px;font-size:smaller">
+            Theorem:
+            \[
+            \bbP\bigl(
+            \mbox{CBC}(\bfx_k, \bfu_k) > \zeta
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge 1-\epsilon
+            \quad\Rightarrow\quad
+            \bbP\bigl(
+            \mbox{CBC}(\bfx(t), \bfu_k) > 0
+            \mid \bfx_k,\bfu_k
+            \bigr) \ge p_k, \;
+            \forall t \in [t_k, t_k + \tau_k)
+            \]
+            holds with \( p_k = 1-\epsilon q_k \) and
+            \(
+            \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
+            \)
+            <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
+        </div>
+    <aside class="notes" data-markdown >
+        Assume stochastic Lipschitz continuity of the dynamics with exponential
+        distribution. This assumption has been made before by Srinivas et al and
+        holds for Gaussian processes with RBF kernels and Mattern kernels.
+
+        Also assume Lipschitz continuity of alpha of h of x. This is true because
+        we already assumed alpha to class Kappa infinity function and h to be
+        differentiable.
+
+        We show that after safety at triggering time with margin
+        zeta ensures safety after the triggering time uptil tau scales with log
+        of the margin zeta.
+    </aside>
+</section>
+
+<section
+    chapter-progress-next="True"
+    class="center"
+    data-visibility="hidden"
+>
+    <h2>Approach</h2>
+    <ul class="dotted">
+        <li>
+            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
+        </li>
+        <li>
+            Propagate uncertainty to the Control Barrier condition.
+        </li>
+        <li class="fragment highlight-current-red">
+            Extension to continuous time using Lipschitz continuity assumptions.
+        </li>
+        <li class="fragment highlight-red">
+            Extension to higher relative degree systems.
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Now we have seen how to extend safety guarantees to untill after
+        triggering time, we focus our attention extending these results to
+        higher relative degree systems.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Higher relative degree CBFs </h2>
+    <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/pendulum.png" />
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li class="fragment">
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+        <li class="fragment">
+            \begin{align}
+            h\left(\begin{bmatrix}
+            \theta
+            \\
+            \omega
+            \end{bmatrix}
+            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
+            \end{align}
+        </li>
+        <li class="fragment">
+            Note that \( \underbrace{\grad_\bfx h(\bfx) g(\bfx)}_{\Lie_g h(\bfx)} = 0 \)
+        </li>
+    </ul>
+    <div class="fragment" style="font-size:larger">
+        \(  \CBC(\bfx, \bfu) = \underbrace{[\grad_\bfx h(\bfx)]^\top f(\bfx)}_{\Lie_f h(\bfx)}  +   \underbrace{[\grad_\bfx h(\bfx)]^\top g(\bfx)}_{\Lie_g h(\bfx)} \bfu + \alpha(h(\bfx))  \) <br/> is independent of \(\bfu\).
+    </div>
+    <aside class="notes" data-markdown >
+        Even pendulum is a higher relative degree system. To see that consider a
+        pendulum with unsafe region defined as the red region.
+
+        We define the state as theta and omega and the control signal is simply
+        the acceleration signal. Pendulum is an control affine system.
+
+        Next we define the control barrier function h based on the cosine
+        distance from the center of unsafe region theta_c.
+
+        Now note that the Lie derivative of h with respect input-gain term g is 0.
+
+        This leads to a condition where our safety constraints so far are
+        independent of u. This is a well-known problem and Ames et al has proposed
+        exponential CBFs for higher relative degree systems.
+    </aside>
+</section>
+
+<section id="ecbf" data-visibility="hidden">
+    <h2>Exponential Control Barrier Functions (ECBF)</h2>
+    <ul>
+        <li >
+            \[
+            \CBCr(\bfx, \bfu) := \Lie_f^{(r)} h(\bfx)
+            +
+
+            \cssId{highlight-current-red-1}{\class{fragment}{
+            \underbrace{
+            \Lie_g \Lie_f^{(r-1)} h(\bfx)
+            }_{\ne 0}
+            }}
+            \bfu + \bfk_\alpha^\top \begin{bmatrix}
+            h(\bfx) \\
+            \Lie_f h(\bfx) \\
+            \vdots \\
+            \Lie_f^{(r-1)} h(\bfx)
+            \end{bmatrix}
+            \]
+            <cite data-key="Ames et al (ECC 2019)"></cite>
+            <cite data-key="Nguyen and Sreenath (ACC 2016)"></cite>
+        </li>
+        <!-- li class="fragment">
+            \( r \ge 1 \) is the relative degree of CBF, \( h(\bfx) \), then
+            \( \Lie_g \Lie_f^{k} h(\bfx) = 0, \; \forall k = \{0, \dots, r-2 \} \)
+            and \( \Lie_g \Lie_f^{(r-1)} h(\bfx) \ne 0 \) and
+        </li -->
+    </ul>
+    <aside class="notes" data-markdown >
+        A Control barrier condition for relative-degree r CBF is defined as this
+        expression. The first two terms of this expression are just rth time
+        derivative of h of x.
+
+        Based on this expression it is easy to understand what relative degree
+        definition should be.
+        The relative degree of a CBF is defined as r greater than 1 such that
+        All the Lie derivatives with respect to g are zero upto r-2 but the last
+        one is non-zero.
+        Alternatively speaking r is the smallest order of control-barrier
+        condition such that CBCr depends upon the contorl u.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
+    <ul>
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
+        <ul class="fragment"><li>
+            If \( p(\bfx) \sim \GP(\mu(\bfx), \kappa(\bfx, \bfx'))\), then
+            <br/>
+            \( \grad_\bfx p(\bfx) \sim \GP(\grad_\bfx \mu(\bfx), H_\bfx \kappa(\bfx, \bfx')) \)
+        </li></ul>
+    </li>
+    </ul>
+</section>
+<section data-visibility="hidden">
+    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
+    <ul style="font-size:95%">
+        <li class="fragment">
+            \[
+            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
+    </li><li class="fragment">
+        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP (not a GP )
+        <!-- 
+        <ul class="fragment"><li>
+            \(\newcommand{\trc}{\text{tr}}\)
+            If \(p(\bfx)\) and \(q(\bfy)\) are GPs then \(p(\bfx)^\top q(\bfx)\) is also a GP
+            <br/>
+            \begin{multline}
+            p(\bfx)^\top q(\bfx) \sim \GP(\mu_p(\bfx)^\top \mu_q(\bfx) + \trc(\Cov_{p,q}(\bfx, \bfx)), \\
+            2\trc(\Cov_{p,q}(\bfx, \bfx'))^2 )
+            + p(\bfx)^\top \kappa_q(\bfx, \bfx') p(\bfx')
+            \\
+            + q(\bfx)^\top \kappa_p(\bfx, \bfx') q(\bfx')
+            + 2 q(\bfx)^\top \Cov_{p,q}(\bfx, \bfx') p(\bfx')
+            \end{multline}
+            <cite data-key="Seare and Gruber. Linear Models. (Book 1971)"></cite>
+        </li></ul>
+    -->
+
+    </li>
+    <li class="fragment" style="padding:5px; border: 2px solid red;">
+        \( \CBCtwo(\bfx, \bfu) \) is a quadratic form of GP.
+        <br/>
+        \( \E[\CBCtwo](\bfx, \bfu) \) is still affine in \( \bfu \).
+        <br/>
+        \( \Var[\CBCtwo](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
+    </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        Now that we have defined CBCtwo as the safety condition, we want to see
+a        how to propagate uncertainty to CBCtwo.
+
+        We have already seen that Lie derivative of h wrt to f is a gaussian process.
+
+        The gradients of GPs are GPs, hence the gradient of Lie of h of x is also a GP.
+
+        The dot product of this gradient with system dynamics is a quadratic
+        form of two GPs. Now this is not a GP. But its mean and variacne can be
+        computed analyticallly.
+
+        Note that CBCtwo is affine in this term which is again a quadratic form in GP.
+        Without writing the long expressions for the mean and variance of
+        CBCtwo, I want to convey to you two things; that mean and variance of
+        CBCtwo can be computed analytically and the mean and variance of CBCtwo
+        are affine and quadratic in control signal like CBCone.
+
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Extending to \(\CBCr\)</h2>
+    <ul>
+        <li >
+            \[
+            \CBCr(\bfx, \bfu) = [\grad_\bfx \Lie_f^{(r)} h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
+            \begin{bmatrix}
+            h(\bfx) &
+            \Lie_f h(\bfx) & \dots \Lie_f^{(r-1)} h(\bfx)
+            \end{bmatrix}^\top
+            \]
+        </li>
+        <li class="fragment">
+        <img src="./media/computation-graph-cbf-r.png" />
+        </li>
+        <li class="fragment" style="padding:5px; border: 2px solid red;">
+            \( \CBCr(\bfx, \bfu) \) is not a GP
+            <br/>
+            \( \E[\CBCr](\bfx, \bfu) \) is still affine in \( \bfu \).
+            <br/>
+            \( \Var[\CBCr](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
+        </li>
+    <li class="fragment">
+        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
+        Monte-carlo methods.
+    </li>
+    </ul>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Safe controller using ECBF</h2>
+    <ul><li>
+    \begin{align}
+    \min_{\bfu_k \in \mathcal{U}}&
+    \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
+    \\
+    \qquad\text{s.t.}&~~
+    \bbP\bigl(
+    \CBCr(\bfx_k, \bfu_k) > \zeta
+    \mid \bfx_k,\bfu_k
+    \bigr) \ge 1-\epsilon
+    \end{align}
+    </li><li class="fragment">
+        Using Cantelli's (Chebyshev's one-sided) inequality
+    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
+        Safe controller (an SOCP)
+        \begin{align}
+        \min_{\bfu_k \in \mathcal{U}}&
+        \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
+        \\
+        \qquad\text{s.t.}\qquad
+        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge \sqrt{\frac{1-\epsilon}{\epsilon}\Var[\mbox{CBC}_k^{(r)}]}
+        \end{align}
+    </li></ul>
+    <aside class="notes" data-markdown >
+        To derive a safe controller using ECBFs we use Cantelli's inequality
+        that need only mean and variance of the distribution.
+
+        We again derive a safe controller for aribitrary ordered CBCr as long as
+        mean and variance can be estimated. The good thing is that it is still a
+        Quadratic program.
+    </aside>
+</section>
+
+<section data-visibility="hidden">
+    <h2>Safe controller using ECBF Experiments</h2>
+    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
+
+    <ul class="dotted" style="display:inline-block; vertical-align: middle">
+        <li >
+            \begin{align}
+            \begin{bmatrix}
+            \dot{\theta}
+            \\
+            \dot{\omega}
+            \end{bmatrix}
+            = \underbrace{\begin{bmatrix}
+            \omega
+            \\
+            -\frac{g}{l} \sin(\theta)
+            \end{bmatrix}}_{f(\bfx)}
+            +
+            \underbrace{\begin{bmatrix}
+            0 \\  \frac{1}{ml}
+            \end{bmatrix}}_{g(\bfx)}
+            u
+            \end{align}
+        </li>
+        <li >
+            \begin{align}
+            h\left(\begin{bmatrix}
+            \theta
+            \\
+            \omega
+            \end{bmatrix}
+            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
+            \end{align}
+        </li>
+    </ul>
+    <br/>
+    <br/>
+    <img class="fragment "
+         src="./media/bayes_cbf_fig/run_pendulum_control_online_learning_trajectory_160.svg"
+    style="height:287px" />
+    <aside class="notes" data-markdown >
+        We show the behaviour of the pendulum with Safe controller using ECBF.
+
+        We use an exponentially decreasing epsilon-greedy scheme going from 1 to 0.01
+        in 100 steps. Negative control inputs get rejected by the CBF-based
+        constraint, while positive inputs allow the pendulum to bounce back from
+        the unsafe region.
+    </aside>
+</section>
+
+<section >
+    <h2>Ackerman Drive Simulations</h2>
+
+    <img data-src="media/dhiman-2021/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" 
+         style="height:550px"
+    />
+    <img data-src="media/dhiman-2021/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif"
+         style="height:550px"
+         class="fragment"
+    />
+</section>
+
+<section>
+    <h2>Ackerman Drive Simulations</h2>
+    <img src="media/dhiman-2021/unicycle_move_to_pose_fixed_no_learning_gets_stuck_v1.2.3_animation.gif"
+         height="550"
+    />
+    <img src="media/dhiman-2021/unicycle_move_to_pose_fixed_learning_helps_avoid_getting_stuck_v1.2.3_animation.gif"
+         height="550"
+         class="fragment"
+    />
+</section>
+
+<section>
+    <h2>2022 upgrade: Learning \( h(\bfx) \) </h2>
+    <table><tr><td class="img-row">
+        <img style="height:200px" class="fragment" data-src="./media/kehan-2022-FIESTA.png" />
+        <img style="height:200px" class="fragment" data-src="./media/kehan-2022-implicit-geometric-regularization.png" />
+    </td></tr><tr><td class="img-row">
+        <img style="height:220px" class="fragment" data-src="./media/kehan-2022/object-boundary.jpg" />
+        <img style="height:220px" class="fragment" data-src="./media/kehan-2022/object-boundaries.png" />
+    </td></tr></table>
+    <footnote style="font-size:tiny">
+        “Fiesta” Han et al (IROS 2019),
+        Gropp et al (ICML 2020)
+    </footnote>
+    <cite data-key="Long et al (RAL 2022)"></cite>
+</section>
+
+<section>
+    <h2>Better math</h2>
+    <img data-src="media/kehan-2022/scary-math-prob.png" />
+</section>
+
+<section>
+    <h2>Better Simulation: PyBullet </h2>
+    <img height="500px" data-src="./media/kehan-2022/PyBullet.png" />
+    <cite data-key="Long et al (RAL 2022)"></cite>
+</section>
+
+<section>
+    <h2>Results</h2>
+
+    <table><tr><td class="img-row">
+    <img height="300px" data-src="./media/kehan-2022/results-vis.png" />
+    <img height="180px" data-src="./media/kehan-2022/results-table2.jpg" />
+    </td></tr></table>
+    <cite data-key="Long et al (RAL 2022)"></cite>
+</section>
+
+<section>
+    <h2>Sample trajectories</h2>
+
+    <table><tr><td class="img-row">
+        <img height="200px" data-src="./media/kehan-2022/results-sample-traj1.png" />
+        <img height="200px" data-src="./media/kehan-2022/results-sample-traj2.png" />
+        <img height="200px" data-src="./media/kehan-2022/results-sample-traj3.png" />
+    </td></tr></table>
+    <cite data-key="Long et al (RAL 2022)"></cite>
+</section>
+
+<section>
+    <h2>Take away</h2>
+    <ul>
+        <li >
+            Bayesian learning enables uncertainty-awareness
+        </li>
+        <li class="control">
+            Uncertainty-aware controller can be formulated as SOCP controller
+        </li>
+    </ul>
+    <aside class="notes" data-markdown >
+        If you want to remember one-thing from the talk then I want you to remember this.
+
+        If you need measureable safety guarantees for your stochastic system.
+        There exists a paper out there that provides a way to convert
+        Exponential CBFs into quadratic constraints.
+    </aside>
+</section>
+
+<section>
+    <h2 id="safety-fut-work">Future work</h2>
+    <div style="position:relative;margin:auto;display:inline-block;left:2%">
+        <div class="" style="position:relative; top:-50px" >
+            <object type="image/svg+xml"
+                    id="safety-levels-fut"
+                    style="height:700px"
+                    data-src="./media/safety-levels.svg"
+                    onload="show_on_svgload('safety-levels-fut', 'safety-levels')"
+            >
+            </object>
+        </div>
+    </div>
+</section>
+
+<section id="other-work-video" >
+    <h2>Other work</h2>
     <div style="position:relative;margin:auto;display:inline-block;left:2%">
         <style>
          .div-row-stack div {
@@ -773,1463 +2279,6 @@
 </section>
 
 
-
-
-<section id="why-learning">
-    <div class="r-stack">
-    <h2 class="fragment fade-out">Why learning?</h2>
-    <h2 class="fragment">Need robots that learn and adapt</h2>
-    </div>
-    <table><tr>
-        <th style="text-align:center">So far</th>
-        <th style="text-align:center"
-            data-fragment-index="0"
-            class="fragment"
-        >Next era</th>
-    </tr><tr class="img-row">
-            <td>
-                <img data-src="./media/industrial-robots.jpeg" height="300" />
-            </td>
-            <td class="fragment" data-fragment-index="0">
-                <img
-                     data-src="./media/delivery-robots.jpeg"
-                     height="100" />
-                <img
-                     data-src="./media/cleaning-robots.jpeg"
-                     height="100" />
-                <img
-                     data-src="./media/drone-delivery.webp"
-                     height="100" />
-                <img
-                     data-src="./media/autonomous-driving.webp"
-                     height="100" />
-                <img data-src="./media/human-robot-collaboration.jpeg"
-                     height="100"/>
-            </td>
-    </tr>
-    </table>
-
-</section>
-
-<section id="why-ml-control-rob"  data-visibility="hidden">
-    <h2>Robotics and Learning</h2>
-    <aside class="notes" data-markdown>
-        Applications:
-        - Industrial robots
-        - Corobots
-        - Construction
-        - Agricultural ()
-        - Medical (Elderly care)
-        - Home/Domestic (Roomba,  lawn mowers, )
-        - Disastor recovery (nuclear facility shutdown)
-        - Autonomous cars
-
-        Problems:
-        - Power source ()
-        - Actuation (motors, hydraulic etc)
-        - Sensing (vision, lidar, radar, ultrasonics, touch, speech etc)
-        - Manipulation (grippers, suction, full human hand)
-        - Navigation (flying, n-wheel (n=1, ..., 6))
-        - Bipedal
-        - Human-robot interaction
-        - Controls
-
-    </aside>
-</section>
-
-<section id="need-of-maps" >
-  <div style="position:relative" >
-    <h2>Learning applied to autonomous cars</h2>
-    <div  >
-        <h3 style="">Google trends for 'Self-driving cars'</h3>
-        <img  style=""
-             src="./media/2010-2022-self-driving-car-trends.png" style="height:200px" />
-    </div>
-    <img class="fragment" style="position:absolute;left:05%;top:10%;transform: rotate(-10deg);height:100px"
-        src="./media/2012-calif-auto-legal.png"  />
-    <img class="fragment" style="position:absolute;left:40%;top:10%;transform: rotate(10deg);height:100px"
-        src="./media/2012-300m-google-deemed-ready.png" />
-    <img class="fragment" style="position:absolute;left:60%;top:10%;transform: rotate(0deg);height:100px"
-        src="./media/2014-tc-auto-closer.png"  />
-    <img class="fragment" style="position:absolute;left:05%;top:30%;transform: rotate(0deg);height:100px"
-        src="./media/2015-tesla-3-years.png"  />
-    <img class="fragment" style="position:absolute;left:05%;top:45%;transform: rotate(-10deg);height:100px"
-        src="./media/2013-tesla-2016.png"  />
-
-    <img class="fragment" style="position:absolute;left:35%;top:45%;transform: rotate(10deg);height:100px"
-        src="./media/2022-self-driving-austin.png" />
-    <img class="fragment" style="position:absolute;left:20%;top:60%;transform: rotate(00deg);height:080px"
-        src="./media/2022-self-driving-not-far-away.png"  />
-    <img class="fragment" style="position:absolute;left:20%;top:75%;transform: rotate(00deg);height:120px"
-        src="./media/2022-self-driving-not-far-away.png"  />
-    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(10deg);height:400px"
-         src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
-
-    <img class="fragment" style="position:absolute;left:8%;top:19%;transform: rotate(-10deg);height:400px"
-         src="./media/uber-crash.jpeg"
-    />
-  </div>
-  <aside class="notes" data-markdown>
-    - While talk about navigation we cannot ignore self-driving cars.
-    - Self-driving cars have been getting a lot of attention from public, media
-      and entrepreneurs.
-    - Self-driving cars have covered millions of miles.
-    - States have been legalizing self-driving cars.
-    - The predictions of self-driving cars have been getting closer.
-    - However, what we have got are delayed demos and bad news.
-    - Learning algorithms may have beaten humans at Go, but for driving I still
-      trust humans.
-  </aside>
-</section>
-
-<section>
-    <h2> Learning </h2>
-    <table><tr><td class="img-row">
-        <img style="height:220px" class="fragment" data-src="./media/alpha-go-le-sedol.jpg" />
-        <span style="width:85px;display:inline-block"> &nbsp; </span>
-        <img style="height:220px" class="fragment" data-src="./media/protein-folding.png" />
-
-    </td></tr>
-    <tr><td class="img-row">
-        <img style="height:220px" class="fragment" data-src="./media/dall-e.png" />
-        <span class="fragment">
-            <video
-                class="fragment-play"
-                style="height:220px"
-                loop="true"
-                muted="True"
-                currentTime="60"
-                height="245"
-            >
-                <source type="video/mp4" data-src="media/rubiks-cube.mp4#t=30,45"/>
-            </video>
-        </span>
-    </td></tr></table>
-</section>
-
-
-
-<section>
-    <h2>Why?</h2>
-    <div style="position:relative;height:400px">
-        <img style="position:absolute;left:02%;height:250px" src="./media/alpha-go-le-sedol.jpg" />
-        <img style="position:absolute;right:2%;height:250px"
-             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
-    </div>
-</section>
-
-<section>
-    <h2 >Data brings uncertainty.</h2>
-    <img data-src="./media/data-uncertainity.png" />
-    <h2 class="fragment">How to handle uncertainty <b>safely</b>?</h2>
-    <aside class="notes">
-        1. We can take two lessons from this experience.
-    </aside>
-</section>
-
-<section id="kinds-of-safety" >
-<h2 id="different-kinds-of-safety">Safety</h2>
-    <div style="position:relative;margin:auto;display:inline-block;left:2%">
-        <div class="" style="position:relative; top:-50px" >
-            <object type="image/svg+xml"
-                    id="safety-levels"
-                    style="height:700px"
-                    data-src="./media/safety-levels.svg"
-            >
-            </object>
-        </div>
-        <div id="safety-levels-dummy"
-             class="dummy-to-svg-map"
-             mapped-svg="safety-levels"
-        >
-          <span id="safety-levels-dummy-1" class="fragment"
-                svg-ele-in-ids="safety-levels"
-          ></span>
-        </div>
-    </div>
-</section>
-
-<section id="todays focus">
-    <h2>Safe control while learning</h2>
-    <div style="position:relative;width:100%">
-        <img style="vertical-align:middle;" src="./media/motivation-fig.svg" />
-        <div style="display:inline-block; vertical-align:middle; list-style: none; font-size: 80%;text-align: left; padding: 50px">
-            <h5 class="fragment">Given:</h5>
-            <ul class="fragment">
-            <li>Map and localization</li>
-            <li>Desired trajectory as a plan</li>
-            <li>Unsafe regions</li>
-            </ul>
-            <h5 class="fragment">Problem 1:</h5>
-            <ul class="fragment">
-                <li>Learn uncertainty aware robot system dynamics</li>
-            </ul>
-            <h5 class="fragment">Problem 2:</h5>
-            <ul class="fragment"><li>
-                Follow trajectory avoiding unsafe actions
-            </li>
-            </ul>
-        </div>
-    </div>
-</section>
-
-<section id="why-gp">
-    <h2>How to learn dynamics?</h2>
-    <ul>
-        <li class="fragment">
-            Maximum Likelihood models.
-            <ul> <li>Koopman operators
-                ( Mamakoukas et al (2020) )
-            </li>
-            <li >Model based reinforcement Learning (  Wang et al  (2019) )
-            </li>
-            </ul>
-       <li class="fragment">
-           Bayesian methods
-           <ul>
-               <li >Ensemble neural networks
-                   ( Pearce et al (2018) )
-               </li>
-               <li >Dropout neural networks
-                   ( Gal and Ghahramani (2016) )
-               </li >
-               <li >Probabilistic Backpropagation
-                   ( Hernández-Lobato and Adams (2015) )
-               </li >
-               <li >Gaussian Processes (Rasmussen (2003))
-               </li>
-           </ul>
-    </ul>
-</section>
-
-<section>
-    <h2>Gaussian Processes</h2>
-    <table><tr><td style="vertical-align:top" class="fragment">
-        <img 
-            style="width:500px" data-src="./media/gp-prior.png" />
-        <footnote>Image source: https://peterroelants.github.io/</footnote>
-    </td>
-    <td style="vertical-align:top;font-size: smaller">
-        <ul>
-            <li class="fragment" >
-                \[
-                \begin{bmatrix}
-                f_1
-                \\
-                \vdots \\
-                f_n
-                \end{bmatrix}
-                \sim \calN\left(
-                \begin{bmatrix}
-                \mu_1 \\ \vdots \\ \mu_n
-                \end{bmatrix},
-
-                \begin{bmatrix}
-                \sigma_{1,1} & \dots & \sigma_{1,n} \\
-                \vdots & \dots & \vdots \\
-                \sigma_{n,1} & \dots & \sigma_{n,n}
-                \end{bmatrix}
-                \right)
-                \]
-            </li><li class="fragment" >
-                \[
-                \begin{bmatrix}
-                f(\bfx_1)
-                \\
-                \vdots \\
-                f(\bfx_n)
-                \end{bmatrix}
-                \sim \calN\left(
-                \begin{bmatrix}
-                \mu(\bfx_1) \\ \vdots \\ \mu(\bfx_n)
-                \end{bmatrix},
-                \begin{bmatrix}
-                \sigma(\bfx_1,\bfx_1) & \dots & \sigma(\bfx_1,\bfx_n) \\
-                \vdots & \dots & \vdots \\
-                \sigma(\bfx_n,\bfx_1) & \dots & \sigma(\bfx_n, \bfx_n)
-                \end{bmatrix}
-                \right)
-                \]
-            </li>
-            <li class="fragment" >
-                \[
-                f \sim \GP(\mu, \sigma)
-                \]
-            </li>
-            <li class="fragment" >
-                \[
-                f(\bfx^*) | \{ f(\bfx_1) \dots  f(\bfx_n) \}
-                \sim \N( \mu_{*|n}(\bfx^*), \sigma_{*|n}(\bfx^*) )
-                \]
-            </li>
-        </ul>
-
-    </td>
-    </tr></table>
-</section>
-
-<section id="Problem formulation">
-    <h2>Problem formulation</h2>
-    <div style="position:relative;width:100%">
-        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
-        <ul style="display:inline-block; vertical-align:middle; list-style: none">
-            <li class="fragment">
-                \(\bfx \in \bbR^n \) is the state
-            </li>
-            <li class="fragment">
-                \(\bfu \in \bbR^m \) is the control signal
-            </li>
-            <li  class="r-stack">
-                <div class="fragment current-visible">
-                        \begin{align}
-                        \label{eq:system_dyanmics}
-                    \dot{\bfx} = f(\bfx) + g(\bfx)\bfu
-                    \end{align}
-                </div>
-                <div class="fragment">
-                    \begin{align}
-                    \dot{\bfx} = \begin{bmatrix} f(\bfx) & g(\bfx)\end{bmatrix} \begin{bmatrix}1\\\bfu\end{bmatrix} =: F(\bfx) \ctrlaff
-                    \end{align}
-                </div>
-            </li>
-            <li class="r-stack">
-                <div class="fragment current-visible">
-                    \[
-                    \vect(F(\bfx)) = \begin{bmatrix} f(\bfx) \\ g_{:,1}(\bfx) \\ \vdots \\ g_{:, m}(\bfx)
-                    \end{bmatrix}
-                    \]
-                </div>
-                <div class="fragment">
-                \[
-                \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
-                \]
-                </div>
-            </li>
-            <li style="position:relative;height:125px">
-                <div class="fragment " style="position:absolute;">
-                    \begin{align}
-                    \min_{\bfu \in \mathcal{U}}&
-                    \|\bfR(\bfx) (\bfu - \pi_\epsilon(\bfx)) \|_2^2
-                    \\
-                    \qquad\text{s.t.}&~~\bbP\bigl(
-                    \text{ Safety constraint }
-                    \mid \bfx_k,\bfu
-                    \bigr) \ge \tilde{p}_k,
-                    \end{align}
-                </div>
-                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
-                controller.</footnote-->
-            </li>
-        </ul>
-    </div>
-    <aside class="notes" data-markdown>
-        Consider a robot tasked to cross a narrow bridge. In the scenario,
-        the robot dynamics are not known with certainity, we want the robot to
-        learn about its own dynamics to the point that it is safe to cross the
-        bridge with a desired probability.
-
-        Fragment 1:
-        Specifically, we consider a control-affine system. And we write it in in
-        a Linear-form using homogeneous coordinates. We denote homogeneous
-        coordinates with an underline.
-
-        Fragment 2:
-        We assume that state-dependent part of the dynamics, capital F of x, is
-        a Gaussian process whose mean and uncertainty could be estimated.
-
-        Fragment 3:
-        We want to formulate a controller that minimizes task cost function
-        subject to the satisfaction of safety condition with a given probability
-        \(\tilde{p}_k \).
-
-        A specific example of that would be to have an epsilon greedy unsafe
-        controller. The safe controller will closely follow the unsafe controller
-        constrained by safety. The epsilon greedy parts allows the robot to take
-        random actions so that it can reduce the uncertainty of its dynamics.
-    </aside>
-</section>
-
-<section id="Problem 1">
-    <h2>Problem 1</h2>
-    <div style="position:relative;width:100%">
-        <!-- -  img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" /-->
-        <ul style="display:inline-block; vertical-align:middle; list-style: none">
-            <li class="fragment">
-                \begin{align}
-                \dot{\bfx} =  F(\bfx) \ctrlaff
-                \end{align}
-            </li>
-            <li class="fragment">
-                \[
-                \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
-                \]
-            </li>
-            <li class="fragment">
-                \[\StDat_{1:k} \triangleq [\bfx(t_1), \dots, \bfx(t_k)]\]
-            </li>
-            <li class="fragment">
-                \[\bfU_{1:k} \triangleq [\bfu(t_1), \dots, \bfu(t_k)]\]
-
-            </li>
-            <li class="fragment">
-                \[
-                \StDtDat_{1:k} \triangleq [\dot{\bfx}(t_1), \dots, \dot{\bfx}(t_k)]
-                \]
-            </li>
-            <li style="position:relative;height:125px">
-                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
-                    Compute the posterior distribution \(\calG\calP(\vect(\bfM_k(\bfx)), \bfK_k(\bfx,\bfx'))\) of \(\vect(F(\bfx)) \mid (\StDat_{1:k}, \bfU_{1:k}, \StDtDat_{1:k})\).
-                </div>
-                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
-                controller.</footnote-->
-            </li>
-        </ul>
-    </div>
-</section>
-
-<section id="CBF">
-    <h2>Control Barrier Functions</h2>
-
-    <div style="position:relative;width:100%">
-    <div class="" style="display:inline-block" >
-        <object type="image/svg+xml"
-                id="cbf-layered-svg"
-                style="width:300px"
-                data-src="./media/cbf-layered.svg"
-                onload="show_on_svgload('cbf-layered-svg', 'base')"
-        >
-        </object>
-    </div>
-    <ul class="dotted" style="display:inline-block; vertical-align:middle; list-style: none"
-        mapped-svg="cbf-layered-svg"
-        class="dummy-to-svg-map"
-        id="cbf-layered-svg-dummy"
-    >
-        <li>
-            For differentiable \( h(\bfx) \),
-            <br/>
-            safe set is \( \calC = \{ \bfx \in \calX : h(\bfx) > 0 \} \)
-        </li>
-        <li class="fragment"
-            svg-ele-out-ids=""
-        svg-ele-in-ids="gradh">
-            Assume \( \grad_\bfx h(\bfx) \ne 0 \quad \forall  x \in \partial \calC \)
-        </li>
-        <li class="fragment"
-        >
-            Assume system starts in safe state \( \bfx(0) \in \calC \)
-        </li>
-        <li class="fragment"
-            svg-ele-in-ids="doth"
-            svg-ele-out-ids="gradh"
-        >
-            <p> System stays safe iff</p>
-            <div class="r-stack">
-            <div class="fragment current-visible">
-            \[
-                \dot{h}(\bfx) \ge - \gamma h(\bfx)
-            \]
-            </div>
-            <div class="fragment current-visible">
-                \[
-                [\grad_\bfx h(\bfx)]^\top \dot{\bfx} \ge - \gamma  h(\bfx)
-                \]
-            </div>
-            <div class="fragment">
-                \[
-                [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff \ge - \gamma h(\bfx)
-                \]
-            </div>
-            </div>
-        </li>
-        <li class="fragment" style="padding:5px;border: 2px solid #ff2c2d">
-            Ames et al (ECC 2019):
-            \begin{multline}
-            \text{ System stays safe } \Leftrightarrow~~\exists~\bfu = \pi(\bfx)~~\text{s.t.}\\
-            \mbox{CBC}(\bfx,\bfu) := [\grad_\bfx h(\bfx)]^\top F(\bfx)\ctrlaff + \gamma h(\bfx)  \ge 0 \;~ \forall \bfx \in \calX.
-            \end{multline}
-        </li>
-    </ul>
-    </div>
-    <aside class="notes" data-markdow>
-        Recall the motivating example. We define a safe region C by a
-        differentiable function function h of x which is greater than 0 inside
-        the safe region.
-
-        We also assume that the gradient of h of x is non-zero at the boundary of set C.
-
-        Then a theorem from Ames et al says that if the system starts from safe
-        state then it stays in safe state if time derivative of h of x is
-        greater than alpha of h of x.
-
-        Define alpha as a function that belongs to Kappa infinity class, that it
-        is an increasing function that maps a bounded input to zero and infinity.
-    </aside>
-    <cite data-key="Ames et al (ECC 2019)"></cite>
-</section>
-
-
-<section id="Problem 2">
-    <h2>Problem 2</h2>
-    <div style="position:relative;width:100%">
-        <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/motivation-fig.svg" />
-        <ul style="display:inline-block; vertical-align:middle; list-style: none">
-            <li class="fragment">
-                \begin{align}
-                \dot{\bfx} =  F(\bfx) \ctrlaff
-                \end{align}
-            </li>
-            <li class="fragment">
-                \[
-                \vect(F(\bfx)) \sim \GP(\vect(\bfM_k(.)), \bfK_k(.,.))
-                \]
-            </li>
-            <li style="position:relative;height:125px">
-                <div class="fragment" style="position:absolute;padding:5px;border: 2px solid #ff2c2d">
-                    Find \(\bfu_k\) and \(\tau_k\) such that for \(\bfu(t) = \bfu_k\)
-                    \[
-                    \mathbb{P}(\mbox{CBC}(\bfx(t),\bfu_k) \ge 0) \ge p_k
-                    \]
-                    for all \( t \in [t_k,t_k+\tau_k) \)
-                </div>
-                <!-- footnote>\( \pi_\epsilon(.) \) is an \(\epsilon\)-greedy unsafe
-                controller.</footnote-->
-            </li>
-        </ul>
-    </div>
-</section>
-
-<section
-    data-visibility="hidden"
-    chapter-progress-next="True"
-    class="center"
->
-    <h2>Approach</h2>
-    <ul class="dotted">
-        <li class="fragment highlight-red">
-            Estimate posterior distribution over \(F(\bfx)\)
-        </li>
-        <li>
-            Propagate uncertainty to the Safety condition.
-        </li>
-        <li>
-            Extension to continuous time using Lipschitz continuity assumptions.
-        </li>
-        <li>
-            Extension to higher relative degree systems.
-        </li>
-    </ul>
-    <!--  li class="fragment">
-         \(
-         \mbox{CBC}(\bfx, \bfu) := \Lie_{f}h(\bfx) + \Lie_{g}h(\bfx)\bfu + \alpha(h(\bfx))
-         \)
-         </li -->
-    <aside class="notes" data-markdown>
-        We will approach this problem in five broad steps.
-        The estimation of F of x with uncertainty using Gaussian Processes.
-        Note that Gaussian Processes are just one-way of estimating F of x. We
-        can also uses Bayesian Neural Networks based on Esembles, Probabilistic
-        Backpropagation and dropouts.
-
-        Then we will focus on propagating the estimated uncertainty to the
-        safety condition.
-
-        And in the end we will talk about extension to higher relative
-        degree systems.
-    </aside>
-
-</section>
-
-
-<section id="mvgp">
-    <div style="font-size:80%; text-align:left; width: 500px; margin:auto">
-    <div >
-        \[
-        \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfK_0(.,.))
-        \]
-    </div>
-        <div class="fragment" >
-            Decoupled GPs: Learn each element of \(F(\bfx)\) independently:
-            \[
-            \bfK_0(\bfx, \bfx') = \diag([\kappa(\bfx, \bfx'), \dots ])
-            \]
-            <span class="fragment" style="color:red"> No correlation across dimensions, training data still correlated.</span>
-        </div>
-        <div class="fragment" >
-            Corregionalization models: Alvarez et al (FTML 2012):
-            \[
-            \bfK_0(\bfx, \bfx') = \kappa(\bfx, \bfx') \boldsymbol{\Sigma}
-            \]
-            <cite data-key="Alvarez et al (FTML 2012)"></cite>
-            <span class="fragment" style="color:red"> \(\Sigma \in \R^{n(1+m) \times (1+m)n}\) has too many parameters to learn</span>
-        </div>
-        <div class="fragment " style="position:relative;display:inline-block;">
-            Matrix Variate Gaussian: Inspired from Sun et al (AISTATS 2017)
-            <div class="fragment current-visible" style="position:absolute">
-                \[
-                F \sim \mathcal{MVG}(\bfM, \bfA, \bfB) \Leftrightarrow
-                \vect(F) \sim \calN(\vect(M), \bfB \otimes \bfA)
-                \]
-            </div>
-            <div class="fragment">
-                \[
-            \bfK_0(\bfx, \bfx') = \bfB_0(\bfx, \bfx') \otimes \bfA
-            \]
-            <cite data-key="Sun et al, AISTATS 2017"></cite>
-            <cite data-key="Louizos and Welling (ICML 2016)"></cite>
-            </div>
-        </div>
-        <br/>
-        <div class="fragment"
-             style="display:inline-block;border: 2px solid red; text-align: left">
-            Factorization assumption:
-            \[
-            \vect(F(\bfx)) \sim \GP(\vect(\bfM_0(.)), \bfB_0(.,.) \otimes \bfA)
-            \]
-        </div>
-    </div>
-    <aside class="notes">
-        Directly learning the vectorized form of Gaussian Process in this form
-        is hard to ensure positive definiteness of each output. That's why
-        simplifying assumptions are used.
-
-        For example, Alvarez et al reviewed a number of multi-output Gaussian
-        processes that decompose the kernel into a scalar kernel that only
-        depends on the input and an input independent matrix that captures the
-        covariance between output components. However, this proposition is for
-        vector-valued Gaussian processes and in our case the matrix Sigma will
-        end up scaling poorly with the state dimension and control vector dimension.
-
-        Another option from Sun et al considers a Matrix Variate Gaussian
-        distribution, where the covariance between rows (B) and columns (A) is
-        considered by separately. In vectorized form the covariance is just the
-        kronecker product of row and column covariance matrices.
-
-        This is the assumption that we use for Matrix Variate Gaussian process
-        and factorize kernel K_0 into column covariance matrix A and row
-        covariance matrix B. By assuming that only the row covariance matrix
-        depends upon input, we will see that we get a nice structure in the
-        inference result.
-    </aside>
-</section>
-
-<section>
-    <h2>Matrix variate Gaussian Process</h2>
-    <div >
-        \(
-        \newcommand{\prl}[1]{\left(#1\right)}
-        \newcommand{\brl}[1]{\left[#1\right]}
-        \newcommand{\crl}[1]{\left\{#1\right\}}
-        \)
-        \begin{equation}
-        \begin{aligned}
-        \vect(F(\bfx)) &\sim \mathcal{GP}(\vect(\bfM_0(\bfx)), \bfB_0(\bfx,\bfx') \otimes \bfA)
-        %F(\bfx)\underline{\bfu} &\sim \mathcal{GP}(\bfM_0(\bfx)\underline{\bfu}, \underline{\bfu}^\top \bfB_0(\bfx,\bfx') \underline{\bfu}' \otimes \bfA)
-        \end{aligned}
-        \end{equation}
-    </div>
-    <div class="fragment">
-        Given data \(\StDat_{1:k}\),
-        \(\StDtDat_{1:k} \),
-        and \( \underline{\boldsymbol{\mathcal{U}}}_{1:k} \).
-    </div>
-    <div class="fragment">
-        \begin{equation*}
-        \newcommand{\ubcalU}{\underline{\boldsymbol{\calU}}}
-        \newcommand{\bcalM}{\boldsymbol{\calM}}
-        \newcommand{\bcalB}{\boldsymbol{\calB}}
-        \newcommand{\bcalC}{\boldsymbol{\calC}}
-        \begin{aligned}
-        &\bfM_k(\bfx) \triangleq \bfM_0(\bfx) +
-        \left( \dot{\bfX}_{1:k} - \bcalM_{1:k}\ubcalU_{1:k}\right) \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
-        \\
-        &\bfB_k(\bfx,\bfx') \triangleq \bfB_0(\bfx,\bfx') 
-        -
-        \bcalB_{1:k}(\bfx)\ubcalU_{1:k} \left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx')\right)^\dagger
-        \\
-        &\left(\ubcalU_{1:k}\bcalB_{1:k}(\bfx)\right)^\dagger
-        \triangleq
-        \left(\ubcalU_{1:k}^\top\bcalB_{1:k}^{1:k}\ubcalU_{1:k} + \sigma^2 \bfI_k\right)^{-1}\ubcalU_{1:k}^\top\bcalB_{1:k}^\top(\bfx).
-        \label{eq:mvg-posterior}
-        \end{aligned}
-        \end{equation*}
-    </div>
-    <div class="fragment " >
-        <div style="border: 2px solid red; display:inline-block; text-align: left; padding: 5px">
-        Inference on MVGP:
-        \begin{align}
-            \vect(F_k(\bfx_*)) &\sim
-            \mathcal{GP}(\vect(\bfM_k(\bfx_*)), \; \bfB_k(\bfx_*,\bfx_*') \otimes \bfA).
-            \\
-            F_k(\bfx_*)\underline{\bfu}_* &\sim
-            \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \;
-            \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
-            \end{align}
-        </div>
-    </div>
-    <aside class="notes" data-markdown>
-        Next we describe how to do inference with the Matrix Variate Gaussian Process.
-
-        Defining some notation regarding collected data. We collect trajectories
-        with state, control and state derivative. If the state derivative is not
-        available, we estimate it numerically. Note while most X data matrices
-        are just row stacking of state vectors. The control data matrix is a
-        diagonal matrix in homogeneous coordinates of control vector.
-
-        Using some algebra using schur complement and typical Gaussian
-        conditional distribution, we can compute mean matrix M_k and row
-        covariance matrix B_k.
-
-        Finally we get the inference result for Mean and variance of Matrix
-        variate Gaussian process. Note that due to the choice of only row
-        covariance matrix B depending upon input x, we get the same GP structure
-        as we started with.
-    </aside>
-</section>
-
-<section >
-    <h2>Learning Experiments</h2>
-    <div class="r-stack">
-        <div class="fragment current-visible">
-    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
-
-    <ul class="dotted" style="display:inline-block; vertical-align: middle">
-        <li >
-            \begin{align}
-            \begin{bmatrix}
-            \dot{\theta}
-            \\
-            \dot{\omega}
-            \end{bmatrix}
-            = \underbrace{\begin{bmatrix}
-            \omega
-            \\
-            -\frac{g}{l} \sin(\theta)
-            \end{bmatrix}}_{f(\bfx)}
-            +
-            \underbrace{\begin{bmatrix}
-            0 \\  \frac{1}{ml}
-            \end{bmatrix}}_{g(\bfx)}
-            u
-            \end{align}
-        </li>
-    </ul>
-    <br/>
-    
-        </div>
-    <img class="fragment " data-src="media/bayes_cbf_fig/learn_matrix_vector_v1.5.2-2-g31b30e1/learned_f_g_vs_true_f_g_mat_vec_ind.svg" />
-    </div>
-    <aside class="notes" data-markdown >
-        We test our learning framework on the pendulum example that we described earlier.
-
-        We plot different different dimensions of true and learned f of x and g
-        of x. The top row contains the true dynamics plotted with color across
-        theta and omega. The bottom row contains learned dynamics with zero mean
-        and RBF kernel, matrix-variate gaussian processes. The data has been
-        learned with 100 samples.
-
-        You can see that f of x and g of x are learned correctly within one decimal point
-    </aside>
-</section>
-
-<section id="learning-exp-quant">
-    <h2> Learning Experiments</h2>
-    <img src="media/bayes_cbf_fig/speed_test_matrix_vector_v1.6.1/speed_test_mat_vec_ind.svg"/>
-</section>
-
-<section
-    chapter-progress-next="True"
-    class="center"
-    data-visibility="hidden"
->
-    <h2>Approach</h2>
-    <ul class="dotted">
-        <li class="fragment highlight-current-red" >
-            Estimate \(F(\bfx)\)  with Matrix-Variate Gaussian Process
-        </li>
-        <li class="fragment highlight-red" >
-            Propagate uncertainty to the Safety condition
-        </li>
-        <li>
-            Extension to continuous time using Lipschitz continuity assumptions.
-        </li>
-        <li>
-            Extension to higher relative degree systems.
-        </li>
-    </ul>
-    <aside class="notes" data-markdown>
-        This completes our contribution the estimation of F of x. Next we focus on
-        how to propagate uncertainty to the Safety condition.
-        For safety condition, we use control barrier functions.
-    </aside>
-</section>
-
-<section>
-    <h2>Uncertainty propagation to CBC</h2>
-    <ul  >
-    <li class="fragment">
-        \[
-        \mbox{CBC}(\bfx, \bfu)= \grad_\bfx h(\bfx)F_k(\bfx)\ctrlaff + \alpha(h(\bfx))
-        \]
-    </li>
-    <li class="fragment ">
-        Recall:
-        \begin{equation}
-        F_k(\bfx_*)\underline{\bfu}_* \sim  \mathcal{GP}(\bfM_k(\bfx_*)\underline{\bfu}_*, \underline{\bfu}_*^\top\bfB_k(\bfx_*,\bfx_*')\underline{\bfu}_*\otimes\bfA).
-        \end{equation}
-    </li>
-    <li class="fragment" style="border:2px solid red; padding:5px">
-        Lemma :
-        \[
-        \mbox{CBC}(\bfx, \bfu) \sim \GP(\E[\mbox{CBC}], \Var(\mbox{CBC}))
-        \]
-        \begin{align}
-        \label{eq:parametofpi5543}
-        \E[\mbox{CBC}_k](\bfx, \bfu) &= \nabla_\bfx h(\bfx)^\top \bfM_k(\bfx)\underline{\bfu} + \alpha(h(\bfx)),\\
-        \Var[\mbox{CBC}_k](\bfx, \bfx'; \bfu) &=  \underline{\bfu}^\top\bfB_k(\bfx,\bfx')\underline{\bfu} \nabla_\bfx h(\bfx)^{\top}\bfA\nabla_\bfx h(\bfx')
-        \end{align}
-        Note: mean and variance are Affine and Quadratic in \( \bfu \) respectively.
-    </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        In the last slide we defined CBC as this. It can be written in terms of
-        system dynamics like this. Note that this is affine in the only random
-        term which if F of x. Since F of x is Gaussian hence CBC is also gaussian.
-
-        Also recall the notation for mean and variance of F of x u.
-
-        Using this information we can write the expression for mean and variance of CBC.
-        Note that CBC is GP only in x not in u. Also note that mean is affine in
-        u and the variance is quadratic in u.
-    </aside>
-</section>
-
-<section>
-    <h2>Deterministic condition for controller</h2>
-    <ul>
-        <li style="position:relative;height:125px;width:400px">
-            <div class="fragment current-visible" style="position:absolute;">
-                \begin{align}
-                \min_{\bfu_k \in \mathcal{U}}&
-                \text{ Task cost function }
-                \\
-                \qquad\text{s.t.}&~~\bbP\bigl(
-                \text{ Safety constraint }
-                \mid \bfx_k,\bfu_k
-                \bigr) \ge \tilde{p}_k,
-                \end{align}
-            </div>
-            <div class="fragment" style="position:absolute;">
-                \begin{align}
-                \min_{\bfu_k \in \mathcal{U}}&
-                \|\bfR(\bfx)(\bfu_k - \pi_\epsilon(\bfx_k)) \|_2^2
-                \\
-                \qquad\text{s.t.}&~~\bbP\bigl(
-                \style{color:red}{\mbox{CBC}(\bfx_k, \bfu_k) > \zeta > 0}
-                \mid \bfx_k,\bfu_k
-                \bigr) \ge \tilde{p}_k,
-                \end{align}
-            </div>
-        </li>
-        <!-- li class="fragment" >
-            \[
-            \newcommand{\CBC}{\mbox{CBC}}
-            \bbP\bigl(\mbox{CBC}(\bfx_k, \bfu_k) > \zeta \mid \bfx_k,\bfu_k \bigr) \ge \tilde{p}_k
-            \\
-            \Leftrightarrow \frac{1}{2}-\frac{1}{2} \erf\left(
-            \frac{\zeta - \E[\CBC] }{\sqrt{2\Var(\CBC)}}
-            \right) \ge \tilde{p}_k
-            \]
-            where \( \erf(y) \) is the error function.
-        </li -->
-        <li class="fragment" style="padding:5px; border: 2px solid red">
-            Safe controller (an SOCP):
-            \begin{align}
-            \min_{\bfu_k \in \mathcal{U}}&
-            \|\bfR(\bfx)(\bfu_k - \pi_\epsilon(\bfx_k)) \|_2^2
-            \\
-            \qquad\text{s.t.}\qquad&
-            \cssId{highlight-current-red-1}{\class{fragment}{
-            \E[\CBC] - \zeta \ge \sqrt{2\Var(\CBC)(\erf^{-1}(1-2\tilde{p}_k))^2}
-            }}
-            \end{align}
-        </li>
-        <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
-    </ul>
-    <aside class="notes" data-markdown >
-        Recall the problem formulation. We want to ensure Safety constraint with
-        some high probability.
-
-        Fragment 1: More specifically, we want to ensure the Control Barrier
-        Condition is greater than 0 by some margin zeta.
-
-        Fragment 2: Since we have already shown that Control Barrier Condition
-        is a Gaussian Process, we can analytically compute this probability in
-        terms of mean and variance.
-
-        Fragment 3: After some algebra we can convert the problem formulation
-        into a nice Quadratically constrained Quadratic program with two
-        conditions. Recall that the mean and variance of CBC are Affine and
-        Quadratic in u respectively.
-
-        Fragment 4: The first condition intuitively means that the CBC should be
-        far from zeta by atleast by a term proportional to the standard
-        deviation. The quadratic form of the first condition allows mean to be
-        either side of zeta, but we want it to be greater than zeta which is
-        greater than 0.
-    </aside>
-</section>
-
-<section data-visibility="hidden"
-    class="center"
->
-    <h2>Approach</h2>
-    <ul class="dotted">
-        <li>
-            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
-        </li>
-        <li class="fragment highlight-current-red">
-            Propagate uncertainty to the Control Barrier condition.
-        </li>
-        <li class="fragment highlight-red">
-            Extension to continuous time using Lipschitz continuity assumptions.
-        </li>
-        <li>
-            Extension to higher relative degree systems.
-        </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        Now we have seen how to propagate uncertainty to the Control Barrier
-        condition, we can move on the next step which is to translate the
-        Probabilistic condition to a deterministic one.
-    </aside>
-</section>
-
-
-<section
-    chapter-progress-next="True"
->
-    <h2>Safety beyond triggering times</h2>
-    <ul>
-        <li >
-                So far:
-            \begin{align}
-            \min_{\bfu_k \in \mathcal{U}}&
-            \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
-            \\
-                \qquad\text{s.t.}&~~
-                \bbP\bigl(
-                \mbox{CBC}(\style{color:red}{\bfx_k}, \bfu_k) > \style{color:red}{\zeta}
-            \mid \bfx_k,\bfu_k
-            \bigr) \ge \style{color:red}{\tilde{p}_k},
-            \end{align}
-        </li>
-        <li class="fragment" >
-                Next:
-                \begin{align}
-                \min_{\bfu_k \in \mathcal{U}}&
-                \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
-                \\
-                \qquad\text{s.t.}&~~
-                \bbP\bigl(
-                \mbox{CBC}(\style{color:red}{\bfx(t)}, \bfu_k) > \style{color:red}{0}
-                \mid \bfx_k,\bfu_k
-                \bigr) \ge \style{color:red}{p_k}, \qquad
-                \style{color:red}{\forall t \in [t_k, t_k + \tau_k)}
-                \end{align}
-        </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        So far we have considered the problem only on triggering timesteps.
-        But we need safety at all times.
-
-        We assume zero-order hold and analyze what can we say about safety
-        beyond triggering times. Especially for how long we can assume safety
-        after we have ensured safety triggering time.
-    </aside>
-</section>
-
-<section>
-    <h2>Safety beyond triggering times</h2>
-    <ul>
-        <li class="fragment">
-            Assume Lipschitz continuity of dynamics:
-            \begin{align}
-            \textstyle
-            \label{eq:smoth23}
-            \bbP\left(
-            \sup_{s \in [0, \tau_k)}\|F(\bfx(t_k+s))\ctrlaff_k
-            -F(\bfx(t_k))\ctrlaff_k\| \le L_k \|\bfx(t_k+s)-\bfx_k\|
-            \right) \ge q_k:=1-e^{-b_kL_k}.
-            \end{align}
-            <cite data-key="Srinivas et al. (2009)"></cite>
-        </li>
-        <li class="fragment">
-            Assume Lipschitz continuity of \( \alpha(h(\bfx)) \):
-            \begin{align}
-            \label{htym6!7uytf}
-            |\alpha \circ h(\bfx(t_k+s))-\alpha \circ h(\bfx_k)| 
-            \le L_{\alpha \circ h} \|\bfx(t_k+s)-\bfx_k\|.
-            \end{align}
-        </li>
-        <li class="fragment">
-            \[
-            \sup_{s \in [0, \tau_k)}
-            \| \grad_\bfx h(x(t_k + s)) \| \le \chi_k
-            \]
-        </li>
-    </ul>
-        <div class="fragment" style="padding:5px; border: 2px solid red;text-align:left;margin:20px;font-size:smaller">
-            Theorem:
-            \[
-            \bbP\bigl(
-            \mbox{CBC}(\bfx_k, \bfu_k) > \zeta
-            \mid \bfx_k,\bfu_k
-            \bigr) \ge \tilde{p}_k
-            \quad\Rightarrow\quad
-            \bbP\bigl(
-            \mbox{CBC}(\bfx(t), \bfu_k) > 0
-            \mid \bfx_k,\bfu_k
-            \bigr) \ge p_k, \;
-            \forall t \in [t_k, t_k + \tau_k)
-            \]
-            holds with \( p_k = \tilde{p}_k q_k \) and
-            \(
-            \tau_k \le \frac{1}{L_k}\ln\left(1+\frac{L_k\zeta}{(\chi_kL_k+L_{\alpha \circ h})\|\dot{\bfx}_k\|}\right)
-            \)
-            <cite data-key="Kh<b>Dh</b>FrAt L4DC 2020"></cite>
-        </div>
-    <aside class="notes" data-markdown >
-        Assume stochastic Lipschitz continuity of the dynamics with exponential
-        distribution. This assumption has been made before by Srinivas et al and
-        holds for Gaussian processes with RBF kernels and Mattern kernels.
-
-        Also assume Lipschitz continuity of alpha of h of x. This is true because
-        we already assumed alpha to class Kappa infinity function and h to be
-        differentiable.
-
-        We show that after safety at triggering time with margin
-        zeta ensures safety after the triggering time uptil tau scales with log
-        of the margin zeta.
-    </aside>
-</section>
-
-<section
-    chapter-progress-next="True"
-    class="center"
-    data-visibility="hidden"
->
-    <h2>Approach</h2>
-    <ul class="dotted">
-        <li>
-            Estimate \(F(\bfx)\) with Matrix-Variate Gaussian Process
-        </li>
-        <li>
-            Propagate uncertainty to the Control Barrier condition.
-        </li>
-        <li class="fragment highlight-current-red">
-            Extension to continuous time using Lipschitz continuity assumptions.
-        </li>
-        <li class="fragment highlight-red">
-            Extension to higher relative degree systems.
-        </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        Now we have seen how to extend safety guarantees to untill after
-        triggering time, we focus our attention extending these results to
-        higher relative degree systems.
-    </aside>
-</section>
-
-<section>
-    <h2>Higher relative degree CBFs </h2>
-    <img style="positon:absolute;left:200px;top:200px; vertical-align:middle;" src="./media/pendulum.png" />
-    <ul class="dotted" style="display:inline-block; vertical-align: middle">
-        <li class="fragment">
-            \begin{align}
-            \begin{bmatrix}
-            \dot{\theta}
-            \\
-            \dot{\omega}
-            \end{bmatrix}
-            = \underbrace{\begin{bmatrix}
-            \omega
-            \\
-            -\frac{g}{l} \sin(\theta)
-            \end{bmatrix}}_{f(\bfx)}
-            +
-            \underbrace{\begin{bmatrix}
-            0 \\  \frac{1}{ml}
-            \end{bmatrix}}_{g(\bfx)}
-            u
-            \end{align}
-        </li>
-        <li class="fragment">
-            \begin{align}
-            h\left(\begin{bmatrix}
-            \theta
-            \\
-            \omega
-            \end{bmatrix}
-            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
-            \end{align}
-        </li>
-        <li class="fragment">
-            Note that \( \underbrace{\grad_\bfx h(\bfx) g(\bfx)}_{\Lie_g h(\bfx)} = 0 \)
-        </li>
-    </ul>
-    <div class="fragment" style="font-size:larger">
-        \(  \CBC(\bfx, \bfu) = \underbrace{[\grad_\bfx h(\bfx)]^\top f(\bfx)}_{\Lie_f h(\bfx)}  +   \underbrace{[\grad_\bfx h(\bfx)]^\top g(\bfx)}_{\Lie_g h(\bfx)} \bfu + \alpha(h(\bfx))  \) <br/> is independent of \(\bfu\).
-    </div>
-    <aside class="notes" data-markdown >
-        Even pendulum is a higher relative degree system. To see that consider a
-        pendulum with unsafe region defined as the red region.
-
-        We define the state as theta and omega and the control signal is simply
-        the acceleration signal. Pendulum is an control affine system.
-
-        Next we define the control barrier function h based on the cosine
-        distance from the center of unsafe region theta_c.
-
-        Now note that the Lie derivative of h with respect input-gain term g is 0.
-
-        This leads to a condition where our safety constraints so far are
-        independent of u. This is a well-known problem and Ames et al has proposed
-        exponential CBFs for higher relative degree systems.
-    </aside>
-</section>
-
-<section>
-    <h2>Exponential Control Barrier Functions (ECBF)</h2>
-    <ul>
-        <li >
-            \[
-            \CBCr(\bfx, \bfu) := \Lie_f^{(r)} h(\bfx)
-            +
-
-            \cssId{highlight-current-red-1}{\class{fragment}{
-            \underbrace{
-            \Lie_g \Lie_f^{(r-1)} h(\bfx)
-            }_{\ne 0}
-            }}
-            \bfu + \bfk_\alpha^\top \begin{bmatrix}
-            h(\bfx) \\
-            \Lie_f h(\bfx) \\
-            \vdots \\
-            \Lie_f^{(r-1)} h(\bfx)
-            \end{bmatrix}
-            \]
-            <cite data-key="Ames et al (ECC 2019)"></cite>
-            <cite data-key="Nguyen and Sreenath (ACC 2016)"></cite>
-        </li>
-        <!-- li class="fragment">
-            \( r \ge 1 \) is the relative degree of CBF, \( h(\bfx) \), then
-            \( \Lie_g \Lie_f^{k} h(\bfx) = 0, \; \forall k = \{0, \dots, r-2 \} \)
-            and \( \Lie_g \Lie_f^{(r-1)} h(\bfx) \ne 0 \) and
-        </li -->
-    </ul>
-    <aside class="notes" data-markdown >
-        A Control barrier condition for relative-degree r CBF is defined as this
-        expression. The first two terms of this expression are just rth time
-        derivative of h of x.
-
-        Based on this expression it is easy to understand what relative degree
-        definition should be.
-        The relative degree of a CBF is defined as r greater than 1 such that
-        All the Lie derivatives with respect to g are zero upto r-2 but the last
-        one is non-zero.
-        Alternatively speaking r is the smallest order of control-barrier
-        condition such that CBCr depends upon the contorl u.
-    </aside>
-</section>
-
-<section data-visibility="hidden">
-    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
-    <ul>
-        <li class="fragment">
-            \[
-            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
-            \begin{bmatrix}
-            h(\bfx) &
-            \Lie_f h(\bfx)
-            \end{bmatrix}^\top
-            \]
-        </li>
-        <li class="fragment">
-        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
-    </li><li class="fragment">
-        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
-        <ul class="fragment"><li>
-            If \( p(\bfx) \sim \GP(\mu(\bfx), \kappa(\bfx, \bfx'))\), then
-            <br/>
-            \( \grad_\bfx p(\bfx) \sim \GP(\grad_\bfx \mu(\bfx), H_\bfx \kappa(\bfx, \bfx')) \)
-        </li></ul>
-    </li>
-    </ul>
-</section>
-<section data-visibility="hidden">
-    <h2>Propagating uncertainty to \( \CBCtwo \)</h2>
-    <ul style="font-size:95%">
-        <li class="fragment">
-            \[
-            \CBCtwo(\bfx, \bfu) = [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
-            \begin{bmatrix}
-            h(\bfx) &
-            \Lie_f h(\bfx)
-            \end{bmatrix}^\top
-            \]
-        </li>
-        <li class="fragment">
-        \( \Lie_f h(\bfx) = \grad_x h(\bfx) f(\bfx) \) is a Gaussian process
-    </li><li class="fragment">
-        \( \grad_\bfx \Lie_f h(\bfx) \) is a Gaussian process
-    </li><li class="fragment">
-        \( [\grad_\bfx \Lie_f h(\bfx)]^\top F(\bfx)\ctrlaff \) is a quadratic form of GP (not a GP )
-        <!-- 
-        <ul class="fragment"><li>
-            \(\newcommand{\trc}{\text{tr}}\)
-            If \(p(\bfx)\) and \(q(\bfy)\) are GPs then \(p(\bfx)^\top q(\bfx)\) is also a GP
-            <br/>
-            \begin{multline}
-            p(\bfx)^\top q(\bfx) \sim \GP(\mu_p(\bfx)^\top \mu_q(\bfx) + \trc(\Cov_{p,q}(\bfx, \bfx)), \\
-            2\trc(\Cov_{p,q}(\bfx, \bfx'))^2 )
-            + p(\bfx)^\top \kappa_q(\bfx, \bfx') p(\bfx')
-            \\
-            + q(\bfx)^\top \kappa_p(\bfx, \bfx') q(\bfx')
-            + 2 q(\bfx)^\top \Cov_{p,q}(\bfx, \bfx') p(\bfx')
-            \end{multline}
-            <cite data-key="Seare and Gruber. Linear Models. (Book 1971)"></cite>
-        </li></ul>
-    -->
-
-    </li>
-    <li class="fragment" style="padding:5px; border: 2px solid red;">
-        \( \CBCtwo(\bfx, \bfu) \) is a quadratic form of GP.
-        <br/>
-        \( \E[\CBCtwo](\bfx, \bfu) \) is still affine in \( \bfu \).
-        <br/>
-        \( \Var[\CBCtwo](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
-    </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        Now that we have defined CBCtwo as the safety condition, we want to see
-a        how to propagate uncertainty to CBCtwo.
-
-        We have already seen that Lie derivative of h wrt to f is a gaussian process.
-
-        The gradients of GPs are GPs, hence the gradient of Lie of h of x is also a GP.
-
-        The dot product of this gradient with system dynamics is a quadratic
-        form of two GPs. Now this is not a GP. But its mean and variacne can be
-        computed analyticallly.
-
-        Note that CBCtwo is affine in this term which is again a quadratic form in GP.
-        Without writing the long expressions for the mean and variance of
-        CBCtwo, I want to convey to you two things; that mean and variance of
-        CBCtwo can be computed analytically and the mean and variance of CBCtwo
-        are affine and quadratic in control signal like CBCone.
-
-    </aside>
-</section>
-
-<section>
-    <h2>Extending to \(\CBCr\)</h2>
-    <ul>
-        <li >
-            \[
-            \CBCr(\bfx, \bfu) = [\grad_\bfx \Lie_f^{(r)} h(\bfx)]^\top F(\bfx)\ctrlaff + \bfk_\alpha^\top
-            \begin{bmatrix}
-            h(\bfx) &
-            \Lie_f h(\bfx) & \dots \Lie_f^{(r-1)} h(\bfx)
-            \end{bmatrix}^\top
-            \]
-        </li>
-        <li class="fragment">
-        <img src="./media/computation-graph-cbf-r.png" />
-        </li>
-        <li class="fragment" style="padding:5px; border: 2px solid red;">
-            \( \CBCr(\bfx, \bfu) \) is not a GP
-            <br/>
-            \( \E[\CBCr](\bfx, \bfu) \) is still affine in \( \bfu \).
-            <br/>
-            \( \Var[\CBCr](\bfx, \bfx'; \bfu) \) is still quadratic in \( \bfu \).
-        </li>
-    <li class="fragment">
-        For \( r \ge 3 \), \(\CBCr\) statistics can be estimated by
-        Monte-carlo methods.
-    </li>
-    </ul>
-</section>
-
-<section>
-    <h2>Safe controller using ECBF</h2>
-    <ul><li>
-    \begin{align}
-    \min_{\bfu_k \in \mathcal{U}}&
-    \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
-    \\
-    \qquad\text{s.t.}&~~
-    \bbP\bigl(
-    \CBCr(\bfx_k, \bfu_k) > \zeta
-    \mid \bfx_k,\bfu_k
-    \bigr) \ge \tilde{p}_k
-    \end{align}
-    </li><li class="fragment">
-        Using Cantelli's (Chebyshev's one-sided) inequality
-    </li><li class="fragment" style="padding:5px; border: 2px solid red;">
-        Safe controller (an SOCP)
-        \begin{align}
-        \min_{\bfu_k \in \mathcal{U}}&
-        \|\bfR(\bfx) (\bfu_k - \pi_\epsilon(\bfx_k) \|_2^2
-        \\
-        \qquad\text{s.t.}\qquad
-        &\E[\mbox{CBC}_k^{(r)}]-\zeta \ge \sqrt{\frac{\tilde{p}_k}{1-\tilde{p}_k}\Var[\mbox{CBC}_k^{(r)}]}
-        \end{align}
-    </li></ul>
-    <aside class="notes" data-markdown >
-        To derive a safe controller using ECBFs we use Cantelli's inequality
-        that need only mean and variance of the distribution.
-
-        We again derive a safe controller for aribitrary ordered CBCr as long as
-        mean and variance can be estimated. The good thing is that it is still a
-        Quadratic program.
-    </aside>
-</section>
-
-<section>
-    <h2>Safe controller using ECBF Experiments</h2>
-    <img src="./media/pendulum.png" style="height:150px;display:inline-block; vertical-align:middle" />
-
-    <ul class="dotted" style="display:inline-block; vertical-align: middle">
-        <li >
-            \begin{align}
-            \begin{bmatrix}
-            \dot{\theta}
-            \\
-            \dot{\omega}
-            \end{bmatrix}
-            = \underbrace{\begin{bmatrix}
-            \omega
-            \\
-            -\frac{g}{l} \sin(\theta)
-            \end{bmatrix}}_{f(\bfx)}
-            +
-            \underbrace{\begin{bmatrix}
-            0 \\  \frac{1}{ml}
-            \end{bmatrix}}_{g(\bfx)}
-            u
-            \end{align}
-        </li>
-        <li >
-            \begin{align}
-            h\left(\begin{bmatrix}
-            \theta
-            \\
-            \omega
-            \end{bmatrix}
-            \right) = \cos(\Delta_{col}) - \cos(\theta - \theta_c)
-            \end{align}
-        </li>
-    </ul>
-    <br/>
-    <br/>
-    <img class="fragment "
-         src="./media/bayes_cbf_fig/run_pendulum_control_online_learning_trajectory_160.svg"
-    style="height:287px" />
-    <aside class="notes" data-markdown >
-        We show the behaviour of the pendulum with Safe controller using ECBF.
-
-        We use an exponentially decreasing epsilon-greedy scheme going from 1 to 0.01
-        in 100 steps. Negative control inputs get rejected by the CBF-based
-        constraint, while positive inputs allow the pendulum to bounce back from
-        the unsafe region.
-    </aside>
-</section>
-
-<section>
-    <h2>Ackerman Drive Simulations</h2>
-
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_v1.2.3_animation.gif" 
-         style="height:550px"
-    />
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_mean_cbf_collides_1209-1257_animation.gif"
-         style="height:550px"
-         class="fragment"
-    />
-</section>
-
-<section>
-    <h2>Ackerman Drive Simulations</h2>
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_no_learning_gets_stuck_v1.2.3_animation.gif"
-         height="550"
-    />
-    <img src="https://vikasdhiman.info/Bayesian_CBF/assets/unicycle_move_to_pose_fixed_learning_helps_avoid_getting_stuck_v1.2.3_animation.gif"
-         height="550"
-         class="fragment"
-    />
-</section>
-
-<section>
-    <h2>Take away</h2>
-    <ul>
-        <li >
-            Matrix Variate Gaussian Process enables uncertainty-aware learning
-        </li>
-        <li class="control">
-            Uncertainty aware controller can be formulated as SOCP controller
-        </li>
-    </ul>
-    <aside class="notes" data-markdown >
-        If you want to remember one-thing from the talk then I want you to remember this.
-
-        If you need measureable safety guarantees for your stochastic system.
-        There exists a paper out there that provides a way to convert
-        Exponential CBFs into quadratic constraints.
-    </aside>
-</section>
-
-<section>
-    <h2 id="safety-fut-work">Future work</h2>
-    <div style="position:relative;margin:auto;display:inline-block;left:2%">
-        <div class="" style="position:relative; top:-50px" >
-            <object type="image/svg+xml"
-                    id="safety-levels-fut"
-                    style="height:700px"
-                    data-src="./media/safety-levels.svg"
-                    onload="show_on_svgload('safety-levels-fut', 'safety-levels')"
-            >
-            </object>
-        </div>
-    </div>
-</section>
-
-
-<section>
-    <h2>How much safety can we aim for?</h2>
-    <div style="position:relative;height:220px">
-        <img style="position:absolute;left:29%;height:200px"
-             src="media/tesla-model-3-turns-wrecking-ball-crashes-into-shopping-center-head-on-144377_1.jpg"  />
-    </div>
-    <div >
-        <div style="position:relative;height:250px;width:400px;display:inline-block" >
-            <img style="position:absolute;left:13%;height:200px;display:block"
-                 src="./media/human-driver.webp" />
-            <div style="font-size:larger;color:red;position:absolute;left:10%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
-                150 deaths per 10 billion miles</div>
-        </div>
-        <div style="position:relative;height:250px;width:400px;display:inline-block" >
-            <img style="position:absolute;right:13%;height:200px"
-                 src="./media/aircraft.jpeg" />
-            <div style="font-size:larger;color:red;position:absolute;right:13%;bottom:10%;display:block;background:white;opacity:85%;width:250px">
-                0.2 deaths per 10 billion miles</div>
-        </div>
-        <!-- div style="opacity:0.7;background-color:white;height:220px;position:relative" class="fragment">
-        <div sytle="font-size:larger;text-color:red;position:absolute;left:10%;top:10%;display:inline-block">150 deaths per 10 billion miles</div>
-        <div sytle="font-size:larger;text-color:green;position:absolute;right:10%;top:10%;display:inline-block">0.2 deaths per 10 billion miles</div>
-        </div -->
-    </div>
-</section>
-
 <section id="other-work" data-visibility="hidden">
     <h2>Other work</h2>
     <style>
@@ -2362,6 +2411,7 @@ a        how to propagate uncertainty to CBCtwo.
         <img  data-src="media/collaborators/tianyu.jpeg" />
         <img  data-src="media/collaborators/Mo_Shan3.jpg" />
         <img  data-src="media/collaborators/jing-bi.png" />
+        <img  data-src="media/collaborators/kehan-long.jpg" />
     </div>
 </section>
 
@@ -2456,6 +2506,7 @@ a        how to propagate uncertainty to CBCtwo.
     </div>
     <div style="position:absolute;left:5%;bottom:-2%"></div>
 </section>
+
 
 
 <section id="bibliography-slide" data-visibility="uncounted">
@@ -2571,9 +2622,13 @@ Mutual localization: Two camera relative 6-dof pose estimation from reciprocal f
       <li id="Seare and Gruber. Linear Models. (Book 1971)">
           Shayle R Searle and Marvin HJ Gruber.Linear models. John Wiley & Sons, 1971
       </li>
+      <li id="Long et al (RAL 2022)">
+          Kehan Long, Vikas Dhiman, Melvin Leok, Jorge Cortés, Nikolay Atanasov:
+          Safe Control Synthesis With Uncertain Dynamics and Constraints. IEEE Robotics Autom. Lett. 7(3): 7295-7302 (2022)
+      </li>
     </ul>
     <h2>Bibliography</h2>
-    <ul id="bibliography" style="font-size:60%;text-align:left;padding-left:5%">
+    <ul id="bibliography" style="font-size:40%;text-align:left;padding-left:5%">
         <!-- Auto populated using <cite> -->
     </ul>
     <aside class="notes" data-markdown>
@@ -2601,6 +2656,14 @@ Mutual localization: Two camera relative 6-dof pose estimation from reciprocal f
             </div> <!-- class="slides" -->
 		</div> <!-- class="reveal"-->
         <script src="reveal.js/dist/reveal.js"></script>
+        <script src="reveal.js/plugin/markdown/markdown.js"></script>
+	    <script src="reveal.js/plugin/highlight/highlight.js"></script>
+	    <script src="reveal.js-plugins/menu/menu.js"></script>
+	    <script src="reveal.js-plugins/chalkboard/plugin.js"></script>
+	    <script src="reveal.js-plugins/audio-slideshow/plugin.js"></script>
+	    <script src="reveal.js-plugins/audio-slideshow/RecordRTC.js"></script>
+	    <script src="reveal.js-plugins/audio-slideshow/recorder.js"></script>
+
         <script src="index.js" > </script>
         <script>
          window.MathJax = {

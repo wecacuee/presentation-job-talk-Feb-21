@@ -48,6 +48,8 @@
         "id":"4308ad89fe2e7d3f",
         url: 'http://fovea.eecs.umich.edu:1948' // Location of socket.io server
     },
+
+	plugins: [ RevealMarkdown, RevealMenu, RevealHighlight, RevealChalkboard, RevealAudioSlideshow, RevealAudioRecorder ],
   });
 
   var safeGetElemementById = function (parent, id) {
