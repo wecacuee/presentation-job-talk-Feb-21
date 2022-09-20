@@ -25,17 +25,17 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1"
-     inkscape:cx="191.78962"
-     inkscape:cy="-54.288047"
+     inkscape:zoom="4"
+     inkscape:cx="164.03979"
+     inkscape:cy="18.633093"
      inkscape:document-units="px"
-     inkscape:current-layer="slide-fut-work"
+     inkscape:current-layer="g4238-6-6"
      showgrid="true"
      inkscape:snap-grids="false"
-     inkscape:window-width="1244"
-     inkscape:window-height="996"
-     inkscape:window-x="2592"
-     inkscape:window-y="82"
+     inkscape:window-width="1404"
+     inkscape:window-height="1016"
+     inkscape:window-x="512"
+     inkscape:window-y="62"
      inkscape:window-maximized="0"
      fit-margin-top="1"
      fit-margin-left="0"
@@ -570,14 +570,14 @@
            y="29.642296"
            ry="0" />
         <image
-           sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/localization-snapshot.png"
+           sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/localization-snapshot.png"
            xlink:href="obs-map-plan-layered_files/localization-snapshot.png"
-           y="29.517307"
-           x="47.781284"
-           id="image3391"
-           preserveAspectRatio="none"
+           width="44.264866"
            height="44.264866"
-           width="44.264866" />
+           preserveAspectRatio="none"
+           id="image3391"
+           x="47.781284"
+           y="29.517307" />
       </g>
     </g>
     <g
@@ -600,14 +600,14 @@
              style="font-size:7.50000095px;line-height:1.25;font-family:sans-serif">Goal</tspan></text>
       </g>
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-goal-snapshot.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-goal-snapshot.png"
          xlink:href="obs-map-plan-layered_files/map-and-goal-snapshot.png"
-         width="43.828148"
-         height="43.828148"
-         preserveAspectRatio="none"
-         id="image566"
+         y="-27.15567"
          x="47.984379"
-         y="-27.15567" />
+         id="image566"
+         preserveAspectRatio="none"
+         height="43.828148"
+         width="43.828148" />
       <g
          transform="translate(-0.01520957,0.16959711)"
          inkscape:label="#g13563"
@@ -668,14 +668,14 @@
        inkscape:label="#g4498"
        transform="translate(2.8409342,-3.4754124)">
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/camera.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/camera.png"
          xlink:href="obs-map-plan-layered_files/camera.png"
-         width="30.424835"
-         height="36.315014"
-         preserveAspectRatio="none"
-         id="image554"
+         y="11.837776"
          x="-59.947601"
-         y="11.837776" />
+         id="image554"
+         preserveAspectRatio="none"
+         height="36.315014"
+         width="30.424835" />
       <text
          id="text13551"
          y="59.855057"
@@ -735,15 +735,15 @@
            d="M 92.968307,2.0308822 C 102.06054,16.622137 116.66998,23.582875 126.5634,23.962522 M 92.874634,45.313887 C 102.6269,28.454798 115.19123,23.559838 132.86972,23.900917 h 12.60939"
            style="fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4384-7-7)" />
         <image
-           sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-location-snapshot.png"
+           sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-location-snapshot.png"
            xlink:href="obs-map-plan-layered_files/map-and-location-snapshot.png"
-           y="-3.1480608"
-           x="94.818802"
-           id="image4260-3-6-6"
-           style="opacity:0;filter:url(#filter14808-3-3);image-rendering:optimizeSpeed"
-           preserveAspectRatio="none"
+           width="44.26487"
            height="44.26487"
-           width="44.26487" />
+           preserveAspectRatio="none"
+           style="opacity:0;filter:url(#filter14808-3-3);image-rendering:optimizeSpeed"
+           id="image4260-3-6-6"
+           x="94.818802"
+           y="-3.1480608" />
       </g>
       <text
          id="text13495-9-9-3"
@@ -865,15 +865,15 @@
          id="g4747"
          transform="translate(6.0104084,-1.7677672)">
         <image
-           sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-location-snapshot.png"
+           sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/map-and-location-snapshot.png"
            xlink:href="obs-map-plan-layered_files/map-and-location-snapshot.png"
-           width="44.26487"
-           height="44.26487"
-           preserveAspectRatio="none"
-           style="opacity:0;filter:url(#filter14808-3-36);image-rendering:optimizeSpeed"
-           id="image4749"
+           y="-3.1480608"
            x="94.818802"
-           y="-3.1480608" />
+           id="image4749"
+           style="opacity:0;filter:url(#filter14808-3-36);image-rendering:optimizeSpeed"
+           preserveAspectRatio="none"
+           height="44.26487"
+           width="44.26487" />
         <path
            style="fill:none;fill-rule:evenodd;stroke:#ff0000;stroke-width:1.00000012;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#marker4384-7-5)"
            d="M 92.968307,2.0308822 C 102.06054,16.622137 116.66998,23.582875 126.5634,23.962522 M 92.874634,45.313887 C 102.6269,28.454798 115.19123,23.559838 132.86972,23.900917 h 12.60939"
@@ -1718,30 +1718,6 @@
       </g>
     </g>
     <g
-       transform="matrix(1.3487461,0,0,1.3487461,99.595154,-1.2366609)"
-       id="g3855">
-      <g
-         id="g3869">
-        <ellipse
-           id="ellipse3857"
-           ry="3.8399122"
-           rx="11.088833"
-           cy="61.59486"
-           cx="56.86919"
-           style="opacity:1;fill:#ffaaaa;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0" />
-        <text
-           xml:space="preserve"
-           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-           x="50.170639"
-           y="62.28577"
-           id="text3863"><tspan
-             id="tspan3865"
-             x="50.170639"
-             y="62.28577"
-             style="font-size:2.50000024px;font-family:sans-serif">ArXiV 2019</tspan></text>
-      </g>
-    </g>
-    <g
        id="g4240"
        transform="matrix(1.2959058,0,0,1.2959058,136.44545,5.9002675)">
       <g
@@ -1812,6 +1788,56 @@
              x="74.593498"
              y="65.335548"
              style="font-size:2.50000024px;font-family:sans-serif">ICRA 2020</tspan></text>
+      </g>
+    </g>
+    <g
+       style="display:inline"
+       id="g4240-3"
+       transform="matrix(1.2959058,0,0,1.2959058,139.99426,19.585579)">
+      <g
+         id="g4238-6">
+        <ellipse
+           style="opacity:1;fill:#ffaaaa;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0"
+           cx="56.86919"
+           cy="61.59486"
+           rx="11.088833"
+           ry="3.8399122"
+           id="ellipse4232-7" />
+        <text
+           id="text4236-5"
+           y="62.28577"
+           x="50.170639"
+           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-size:2.50000024px;font-family:sans-serif"
+             y="62.28577"
+             x="50.170639"
+             id="tspan4234-3">TAC 2021</tspan></text>
+      </g>
+    </g>
+    <g
+       style="display:inline"
+       id="g4240-3-5"
+       transform="matrix(1.2959058,0,0,1.2959058,101.19045,1.1963421)">
+      <g
+         id="g4238-6-6">
+        <ellipse
+           style="opacity:1;fill:#ffaaaa;fill-opacity:1;stroke:none;stroke-width:1;stroke-miterlimit:4;stroke-dasharray:1, 2;stroke-dashoffset:0"
+           cx="56.86919"
+           cy="61.59486"
+           rx="11.088833"
+           ry="3.8399122"
+           id="ellipse4232-7-2" />
+        <text
+           id="text4236-5-9"
+           y="62.28577"
+           x="50.170639"
+           style="font-style:normal;font-weight:normal;font-size:12.5px;line-height:0%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+           xml:space="preserve"><tspan
+             style="font-size:2.50000024px;font-family:sans-serif"
+             y="62.28577"
+             x="50.170639"
+             id="tspan4234-3-1">RAL 2022</tspan></text>
       </g>
     </g>
   </g>
@@ -2001,15 +2027,15 @@
        style="display:inline"
        transform="translate(70.432083,56.724068)">
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
          xlink:href="obs-map-plan-layered_files/goal-snapshot-obs.png"
-         y="3.2336342"
-         x="156.23351"
-         id="image7339"
-         style="opacity:0.7;image-rendering:optimizeSpeed"
-         preserveAspectRatio="none"
+         width="50.128899"
          height="50.128899"
-         width="50.128899" />
+         preserveAspectRatio="none"
+         style="opacity:0.7;image-rendering:optimizeSpeed"
+         id="image7339"
+         x="156.23351"
+         y="3.2336342" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:1.00500011;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-75)"
          d="M 178.62909,23.453097 V 9.0853927"
@@ -2178,15 +2204,15 @@
        id="use4975"
        transform="translate(70.432083,56.724068)">
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
          xlink:href="obs-map-plan-layered_files/goal-snapshot-obs.png"
-         y="3.2336342"
-         x="156.23351"
-         id="image4583"
-         style="opacity:0.7;image-rendering:optimizeSpeed"
-         preserveAspectRatio="none"
+         width="50.128899"
          height="50.128899"
-         width="50.128899" />
+         preserveAspectRatio="none"
+         style="opacity:0.7;image-rendering:optimizeSpeed"
+         id="image4583"
+         x="156.23351"
+         y="3.2336342" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#008000;stroke-width:1.00500011;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;marker-end:url(#Arrow1Mend-75)"
          d="M 178.62909,23.453097 V 9.0853927"
@@ -2246,14 +2272,14 @@
          id="rect4555"
          style="opacity:1;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1.005;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0" />
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/localization-snapshot.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/localization-snapshot.png"
          xlink:href="obs-map-plan-layered_files/localization-snapshot.png"
-         width="44.264866"
-         height="44.264866"
-         preserveAspectRatio="none"
-         id="image4557"
+         y="29.517307"
          x="47.781284"
-         y="29.517307" />
+         id="image4557"
+         preserveAspectRatio="none"
+         height="44.264866"
+         width="44.264866" />
     </g>
     <g
        transform="translate(70.278785,56.724068)"
@@ -2734,15 +2760,15 @@
              style="font-size:7.50000095px;font-family:sans-serif"
              id="tspan3929">Observations</tspan></tspan></text>
       <image
-         sodipodi:absref="/home/vdhiman/wrk/BayesCBF_ws/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
+         sodipodi:absref="/home/vdhiman/wrk/talks/092022-sonali/presentation-job-talk-Feb-21/media/obs-map-plan-layered_files/goal-snapshot-obs.png"
          xlink:href="obs-map-plan-layered_files/goal-snapshot-obs.png"
-         width="50.128891"
-         height="50.128891"
-         preserveAspectRatio="none"
-         style="image-rendering:optimizeSpeed"
-         id="image3931"
+         y="0.67528927"
          x="-69.724976"
-         y="0.67528927" />
+         id="image3931"
+         style="image-rendering:optimizeSpeed"
+         preserveAspectRatio="none"
+         height="50.128891"
+         width="50.128891" />
     </g>
     <use
        style="display:inline"
